@@ -1,0 +1,108 @@
+{
+  "home": {
+    "heroText": "Crodal is a Software design and development company headquartered in Bangalore.",
+    "header": {
+      "navItems": [
+        {
+          "label": "Crodal"
+        },
+        {
+          "label": "Projects"
+        },
+        {
+          "label": "About"
+        },
+        {
+          "label": "Pitch Us"
+        }
+      ]
+    },
+    "curatedPartnerships": {
+      "description": "Crodal partners selectively with teams worldwide to design and build distinctive software products—combining strong technical execution with thoughtful product design. Every engagement is held to rigorous standards, with client satisfaction as the baseline.",
+      "linkText": "",
+      "linkUrl": ""
+    },
+    "projectStack": {
+      "projects": [
+        {
+          "sub": "Job Worker Inventory"
+        },
+        {
+          "sub": "ATit Capital"
+        },
+        {
+          "sub": "Gattabara Game Studios"
+        },
+        {
+          "sub": "New Project"
+        },
+        {
+          "sub": "New Project"
+        },
+        {
+          "sub": "New Project"
+        }
+      ]
+    },
+    "bottomBox": {
+      "phrases": [
+        "crodal.",
+        "crafted with conviction.",
+        "inspired by culture."
+      ],
+      "contactEmail": "contact@crodal.com",
+      "footerLinks": [
+        {
+          "label": "Pitch",
+          "url": "/pitch"
+        },
+        {
+          "label": "X(Twitter)",
+          "url": "https://x.com/sudeep_n_t"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/sudeep-n-t-b3853b36a/"
+        },
+        {
+          "label": "Blogs",
+          "url": "#"
+        }
+      ]
+    }
+  },
+  "about": {
+    "introText": [
+      "We are an AI-native software company that builds intelligent products alongside founders. Crodal partners through a co-creation model—working closely with leadership teams, sharing ownership, and shaping strategy—while preserving creative and technical independence. Together, we design, build, and scale AI-driven software that is both impactful and commercially successful.",
+      "We spent a lot of time thinking about what our values as a company are. They inform every decision we make and we wanted to ensure we got them right. We're always changing but these ideas are foundational to who we are."
+    ],
+    "values": [
+      {
+        "title": "Curiosity, creativity and intellectual agility",
+        "description": "Original thinking and collaboration are at the core of the organization. Strong voices and unique ideas are valued in everything we do.",
+        "image": "/About1.png"
+      },
+      {
+        "title": "Savoir Faire",
+        "description": "We celebrate people who take pride in their craft, giving them the space to improve, the resources to flourish, and opportunities to share their expertise.",
+        "image": "/About3.png"
+      },
+      {
+        "title": "Supporting and elevating each other",
+        "description": "We nurture a vibrant, inclusive community where people feel safe, respected and empowered.",
+        "image": "/About2.png"
+      }
+    ],
+    "careersLink": "If this aligns with what you're looking to build, start a conversation with us via our contact page →"
+  },
+  "pitch": {
+    "title": "Inbound Form.",
+    "introText": "At Crodal, we know articulating a software vision can be hard. Please read this page carefully before submitting—clear inputs help us design, build, and launch your product with speed and precision.",
+    "tips": [
+      "Ownership (\"Hands-Off\"): Tell us how involved you want to be. We're built to handle everything end-to-end—from system design and development to deployment, scaling, and long-term maintenance.",
+      "Priorities: Working Prototype / Demo > Product Walkthrough or Loom Video > Wireframes > Early Concepts."
+    ],
+    "noteText": "Note: Crodal specializes in building high-quality web, mobile, and AI-driven software products. We do not take on blockchain, NFT, or speculative crypto-only projects.",
+    "buttonText": "Start Application"
+  }
+}
