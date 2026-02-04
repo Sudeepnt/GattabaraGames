@@ -1,13 +1,16 @@
 {
   "home": {
-    "heroText": "Crodal is a Software design and development company headquartered in Bangalore.",
+    "heroText": "Gattabara Games is a Software design and development company headquartered in Bangalore.",
     "header": {
       "navItems": [
         {
-          "label": "Crodal"
+          "label": "GATTABARA GAMES"
         },
         {
-          "label": "Projects"
+          "label": "Games"
+        },
+        {
+          "label": "GG PRODUCTIONS"
         },
         {
           "label": "About"
@@ -18,39 +21,20 @@
       ]
     },
     "curatedPartnerships": {
-      "description": "Crodal partners selectively with teams worldwide to design and build distinctive software products—combining strong technical execution with thoughtful product design. Every engagement is held to rigorous standards, with client satisfaction as the baseline.",
+      "description": "Gattabara Games partners selectively with teams worldwide to design and build distinctive software products—combining strong technical execution with thoughtful product design. Every engagement is held to rigorous standards, with client satisfaction as the baseline.",
       "linkText": "",
       "linkUrl": ""
     },
     "projectStack": {
-      "projects": [
-        {
-          "sub": "Job Worker Inventory"
-        },
-        {
-          "sub": "ATit Capital"
-        },
-        {
-          "sub": "Gattabara Game Studios"
-        },
-        {
-          "sub": "New Project"
-        },
-        {
-          "sub": "New Project"
-        },
-        {
-          "sub": "New Project"
-        }
-      ]
+      "projects": []
     },
     "bottomBox": {
       "phrases": [
-        "crodal.",
+        "Gattabara Games.",
         "crafted with conviction.",
         "inspired by culture."
       ],
-      "contactEmail": "contact@crodal.com",
+      "contactEmail": "contact@gattabaragames.com",
       "footerLinks": [
         {
           "label": "Pitch",
@@ -73,36 +57,58 @@
   },
   "about": {
     "introText": [
-      "We are an AI-native software company that builds intelligent products alongside founders. Crodal partners through a co-creation model—working closely with leadership teams, sharing ownership, and shaping strategy—while preserving creative and technical independence. Together, we design, build, and scale AI-driven software that is both impactful and commercially successful.",
-      "We spent a lot of time thinking about what our values as a company are. They inform every decision we make and we wanted to ensure we got them right. We're always changing but these ideas are foundational to who we are."
+      "Gattabara Games is an AI-powered game studio built for bold worlds and ambitious founders. We don’t just ship products — we co-create universes. Through deep collaboration with visionary teams, we share ownership, shape strategy, and build alongside you from concept to scale. We operate independently, move fast, and fuse AI with design to craft experiences that are immersive, scalable, and commercially dominant.",
+      "We’ve spent serious time defining what we stand for. Our values aren’t filler — they guide every mechanic we design, every system we architect, and every decision we make. We evolve constantly, but these principles are our core engine."
     ],
     "values": [
       {
         "title": "Curiosity, creativity and intellectual agility",
         "description": "Original thinking and collaboration are at the core of the organization. Strong voices and unique ideas are valued in everything we do.",
-        "image": "/About1.png"
+        "image": "/uploads/1770195200412-0.png"
       },
       {
         "title": "Savoir Faire",
         "description": "We celebrate people who take pride in their craft, giving them the space to improve, the resources to flourish, and opportunities to share their expertise.",
-        "image": "/About3.png"
+        "image": "/uploads/1770195528992-1.png"
       },
       {
         "title": "Supporting and elevating each other",
         "description": "We nurture a vibrant, inclusive community where people feel safe, respected and empowered.",
-        "image": "/About2.png"
+        "image": "/uploads/1770195327225-2.png"
       }
     ],
     "careersLink": "If this aligns with what you're looking to build, start a conversation with us via our contact page →"
   },
   "pitch": {
-    "title": "Inbound Form.",
-    "introText": "At Crodal, we know articulating a software vision can be hard. Please read this page carefully before submitting—clear inputs help us design, build, and launch your product with speed and precision.",
-    "tips": [
-      "Ownership (\"Hands-Off\"): Tell us how involved you want to be. We're built to handle everything end-to-end—from system design and development to deployment, scaling, and long-term maintenance.",
-      "Priorities: Working Prototype / Demo > Product Walkthrough or Loom Video > Wireframes > Early Concepts."
-    ],
-    "noteText": "Note: Crodal specializes in building high-quality web, mobile, and AI-driven software products. We do not take on blockchain, NFT, or speculative crypto-only projects.",
-    "buttonText": "Start Application"
+    "formLine1Start": "Hi, my name is",
+    "namePlaceholder": "your name",
+    "formLine1End": "and I'm exploring a potential partnership or opportunity with Gattabara Games.",
+    "formLine2Start": "Get in touch with me at",
+    "emailPlaceholder": "your e-mail",
+    "formLine2End": ".",
+    "consentText": "Hereby I authorise Gattabara Games to process the given personal information in connection with my inquiry. I am aware that submitting personal data is voluntary and that I have a right to view, edit and delete all the data concerning myself.",
+    "buttonText": "Send",
+    "companyName": "Gattabara Games LLP",
+    "email": "info@gattabaragames.com",
+    "phone": "+91 9900114038",
+    "address1": "No. 55, 1st Floor, 10th Cross, 2nd Stage, Mahalakshmipuram,",
+    "address2": "WOC Road, Bengaluru, Karnataka,",
+    "address3": "India - 560086"
+  },
+  "contact": {
+    "formLine1Start": "Hi, my name is",
+    "namePlaceholder": "your name",
+    "formLine1End": "and I'm exploring a potential partnership or opportunity with Gattabara Games.",
+    "formLine2Start": "Get in touch with me at",
+    "emailPlaceholder": "your e-mail",
+    "formLine2End": ".",
+    "consentText": "Hereby I authorise Gattabara Games to process the given personal information in connection with my inquiry. I am aware that submitting personal data is voluntary and that I have a right to view, edit and delete all the data concerning myself.",
+    "buttonText": "Send",
+    "companyName": "Gattabara Games LLP",
+    "email": "info@gattabaragames.com",
+    "phone": "+91 9900114038",
+    "address1": "No. 55, 1st Floor, 10th Cross, 2nd Stage, Mahalakshmipuram,",
+    "address2": "WOC Road, Bengaluru, Karnataka,",
+    "address3": "India - 560086"
   }
 }

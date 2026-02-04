@@ -72,8 +72,8 @@ export default function PortfolioPage() {
             <div className={`w-full px-6 md:px-12 ${selectedCategory ? 'pb-8' : 'mb-8'} max-w-5xl mx-auto flex flex-col items-center text-center`}>
                 <Link href="/" className="inline-block mb-6">
                     <Image
-                        src="/crodalLogoAbout.png"
-                        alt="Crodal Logo"
+                        src="/GGlogo.png"
+                        alt="Gattabara Games Logo"
                         width={80}
                         height={32}
                         className="object-contain invert opacity-90"

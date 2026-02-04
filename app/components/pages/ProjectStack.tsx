@@ -26,9 +26,8 @@ export default function ProjectStack() {
       {pairedProjects.map((pair, rowIndex) => (
         <div
           key={rowIndex}
-          className={`flex w-full gap-1 ${
-            rowIndex % 2 === 0 ? "md:pr-[10%]" : "md:pl-[10%]"
-          }`}
+          className={`flex w-full gap-1 ${rowIndex % 2 === 0 ? "md:pr-[10%]" : "md:pl-[10%]"
+            }`}
         >
           {pair.map((project, i) => (
             <div
@@ -44,7 +43,7 @@ export default function ProjectStack() {
                 p-4
                 overflow-hidden 
                 cursor-pointer 
-                border border-black 
+                border border-white 
                 rounded-lg
                 bg-transparent
                 transition-all duration-300
@@ -60,9 +59,9 @@ export default function ProjectStack() {
                   />
                 </div>
               )}
-              
+
               <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-black/60 to-transparent z-10"></div>
-              
+
               <div className="relative z-20">
                 <p className="
                   text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] 

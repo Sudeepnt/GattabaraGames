@@ -1,164 +1,113 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import BottomBox from "./BottomBox";
 
 export default function Pitch() {
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [dragActive, setDragActive] = useState(false);
-
-  const [title, setTitle] = useState("Inbound Form.");
-  const [introText, setIntroText] = useState("");
-  const [tips, setTips] = useState<string[]>([]);
-  const [noteText, setNoteText] = useState("");
-  const [buttonText, setButtonText] = useState("Start Application");
-
-  useEffect(() => {
-    fetch('/data/content.json')
-      .then(res => res.json())
-      .then(data => {
-        if (data?.pitch) {
-          if (data.pitch.title) setTitle(data.pitch.title);
-          if (data.pitch.introText) setIntroText(data.pitch.introText);
-          if (data.pitch.tips) setTips(data.pitch.tips);
-          if (data.pitch.noteText) setNoteText(data.pitch.noteText);
-          if (data.pitch.buttonText) setButtonText(data.pitch.buttonText);
-        }
-      })
-      .catch(error => console.error('Pitch page load error:', error));
-  }, []);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    authorized: false,
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Pitch submitted! (This is a demo action)");
-  };
-
-  const handleDrag = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
+    if (!formData.authorized) {
+      alert("Please authorize the data processing to continue.");
+      return;
     }
+    alert(`Pitch submitted for ${formData.name}! (Demo)`);
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-[#FFFFFF] text-[#1a1a1a] font-sans pt-22 z-40 selection:bg-black selection:text-white overflow-x-hidden">
+    <div className="w-full h-screen bg-white text-black flex flex-col items-center justify-center p-8 overflow-hidden relative">
+      <div className="absolute top-8 left-8">
+        <Image
+          src="/GGlogo.png"
+          alt="Gattabara Games Logo"
+          width={80}
+          height={30}
+          className="object-contain"
+          priority
+        />
+      </div>
 
-      <div className="w-full px-6 md:px-16 flex flex-col items-center">
+      <div className="w-full max-w-4xl z-10">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-12 text-xl md:text-3xl font-medium leading-relaxed">
 
-        <div className="mb-12 flex justify-start w-full">
-          <Image
-            src="/crodallogoabout.png"
-            alt="Crodal Logo"
-            width={120}
-            height={48}
-            className="object-contain"
-          />
-        </div>
-
-        <div className="w-full max-w-2xl flex flex-col items-start pb-24">
-
-          <h1 className="text-4xl md:text-6xl font-bold text-black mb-12 tracking-tighter leading-none">
-            {title}
-          </h1>
-
-          <div className="space-y-8 text-lg md:text-[1.15rem] leading-[1.6] font-medium text-[#222]">
-            <p>{introText}</p>
-
-            <ul className="space-y-5">
-              {tips.map((tip, index) => (
-                <li key={index} className="flex gap-4 items-start group">
-                  <span className="mt-[0.6em] w-2 h-2 rounded-full bg-black group-hover:scale-150 transition-transform duration-300 flex-shrink-0"></span>
-                  <span>{tip}</span>
-                </li>
-              ))}
-            </ul>
-
-            <p className="italic font-bold text-black opacity-80 border-l-4 border-black pl-6 py-2 bg-black/5 rounded-r-lg">
-              {noteText}
-            </p>
+          <div className="flex flex-wrap items-baseline gap-4">
+            <span>Hi, my name is</span>
+            <input
+              type="text"
+              placeholder="your name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="bg-[#EBEBEF] px-6 py-2 rounded-lg min-w-[300px] outline-none focus:ring-2 focus:ring-black/10 placeholder-gray-400 text-black"
+              required
+            />
+            <span>and I'm exploring a potential partnership or opportunity with Gattabara Games.</span>
           </div>
 
-          <div className="mt-16 w-full">
+          <div className="flex flex-wrap items-baseline gap-4">
+            <span>Get in touch with me at</span>
+            <input
+              type="email"
+              placeholder="your e-mail"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="bg-[#EBEBEF] px-6 py-2 rounded-lg min-w-[300px] outline-none focus:ring-2 focus:ring-black/10 placeholder-gray-400 text-black"
+              required
+            />
+            <span>.</span>
+          </div>
+
+          <div className="flex items-start gap-4 text-sm text-gray-600 font-normal max-w-2xl mt-8">
+            <div className="relative flex items-center shrink-0">
+              <input
+                type="checkbox"
+                id="auth"
+                checked={formData.authorized}
+                onChange={(e) => setFormData({ ...formData, authorized: e.target.checked })}
+                className="peer h-16 w-16 cursor-pointer appearance-none rounded-lg border border-[#1A2E35] bg-white transition-all checked:bg-[#1A2E35] checked:border-[#1A2E35] hover:border-black"
+                style={{ borderRadius: '12px' }}
+              />
+              <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </span>
+            </div>
+            <label htmlFor="auth" className="cursor-pointer leading-tight hover:text-black transition-colors pt-4">
+              Hereby I authorise Gattabara Games, to process the given personal information in connection with my the inquiry. I am aware that submitting personal data is voluntary and that I have a right to view, edit and delete all the data concerning myself.
+            </label>
+          </div>
+
+          <div className="mt-4">
             <button
-              onClick={() => setIsFormOpen(!isFormOpen)}
-              className={`w-full bg-black hover:bg-[#222] text-white text-left pl-8 py-6 rounded-2xl font-bold text-xl transition-all duration-500 shadow-xl hover:shadow-2xl hover:-translate-y-1 group flex justify-between items-center pr-8 ${isFormOpen ? 'mb-8' : ''}`}
+              type="submit"
+              className="bg-[#1A2E35] text-white px-8 py-3 rounded-lg flex items-center gap-4 text-base font-bold hover:bg-black transition-colors"
             >
-              <span className="tracking-wide">{isFormOpen ? "Close Application" : buttonText}</span>
-              <div className={`w-10 h-10 rounded-full bg-white text-black flex items-center justify-center transition-transform duration-500 ${isFormOpen ? 'rotate-180' : 'group-hover:rotate-90'}`}>
-                &darr;
-              </div>
+              Send
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+              </svg>
             </button>
           </div>
+        </form>
+      </div>
 
-          {isFormOpen && (
-            <div className="w-full animate-in slide-in-from-bottom-4 fade-in duration-700 ease-out">
-              <form onSubmit={handleSubmit} className="bg-white p-8 md:p-10 border border-[#e5e5e5] shadow-2xl rounded-3xl flex flex-col gap-8 relative overflow-hidden">
-
-                <div className="absolute top-0 right-0 w-64 h-64 bg-gray-100 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2 opacity-50"></div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex flex-col gap-3 group">
-                    <label className="font-bold text-xs uppercase tracking-widest text-[#888] group-hover:text-black transition-colors ml-1">Contact Name</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="JOHN DOE"
-                      className="w-full bg-transparent border border-[#ccc] focus:border-black rounded-xl p-4 outline-none transition-all duration-300 placeholder:text-gray-300 font-bold text-black hover:border-gray-400 focus:shadow-lg"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-3 group">
-                    <label className="font-bold text-xs uppercase tracking-widest text-[#888] group-hover:text-black transition-colors ml-1">Email Address</label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="JOHN@STUDIO.COM"
-                      className="w-full bg-transparent border border-[#ccc] focus:border-black rounded-xl p-4 outline-none transition-all duration-300 placeholder:text-gray-300 font-bold text-black hover:border-gray-400 focus:shadow-lg"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-3 group">
-                  <label className="font-bold text-xs uppercase tracking-widest text-[#888] group-hover:text-black transition-colors ml-1">Phone Number (Optional)</label>
-                  <input
-                    type="tel"
-                    placeholder="+1 234 567 8900"
-                    className="w-full bg-transparent border border-[#ccc] focus:border-black rounded-xl p-4 outline-none transition-all duration-300 placeholder:text-gray-300 font-bold text-black hover:border-gray-400 focus:shadow-lg"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-3 group">
-                  <label className="font-bold text-xs uppercase tracking-widest text-[#888] group-hover:text-black transition-colors ml-1">The Project</label>
-                  <textarea
-                    rows={5}
-                    required
-                    placeholder="TELL US WHAT YOU ARE BUILDING..."
-                    className="w-full bg-transparent border border-[#ccc] focus:border-black rounded-xl p-4 outline-none transition-all duration-300 placeholder:text-gray-300 font-medium text-black resize-none hover:border-gray-400 focus:shadow-lg"
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="mt-6 w-full bg-black text-white font-black text-md py-5 rounded-xl hover:bg-[#222] hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 uppercase tracking-widest shadow-xl"
-                >
-                  Submit
-                </button>
-
-              </form>
-            </div>
-          )}
-
+      <div className="absolute bottom-8 left-8 right-8 flex justify-between text-xs text-gray-500 font-medium">
+        <div>
+          <p className="font-bold text-gray-900 mb-1">Gattabara Games LLP</p>
+          <p>contact@gattabaragames.com</p>
+          <p>+91 9900114038</p>
+        </div>
+        <div className="text-right">
+          <p>No. 55, 1st Floor, 10th Cross, 2nd Stage, Mahalakshmipuram,</p>
+          <p>WOC Road, Bengaluru, Karnataka,</p>
+          <p>India - 560086</p>
         </div>
       </div>
-
-      <div className="w-full">
-        <BottomBox isDark={false} />
-      </div>
-
     </div>
   );
 }

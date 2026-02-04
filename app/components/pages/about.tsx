@@ -27,8 +27,8 @@ export default function About() {
 
       <div className="w-full md:w-1/3 mb-12 md:mb-0 sticky top-12 px-6 md:px-16">
         <Image
-          src="/crodallogoabout.png"
-          alt="Crodal About Logo"
+          src="/GGlogo.png"
+          alt="Gattabara Games Logo"
           width={180}
           height={60}
           className="object-contain invert"
@@ -69,7 +69,7 @@ export default function About() {
 
       <section className="w-full px-6 md:px-16 mb-24 text-center">
         <a
-          href="/pitch"
+          href="/pitch-us"
           className="inline-block w-full max-w-7xl text-2xl md:text-4xl font-bold underline hover:underline decoration-white underline-offset-8 leading-tight text-white"
         >
           {careersLink}

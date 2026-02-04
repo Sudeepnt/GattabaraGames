@@ -32,8 +32,8 @@ export default function AboutPage() {
             <div className="w-full md:w-1/3 mb-12 md:mb-0 sticky top-12 px-6 md:px-16">
                 <Link href="/">
                     <Image
-                        src="/crodallogoabout.png"
-                        alt="Crodal About Logo"
+                        src="/GGlogo.png"
+                        alt="Gattabara Games Logo"
                         width={180}
                         height={60}
                         className="object-contain invert"

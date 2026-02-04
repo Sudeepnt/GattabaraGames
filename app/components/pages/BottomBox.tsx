@@ -15,10 +15,11 @@ const SubBox = ({
 }) => (
   <div
     className={`
-      relative p-2 flex flex-col justify-start 
-      border bg-transparent
-      min-h-0 md:min-h-[160px] rounded-sm
-      ${isDark ? "border-white text-white" : "border-black text-black"}
+      relative p-6 flex flex-col justify-start 
+      bg-transparent
+      min-h-0 md:min-h-[160px] 
+      tech-border-btn
+      ${isDark ? "text-white" : "text-black"}
       ${className}
     `}
   >
@@ -35,9 +36,9 @@ const SubBox = ({
 );
 
 export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
-  const [phrases, setPhrases] = useState(["crodal.", "crafted with conviction.", "inspired by culture."]);
+  const [phrases, setPhrases] = useState(["Gattabara Games.", "crafted with conviction.", "inspired by culture."]);
   const [footerLinks, setFooterLinks] = useState<Array<{ label: string; url: string }>>([]);
-  
+
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -80,8 +81,8 @@ export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
     return () => clearTimeout(timer);
   }, [text, isDeleting, loopNum, typingSpeed, phrases]);
 
-  const hoverClass = isDark 
-    ? "hover:bg-white hover:text-black" 
+  const hoverClass = isDark
+    ? "hover:bg-white hover:text-black"
     : "hover:bg-black hover:text-white";
 
   const firstColumn = footerLinks.slice(0, 2);
@@ -90,7 +91,7 @@ export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
 
   return (
     <footer className={`w-full bg-transparent font-sans relative z-10 p-4 md:p-1 flex flex-col gap-1 ${isDark ? "text-white" : "text-black"}`}>
- 
+
       <div className="py-20 md:py-64 flex items-center justify-center w-full px-6 overflow-hidden min-h-[300px] md:min-h-[450px]">
         <h2 className={`text-[11vw] md:text-[7vw] font-black tracking-tighter leading-none text-center uppercase ${isDark ? "text-white" : "text-black"}`}>
           {text}
@@ -100,12 +101,12 @@ export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-1 w-full">
         <SubBox isDark={isDark} className="h-32 md:h-40 flex items-start justify-start">
           <img
-            src={isDark ? "/crodallogo.png" : "/crodallogoblack.png"}
+            src="/GGlogo.png"
             alt="Logo"
             className={`w-12 h-12 md:w-14 md:h-14 ${isDark ? "invert" : ""}`}
           />
         </SubBox>
-        
+
         <SubBox isDark={isDark}>
           <div className="flex flex-col gap-1 italic uppercase tracking-tighter font-semibold">
             {firstColumn.map((link, index) => (
@@ -137,9 +138,9 @@ export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
         </SubBox>
       </div>
 
-      <div className={`w-full border py-6 px-8 flex items-center rounded-sm justify-center ${isDark ? "border-white" : "border-black"}`}>
+      <div className={`w-full py-6 px-8 flex items-center justify-center tech-border-btn ${isDark ? "text-white" : "text-black"}`}>
         <p className={`text-[9px] tracking-[0.5em] font-medium text-center uppercase leading-relaxed ${isDark ? "text-white" : "text-black"}`}>
-          Crodal and the Crodal logo are all brands of Crodal Limited. All rights reserved.
+          Gattabara Games and the Gattabara Games logo are all brands of Gattabara Games Limited. All rights reserved.
         </p>
       </div>
 

@@ -2,7 +2,7 @@
 
 import { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Center, Sphere, RoundedBox, Outlines, useTexture } from "@react-three/drei";
+import { Center, Sphere, RoundedBox, Outlines, useTexture, Environment } from "@react-three/drei";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -10,10 +10,21 @@ import * as THREE from "three";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
-const CrodalLogo3D = ({ activePage, logoType = 'gg' }: { activePage: string, logoType?: 'gg' | 'star' | 'star2' }) => {
+const CrodalLogo3D = ({
+  activePage,
+  logoType = 'gg',
+  mouseRefProp
+}: {
+  activePage: string,
+  logoType?: 'gg' | 'star' | 'star2',
+  mouseRefProp: React.MutableRefObject<{ x: number, y: number }>
+}) => {
   const groupRef = useRef<THREE.Group>(null);
   const internalMotionRef = useRef<THREE.Group>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
+
+  // Use the passed prop for mouse control
+  const mouseRef = mouseRefProp;
+
 
   // Load the texture based on type
   let textureUrl = "/gg-logo.png";
@@ -29,6 +40,7 @@ const CrodalLogo3D = ({ activePage, logoType = 'gg' }: { activePage: string, log
     logoTexture.generateMipmaps = false;
   }, [logoTexture]);
 
+  /* 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -36,7 +48,8 @@ const CrodalLogo3D = ({ activePage, logoType = 'gg' }: { activePage: string, log
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, []); 
+  */
 
   // --- ALIVE MOTION ---
   useFrame((state, delta) => {
@@ -56,18 +69,34 @@ const CrodalLogo3D = ({ activePage, logoType = 'gg' }: { activePage: string, log
       const scrollFactor = Math.max(0, 1 - scrollY / 50);
 
       if (scrollFactor > 0) {
-        const { x, y } = mouseRef.current;
+        // STRICT User Constraint:
+        // 1. Up/Down Movement (RotX) - NOW ENABLED
+        // 2. NO Tilt (RotZ = 0).
+        // 3. Left/Right Turn (RotY).
 
-        // 1. REDUCED SENSITIVITY
-        let rawX = y * 1.0;
-        let rawY = x * 1.0;
-
+        const BASE_ROT_Y = -0.3;
+        const SENSITIVITY = 1.0;
         const LIMIT = 0.5;
 
-        targetRotX = THREE.MathUtils.clamp(rawX, -LIMIT, LIMIT) * scrollFactor;
-        targetRotY = THREE.MathUtils.clamp(rawY, -LIMIT, LIMIT) * scrollFactor;
+        const { x, y } = mouseRef.current; // Now using both x and y
 
-        targetRotZ = THREE.MathUtils.clamp(-x * 0.3, -0.2, 0.2) * scrollFactor;
+        // 1. RotX Logic (Up/Down) with Dead Zone
+        const DEAD_ZONE = 0.2;
+        let rotX_Val = 0;
+        if (Math.abs(y) > DEAD_ZONE) {
+          rotX_Val = -y * SENSITIVITY;
+        }
+        targetRotX = THREE.MathUtils.clamp(rotX_Val, -LIMIT, LIMIT);
+
+        // 2. RotY Logic (Full Left/Right Turn) with Center Dead Zone
+        let rotY_Val = 0;
+        if (Math.abs(x) > DEAD_ZONE) {
+          rotY_Val = x * SENSITIVITY;
+        }
+        targetRotY = BASE_ROT_Y + THREE.MathUtils.clamp(rotY_Val, -LIMIT, LIMIT);
+
+        // 3. LOCK RotZ to 0
+        targetRotZ = 0;
       }
     }
 
@@ -90,8 +119,8 @@ const CrodalLogo3D = ({ activePage, logoType = 'gg' }: { activePage: string, log
     const isMobile = window.innerWidth < 768;
 
     if (activePage === "home") {
-      // Reduced size by half as requested
-      let baseScale = isMobile ? 0.75 : 1.25;
+      // Increased by 40% from previous size
+      let baseScale = isMobile ? 0.525 : 1;
 
       // Reduce Star size by 20%
       if (logoType === 'star' || logoType === 'star2') {
@@ -102,7 +131,7 @@ const CrodalLogo3D = ({ activePage, logoType = 'gg' }: { activePage: string, log
       const endScale = startScale / 2;
 
       gsap.set(groupRef.current.scale, { x: startScale, y: startScale, z: startScale });
-      gsap.set(groupRef.current.position, { x: 0, y: 0, z: 0 });
+      gsap.set(groupRef.current.position, { x: isMobile ? 0.8 : 2.5, y: 0, z: 0 });
       gsap.set(groupRef.current.rotation, { x: 0, y: 0, z: 0 });
 
       ScrollTrigger.refresh();
@@ -162,15 +191,19 @@ const CrodalLogo3D = ({ activePage, logoType = 'gg' }: { activePage: string, log
             return (
               <mesh key={i} position={[0, 0, z]}>
                 <planeGeometry args={[3, 3]} />
-                <meshStandardMaterial
-                  color={isFace ? "#000000" : "#1a1a1a"}
+                <meshPhysicalMaterial
+                  color={isFace ? "#ffffff" : "#f0f0f0"}  // Pure White
                   map={logoTexture}
                   alphaMap={logoTexture}
                   transparent={true}
                   alphaTest={0.15}
-                  roughness={0.15}  // Shiny
-                  metalness={0.1}   // Plastic
+                  roughness={0.1}           // Glossy/Glassy
+                  metalness={0.1}           // Low metalness = White (Dielectric) instead of Silver
+                  clearcoat={1.0}
+                  clearcoatRoughness={0.05}
+                  reflectivity={0.5}
                 />
+                {/* Outlines removed - using DOM Border instead */}
               </mesh>
             );
           })}
@@ -181,35 +214,63 @@ const CrodalLogo3D = ({ activePage, logoType = 'gg' }: { activePage: string, log
 };
 
 export default function Scene({ activePage, logoType = 'gg' }: { activePage: string, logoType?: 'gg' | 'star' | 'star2' }) {
+  // Shared ref for mouse position, updated by the HTML div, read by the 3D component
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  // --- INTERACTION HANDLING ---
+  const onMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    // We ignore Y for now based on strict constraints, but calculating it doesn't hurt
+    const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    mouseRef.current = { x, y };
+  };
+
+  const onMouseLeave = () => {
+    // Reset to rest position
+    mouseRef.current = { x: 0, y: 0 };
+  };
+
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-[1] pointer-events-none">
+    <div className="fixed top-0 left-0 w-full h-full z-[50] pointer-events-none">
+
+      {/* INTERACTION ZONE - Red Border as requested */}
+      {/* Positioned in the center where the logo is */}
+      <div
+        className="absolute top-1/2 left-1/2 md:left-[72%] md:right-auto transform -translate-x-1/2 md:-translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] z-[60] pointer-events-auto cursor-crosshair"
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+      />
+
+
+
       <Canvas
+        className="pointer-events-none"
         camera={{ position: [0, 0, 10], fov: 32 }}
         dpr={[1, 2]}
         gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
       >
-        <ambientLight intensity={1.5} color="#ffffff" />
-        <directionalLight position={[5, 5, 5]} intensity={0.5} color="#ffffff" />
+        <ambientLight intensity={0.4} color="#ffffff" />
 
-        {/* Top/Back Light */}
+        {/* SHARP SUN RAY - More focused and less blinding */}
         <spotLight
-          position={[0, 10, -5]}
-          intensity={8.0}
-          angle={0.5}
-          penumbra={1}
+          position={[3, 5, 8]}    // Moved slightly higher and further back
+          intensity={15.0}        // Reduced intensity so it doesn't wash out white
+          angle={0.15}            // Very narrow beam (like a laser/sharp ray)
+          penumbra={0.2}          // Slightly softer edge to blend but still sharp
           color="#ffffff"
-          target-position={[0, 0, 0]}
+          distance={30}
+          target-position={[0, 0, 0]} // Lock focus on center
+          castShadow
         />
 
-        {/* Bottom Light - CHANGED TO WHITE */}
-        <spotLight
-          position={[0, -10, -5]}
-          intensity={5.0}
-          color="#ffffff"  // Was #3035e6 (Blue)
-          angle={0.5}
-        />
+        {/* Subtle Fill to prevent total blackness on shadows */}
+        <directionalLight position={[-5, 0, 5]} intensity={0.5} color="#ffffff" />
 
-        <CrodalLogo3D activePage={activePage} logoType={logoType} />
+        <Environment preset="studio" />
+
+        {/* Pass shared mouseRef to the 3D component */}
+        <CrodalLogo3D activePage={activePage} logoType={logoType} mouseRefProp={mouseRef} />
       </Canvas>
     </div>
   );
