@@ -128,7 +128,7 @@ const CrodalLogo3D = ({
       }
 
       const startScale = baseScale;
-      const endScale = startScale / 2;
+      const endScale = startScale / 3;
 
       gsap.set(groupRef.current.scale, { x: startScale, y: startScale, z: startScale });
       gsap.set(groupRef.current.position, { x: isMobile ? 0 : 2.5, y: 0, z: 0 });
@@ -172,8 +172,8 @@ const CrodalLogo3D = ({
   }, [activePage]);
 
   // --- GEOMETRY: Stacking for Thickness (Pseudo-Extrusion) ---
-  const layers = 32; // Number of slices to create thickness
-  const depth = 0.5; // Total thickness
+  const layers = 100; // Number of slices to create thickness
+  const depth = 1.0; // Total thickness
 
   return (
     <group dispose={null} ref={groupRef}>
@@ -189,14 +189,15 @@ const CrodalLogo3D = ({
             const brightness = isFace ? 12 : 8;
 
             return (
-              <mesh key={i} position={[0, 0, z]}>
+              <mesh key={i} position={[0, 0, z]} frustumCulled={false}>
                 <planeGeometry args={[3, 3]} />
                 <meshPhysicalMaterial
-                  color={isFace ? "#ffffff" : "#f0f0f0"}  // Pure White
+                  color="#ffffff"  // Pure White
                   map={logoTexture}
                   alphaMap={logoTexture}
-                  transparent={true}
+                  transparent={false}
                   alphaTest={0.15}
+                  side={THREE.DoubleSide}
                   roughness={0.1}           // Glossy/Glassy
                   metalness={0.1}           // Low metalness = White (Dielectric) instead of Silver
                   clearcoat={1.0}
@@ -250,22 +251,10 @@ export default function Scene({ activePage, logoType = 'gg' }: { activePage: str
         dpr={[1, 2]}
         gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
       >
-        <ambientLight intensity={0.4} color="#ffffff" />
-
-        {/* SHARP SUN RAY - More focused and less blinding */}
-        <spotLight
-          position={[3, 5, 8]}    // Moved slightly higher and further back
-          intensity={15.0}        // Reduced intensity so it doesn't wash out white
-          angle={0.15}            // Very narrow beam (like a laser/sharp ray)
-          penumbra={0.2}          // Slightly softer edge to blend but still sharp
-          color="#ffffff"
-          distance={30}
-          target-position={[0, 0, 0]} // Lock focus on center
-          castShadow
-        />
+        <ambientLight intensity={2.0} color="#ffffff" />
 
         {/* Subtle Fill to prevent total blackness on shadows */}
-        <directionalLight position={[-5, 0, 5]} intensity={0.5} color="#ffffff" />
+        <directionalLight position={[0, 0, 5]} intensity={1.0} color="#ffffff" />
 
         <Environment preset="studio" />
 

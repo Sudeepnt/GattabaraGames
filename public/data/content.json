@@ -1,6 +1,6 @@
 {
   "home": {
-    "heroText": "Gattabara Games is a Software design and development company headquartered in Bangalore.",
+    "heroText": "Gattabara Games is a video game company and creative studio headquartered in Bengaluru, India.",
     "header": {
       "navItems": [
         {
@@ -21,12 +21,33 @@
       ]
     },
     "curatedPartnerships": {
-      "description": "Gattabara Games partners selectively with teams worldwide to design and build distinctive software products—combining strong technical execution with thoughtful product design. Every engagement is held to rigorous standards, with client satisfaction as the baseline.",
+      "description": "GG crafts games internally from the ground up and selectively backs bold creators through a co-ownership model that aligns authorship, artistry, and equity. We pair experimental design with distinctive art direction, preserving creative independence while building fun, commercially strong games that can scale globally.",
       "linkText": "",
       "linkUrl": ""
     },
     "projectStack": {
-      "projects": []
+      "projects": [
+        {
+          "sub": "Project 1",
+          "image": "/projects/project1.png",
+          "description": "An exciting new game experience that pushes the boundaries of interactive storytelling and gameplay mechanics."
+        },
+        {
+          "sub": "Project 2",
+          "image": "/projects/project2.png",
+          "description": "A bold creative venture combining experimental design with distinctive art direction for a unique gaming experience."
+        },
+        {
+          "sub": "Project 3",
+          "image": "/projects/project3.png",
+          "description": "Innovative gameplay systems met with stunning visual fidelity."
+        },
+        {
+          "sub": "Project 4",
+          "image": "/projects/project4.png",
+          "description": "Building scalable foundations for the next generation of games."
+        }
+      ]
     },
     "bottomBox": {
       "phrases": [
@@ -69,12 +90,12 @@
       {
         "title": "Savoir Faire",
         "description": "We celebrate people who take pride in their craft, giving them the space to improve, the resources to flourish, and opportunities to share their expertise.",
-        "image": "/uploads/1770195528992-1.png"
+        "image": "/About2.png"
       },
       {
         "title": "Supporting and elevating each other",
         "description": "We nurture a vibrant, inclusive community where people feel safe, respected and empowered.",
-        "image": "/uploads/1770195327225-2.png"
+        "image": "/About3.png"
       }
     ],
     "careersLink": "If this aligns with what you're looking to build, start a conversation with us via our contact page →"
@@ -110,5 +131,25 @@
     "address1": "No. 55, 1st Floor, 10th Cross, 2nd Stage, Mahalakshmipuram,",
     "address2": "WOC Road, Bengaluru, Karnataka,",
     "address3": "India - 560086"
+  },
+  "ggProductions": {
+    "heroTagline": "Build faster. Ship smarter. Stay lean.",
+    "ctaButtonText": "Start a Conversation",
+    "introText": "Full-cycle game development, art production, and technical co-development. We extend your team’s capabilities with specialized talent and production-ready pipelines.",
+    "services": [
+      {
+        "title": "Development",
+        "description": "We help studios build games from concept to playable reality through strong game design, systems architecture, and technical execution. Our teams support gameplay mechanics, level design, prototyping, and full production across Unity, Unreal, and Roblox, building scalable foundations that support long-term growth and live operations."
+      },
+      {
+        "title": "Art",
+        "description": "We create distinctive visuals through strong art direction and production. From style exploration to full world-building, our artists deliver cohesive 2D and 3D visuals, animation, and UI that bring characters and worlds to life with a clear creative vision aligned to your gameplay and audience."
+      },
+      {
+        "title": "Strategy & Pre-Production",
+        "description": "We help studios de-risk production and validate ideas before full development. Our support spans IP creation consultancy, MVP planning for fundraising, game design documentation for investors and partners, and data-driven decision-making across entertainment, branded experiences, and applied games to align creative ambition with market and production realities."
+      }
+    ],
+    "closingCta": "Ready to build something exceptional?"
   }
 }

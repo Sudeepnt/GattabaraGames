@@ -36,8 +36,8 @@ export default function Header() {
   // Determine theme based on current path
   const isWhiteTheme = false; // Default to White Text (Dark Theme) for now, unless specified otherwise
   const themeClasses = isWhiteTheme
-    ? "text-black hover:text-white"
-    : "text-white hover:text-black";
+    ? "!text-black hover:!text-white"
+    : "!text-white hover:!text-black";
 
   return (
     <header className="fixed top-0 left-0 w-full z-[999] p-4 md:p-1">

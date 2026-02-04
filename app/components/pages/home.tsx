@@ -7,7 +7,7 @@ import CuratedPartnerships from "./CuratedPartnerships";
 import BottomBox from "./BottomBox";
 import ClientCarousel from "./ClientCarousel";
 
-const DiamondGridBackground = () => {
+const QuatrefoilGridBackground = () => {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
       <svg
@@ -16,25 +16,26 @@ const DiamondGridBackground = () => {
       >
         <defs>
           <pattern
-            id="diamond-grid"
+            id="quatrefoil-grid"
             x="0"
             y="0"
-            width="300"
-            height="150"
+            width="80"
+            height="80"
             patternUnits="userSpaceOnUse"
           >
-            <line x1="0" y1="75" x2="150" y2="0" stroke="#ffffff" strokeWidth="0.5" opacity="0.1" />
-            <line x1="150" y1="0" x2="300" y2="75" stroke="#ffffff" strokeWidth="0.5" opacity="0.1" />
-            <line x1="300" y1="75" x2="150" y2="150" stroke="#ffffff" strokeWidth="0.5" opacity="0.1" />
-            <line x1="150" y1="150" x2="0" y2="75" stroke="#ffffff" strokeWidth="0.5" opacity="0.1" />
-
-            <circle cx="0" cy="75" r="2" fill="#ffffff" opacity="0.15" />
-            <circle cx="150" cy="0" r="2" fill="#ffffff" opacity="0.15" />
-            <circle cx="300" cy="75" r="2" fill="#ffffff" opacity="0.15" />
-            <circle cx="150" cy="150" r="2" fill="#ffffff" opacity="0.15" />
+            {/* 4-pointed diamond star shape - larger and closer */}
+            <path
+              d="M 40,2 C 35,15 25,25 10,30 C 25,35 35,45 40,58 C 45,45 55,35 70,30 C 55,25 45,15 40,2 Z"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="0.5"
+              opacity="0.1"
+              transform="scale(1.2)"
+              transform-origin="40 30"
+            />
           </pattern>
         </defs>
-        <rect width="100%" height="100%" fill="url(#diamond-grid)" />
+        <rect width="100%" height="100%" fill="url(#quatrefoil-grid)" />
       </svg>
     </div>
   );
@@ -60,7 +61,7 @@ export default function Home() {
 
 
 
-      <DiamondGridBackground />
+      <QuatrefoilGridBackground />
 
       <div className="relative z-10">
         <section className="h-screen w-full relative pointer-events-none">
