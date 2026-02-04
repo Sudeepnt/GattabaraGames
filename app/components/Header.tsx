@@ -41,8 +41,8 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-[999] p-4 md:p-1">
-      <nav className="grid grid-cols-1 md:grid-cols-5 gap-1 w-full">
-        {navItems.map((item) => (
+      <nav className="grid grid-cols-2 md:grid-cols-5 gap-1 w-full">
+        {navItems.map((item, index) => (
           <Link
             key={item.label}
             href={item.href}
@@ -53,6 +53,7 @@ export default function Header() {
               border-none font-bold text-sm uppercase tracking-wide
               transition-all duration-300
               tech-border-btn
+              ${index === 0 ? "col-span-2 md:col-span-1" : "col-span-1"}
               ${themeClasses}
             `}
           >

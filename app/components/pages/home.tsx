@@ -64,16 +64,27 @@ export default function Home() {
 
       <div className="relative z-10">
         <section className="h-screen w-full relative pointer-events-none">
-          {/* Text Container: Left Center */}
-          <div className="absolute top-1/2 left-8 md:left-20 -translate-y-1/2 max-w-lg text-left z-20">
-            <h1 className="text-md md:text-xl font-medium leading-snug text-white tracking-wide">
-              Gattabara Games is a gaming development company headquartered in Banglore.
+          {/* DESKTOP LAYOUT */}
+          <div className="hidden md:block absolute top-1/2 left-20 -translate-y-1/2 max-w-lg text-left z-20">
+            <h1 className="text-xl font-medium leading-snug text-white tracking-wide">
+              {heroText}
             </h1>
           </div>
 
-          {/* Projects Card: Left Bottom (Carousel) */}
-          <div className="absolute bottom-20 left-8 md:left-20 w-[300px] h-[180px] z-20">
+          <div className="hidden md:block absolute bottom-20 left-20 w-[300px] h-[180px] z-20">
             <ClientCarousel />
+          </div>
+
+          {/* MOBILE LAYOUT */}
+          <div className="md:hidden absolute bottom-24 left-0 w-full px-6 flex flex-row items-center justify-between gap-4 z-20">
+            <div className="flex-1 text-left">
+              <h1 className="text-xs font-medium leading-relaxed text-white tracking-wide">
+                {heroText}
+              </h1>
+            </div>
+            <div className="w-[140px] h-[90px] shrink-0">
+              <ClientCarousel />
+            </div>
           </div>
         </section>
 

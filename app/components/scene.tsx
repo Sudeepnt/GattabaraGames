@@ -131,7 +131,7 @@ const CrodalLogo3D = ({
       const endScale = startScale / 2;
 
       gsap.set(groupRef.current.scale, { x: startScale, y: startScale, z: startScale });
-      gsap.set(groupRef.current.position, { x: isMobile ? 0.8 : 2.5, y: 0, z: 0 });
+      gsap.set(groupRef.current.position, { x: isMobile ? 0 : 2.5, y: 0, z: 0 });
       gsap.set(groupRef.current.rotation, { x: 0, y: 0, z: 0 });
 
       ScrollTrigger.refresh();
