@@ -82,7 +82,7 @@ export default function Pitch() {
 
     return (
 
-        <div className="h-screen flex flex-col px-8 md:px-32 max-w-[1920px] mx-auto w-full bg-black justify-center items-center overflow-hidden relative">
+        <div className="h-screen flex flex-col px-8 md:px-32 max-w-[1920px] mx-auto w-full bg-black justify-start md:justify-center items-center pt-52 md:pt-0 overflow-hidden relative">
 
             <div className="fixed top-0 left-0 w-full z-50">
                 <Header />
