@@ -35,7 +35,7 @@
       "footerLinks": [
         {
           "label": "Pitch",
-          "url": "/pitch"
+          "url": "/pitch-us"
         },
         {
           "label": "X(Twitter)",
@@ -180,6 +180,10 @@
         "/projects/project4.png",
         "/projects/project1.png"
       ]
+    },
+    {
+      "sub": "New Game",
+      "description": "Game Description"
     }
   ],
   "ggProductions": {
@@ -220,9 +224,67 @@
           "/projects/project2.png",
           "/projects/project3.png"
         ]
+      },
+      {
+        "sub": "Aetherbound",
+        "image": "/projects/project2.png",
+        "description": "Full-cycle art production for a stylized fantasy RPG. Our artists delivered a cohesive visual identity, including character design, environment kits, and custom VFX for a vibrant, hand-painted aesthetic.",
+        "developedBy": "GG Productions",
+        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "followOn": [],
+        "wishlistOn": [],
+        "availableOn": [
+          {
+            "label": "Console",
+            "url": "#"
+          }
+        ],
+        "screenshots": [
+          "/projects/project2.png",
+          "/projects/project3.png"
+        ]
+      },
+      {
+        "sub": "Neon Drift",
+        "image": "/projects/project3.png",
+        "description": "Technical co-development and UI/UX overhaul for a cyberpunk racing title. We optimized the car physics engine and designed a futuristic, high-performance interface for seamless player immersion.",
+        "developedBy": "GG Productions",
+        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "followOn": [],
+        "wishlistOn": [],
+        "availableOn": [
+          {
+            "label": "PC",
+            "url": "#"
+          }
+        ],
+        "screenshots": [
+          "/projects/project3.png",
+          "/projects/project4.png"
+        ]
+      },
+      {
+        "sub": "Core Protocol",
+        "image": "/projects/project4.png",
+        "description": "Backend infrastructure and multiplayer networking for a competitive shooter. We built a scalable matchmaking system and high-tick-rate servers to ensure low-latency gameplay for a global player base.",
+        "developedBy": "GG Productions",
+        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "followOn": [],
+        "wishlistOn": [],
+        "availableOn": [
+          {
+            "label": "PC",
+            "url": "#"
+          }
+        ],
+        "screenshots": [
+          "/projects/project4.png",
+          "/projects/project1.png"
+        ]
       }
     ],
-    "closingCta": "Ready to build something exceptional?"
+    "closingCta": "Ready to build something exceptional?",
+    "clientLogos": []
   },
   "about": {
     "introText": [

@@ -414,44 +414,44 @@ export default function GGProductions() {
                 </div>
             </section>
 
-            {/* Selected Projects Section */}
-            {projects && projects.length > 0 && (
-                <section className="relative w-full px-6 md:px-16 py-20 pb-32">
+            <section className="relative w-full px-4 md:px-1 py-20 pb-40 max-w-[1920px] mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-8">
+                    {projects.map((project, index) => (
+                        <Link
+                            key={index}
+                            href={`/games/${project.sub.toLowerCase().replace(/\s+/g, '-')}`}
+                            className="group block"
+                        >
+                            <div className="relative overflow-hidden bg-black flex flex-col cursor-pointer transition-opacity group-hover:opacity-90">
+                                {/* Title Bar */}
+                                <div className="relative h-14 pl-[20px] pt-[5px] pr-2 pb-2 flex items-start justify-start bg-black text-white">
+                                    <h3 className="font-bold text-lg md:text-xl uppercase tracking-wide">{project.sub}</h3>
+                                </div>
 
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
-                        {projects.map((project, index) => (
-                            <Link
-                                key={index}
-                                href={`/games/${project.sub.toLowerCase().replace(/\s+/g, '-')}`}
-                                className="group block"
-                            >
-                                <div
-                                    className="relative aspect-video overflow-hidden tech-border-btn bg-black/40"
-                                >
+                                {/* Project Image */}
+                                <div className="relative aspect-video overflow-hidden bg-black tech-border-btn">
                                     {project.image && (
                                         <img
                                             src={project.image}
                                             alt={project.sub}
-                                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
                                     )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
-
-                                    <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                        <h3 className="text-xl font-bold uppercase tracking-wider mb-2 text-white">{project.sub}</h3>
-                                        {project.description && (
-                                            <p className="text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">
-                                                {project.description}
-                                            </p>
-                                        )}
-                                    </div>
                                 </div>
-                            </Link>
-                        ))}
-                    </div>
-                </section>
-            )}
+
+                                {/* Description Below */}
+                                {project.description && (
+                                    <div className="relative p-6 bg-black text-white">
+                                        <p className="text-sm leading-relaxed text-gray-300">
+                                            {project.description}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </section>
 
             {/* Footer */}
             <BottomBox isDark={true} />

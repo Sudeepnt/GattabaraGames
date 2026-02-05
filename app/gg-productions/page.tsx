@@ -7,7 +7,7 @@ export default function GGProductionsPage() {
             <div className="fixed top-0 left-0 w-full z-50">
                 <Header />
             </div>
-            <main className="pt-16">
+            <main className="pt-0">
                 <GGProductions />
             </main>
         </div>

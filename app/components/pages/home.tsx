@@ -19,18 +19,18 @@ const QuatrefoilGridBackground = () => {
             id="quatrefoil-grid"
             x="0"
             y="0"
-            width="80"
-            height="80"
+            width="160"
+            height="160"
             patternUnits="userSpaceOnUse"
           >
-            {/* 4-pointed diamond star shape - larger and closer */}
+            {/* 4-pointed diamond star shape - centered and more visible */}
             <path
               d="M 40,2 C 35,15 25,25 10,30 C 25,35 35,45 40,58 C 45,45 55,35 70,30 C 55,25 45,15 40,2 Z"
               fill="none"
               stroke="#ffffff"
               strokeWidth="0.5"
-              opacity="0.1"
-              transform="scale(1.2)"
+              opacity="0.125"
+              transform="translate(40, 50) scale(2.4)"
               style={{ transformOrigin: '40px 30px' }}
             />
           </pattern>

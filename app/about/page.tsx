@@ -29,17 +29,6 @@ export default function AboutPage() {
 
             <Header />
 
-            <div className="w-full md:w-1/3 mb-12 md:mb-0 sticky top-12 px-6 md:px-16">
-                <Link href="/">
-                    <Image
-                        src="/GGlogo.png"
-                        alt="Gattabara Games Logo"
-                        width={180}
-                        height={60}
-                        className="object-contain invert"
-                    />
-                </Link>
-            </div>
 
             <section className="w-full px-6 md:px-16 mt-32 mb-40 flex justify-end">
                 <div className="w-full md:w-1/2 flex flex-col gap-8 text-lg md:text-xl font-medium leading-relaxed text-gray-200 text-right">

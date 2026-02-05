@@ -134,13 +134,14 @@ export default function GameDetailPage() {
                     </div>
                 </section>
 
-                {/* Description Section */}
+                {/* Synopsis Section */}
                 <section className="px-6 md:px-16 py-12 max-w-7xl mx-auto">
+                    <h3 className="text-sm font-bold text-gray-500 uppercase mb-6 text-[10px] tracking-[0.2em]">Synopsis</h3>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-lg md:text-xl leading-relaxed text-gray-300"
+                        className="text-2xl md:text-4xl leading-tight text-gray-300"
                     >
                         {game.description}
                     </motion.p>
@@ -246,9 +247,9 @@ export default function GameDetailPage() {
 
                 {/* Other Games Section - No title, restructured items, matches header padding */}
                 {otherGames.length > 0 && (
-                    <section className="p-4 md:p-1 pb-20 w-full">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
-                            {otherGames.slice(0, 4).map((otherGame, idx) => (
+                    <section className="px-4 md:px-1 pt-36 md:pt-48 pb-20 w-full">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-1 gap-y-16">
+                            {otherGames.map((otherGame, idx) => (
                                 <Link
                                     key={idx}
                                     href={`/games/${otherGame.sub.toLowerCase().replace(/\s+/g, '-')}`}
