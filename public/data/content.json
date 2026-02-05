@@ -25,30 +25,6 @@
       "linkText": "",
       "linkUrl": ""
     },
-    "projectStack": {
-      "projects": [
-        {
-          "sub": "Project 1",
-          "image": "/projects/project1.png",
-          "description": "An exciting new game experience that pushes the boundaries of interactive storytelling and gameplay mechanics."
-        },
-        {
-          "sub": "Project 2",
-          "image": "/projects/project2.png",
-          "description": "A bold creative venture combining experimental design with distinctive art direction for a unique gaming experience."
-        },
-        {
-          "sub": "Project 3",
-          "image": "/projects/project3.png",
-          "description": "Innovative gameplay systems met with stunning visual fidelity."
-        },
-        {
-          "sub": "Project 4",
-          "image": "/projects/project4.png",
-          "description": "Building scalable foundations for the next generation of games."
-        }
-      ]
-    },
     "bottomBox": {
       "phrases": [
         "Gattabara Games.",
@@ -63,11 +39,11 @@
         },
         {
           "label": "X(Twitter)",
-          "url": "https://x.com/sudeep_n_t"
+          "url": ""
         },
         {
           "label": "LinkedIn",
-          "url": "https://www.linkedin.com/in/sudeep-n-t-b3853b36a/"
+          "url": ""
         },
         {
           "label": "Blogs",
@@ -75,6 +51,178 @@
         }
       ]
     }
+  },
+  "games": [
+    {
+      "sub": "Orbitals",
+      "image": "/projects/project1.png",
+      "description": "Step into a lovingly crafted retro anime world as explorers Maki and Omura brave the deadly Storm Wall and the perils beyond, all to save their home. In this 2-player co-op puzzle adventure, only brains, heart and unyielding resolve will open the path forward.",
+      "developedBy": "Gattabara Games",
+      "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "followOn": [
+        {
+          "label": "Twitter",
+          "url": "https://twitter.com"
+        },
+        {
+          "label": "Discord",
+          "url": "https://discord.com"
+        }
+      ],
+      "wishlistOn": [
+        {
+          "label": "Steam",
+          "url": "https://store.steampowered.com"
+        }
+      ],
+      "availableOn": [
+        {
+          "label": "PC",
+          "url": "#"
+        },
+        {
+          "label": "Console",
+          "url": "#"
+        }
+      ],
+      "screenshots": [
+        "/projects/project1.png",
+        "/projects/project2.png"
+      ]
+    },
+    {
+      "sub": "Ontos",
+      "image": "/projects/project2.png",
+      "description": "A sci-fi mystery set on the repurposed moon hotel Samsara. Uncover cryptic experiments, face unsettling encounters, and piece together a mind-bending narrative. The deeper you go, the more the truth unravels as you confront the ultimate question: What is reality?",
+      "developedBy": "Gattabara Games",
+      "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "followOn": [
+        {
+          "label": "Twitter",
+          "url": "https://twitter.com"
+        }
+      ],
+      "wishlistOn": [
+        {
+          "label": "Steam",
+          "url": "https://store.steampowered.com"
+        }
+      ],
+      "availableOn": [
+        {
+          "label": "Steam",
+          "url": "#"
+        }
+      ],
+      "screenshots": [
+        "/projects/project2.png",
+        "/projects/project3.png",
+        "/uploads/1770274815842-1-2-sc.jpeg"
+      ]
+    },
+    {
+      "sub": "TankRat",
+      "image": "/projects/project3.png",
+      "description": "A dying world, flesh given way to steel. Swarms of corrupted mech-monsters roam a desolate land. Search and destroy, scavenge and dismantle, rebuild yourself from the wreckage. What you take becomes what you are. Survive the wasteland. Make it to Highpoint.",
+      "developedBy": "Gattabara Games",
+      "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "followOn": [
+        {
+          "label": "YouTube",
+          "url": "https://youtube.com"
+        }
+      ],
+      "wishlistOn": [
+        {
+          "label": "Steam",
+          "url": "https://store.steampowered.com"
+        },
+        {
+          "label": "Epic Games",
+          "url": "https://store.epicgames.com"
+        }
+      ],
+      "availableOn": [],
+      "screenshots": [
+        "/projects/project3.png",
+        "/projects/project4.png"
+      ]
+    },
+    {
+      "sub": "Clair Obscur",
+      "image": "/projects/project4.png",
+      "description": "Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.",
+      "developedBy": "Gattabara Games",
+      "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "followOn": [
+        {
+          "label": "Instagram",
+          "url": "https://instagram.com"
+        }
+      ],
+      "wishlistOn": [
+        {
+          "label": "Steam",
+          "url": "https://store.steampowered.com"
+        }
+      ],
+      "availableOn": [
+        {
+          "label": "PS5",
+          "url": "#"
+        },
+        {
+          "label": "Xbox",
+          "url": "#"
+        }
+      ],
+      "screenshots": [
+        "/projects/project4.png",
+        "/projects/project1.png"
+      ]
+    }
+  ],
+  "ggProductions": {
+    "heroTagline": "Build faster. Ship smarter. Stay lean.",
+    "ctaButtonText": "Start a Conversation",
+    "introText": "Full-cycle game development, art production, and technical co-development. We extend your team’s capabilities with specialized talent and production-ready pipelines.",
+    "services": [
+      {
+        "title": "Development",
+        "description": "We help studios build games from concept to playable reality through strong game design, systems architecture, and technical execution. Our teams support gameplay mechanics, level design, prototyping, and full production across Unity, Unreal, and Roblox, building scalable foundations that support long-term growth and live operations."
+      },
+      {
+        "title": "Art",
+        "description": "We create distinctive visuals through strong art direction and production. From style exploration to full world-building, our artists deliver cohesive 2D and 3D visuals, animation, and UI that bring characters and worlds to life with a clear creative vision aligned to your gameplay and audience."
+      },
+      {
+        "title": "Strategy & Pre-Production",
+        "description": "We help studios de-risk production and validate ideas before full development. Our support spans IP creation consultancy, MVP planning for fundraising, game design documentation for investors and partners, and data-driven decision-making across entertainment, branded experiences, and applied games to align creative ambition with market and production realities."
+      }
+    ],
+    "projects": [
+      {
+        "sub": "Project Zero",
+        "image": "/projects/project1.png",
+        "description": "A high-performance technical co-development project focusing on scalable backend systems and immersive environment art. We implemented custom shader solutions and optimized the rendering pipeline for mobile devices.",
+        "developedBy": "GG Productions",
+        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "followOn": [],
+        "wishlistOn": [],
+        "availableOn": [
+          {
+            "label": "Web",
+            "url": "#"
+          }
+        ],
+        "screenshots": [
+          "/projects/project1.png",
+          "/projects/project2.png",
+          "/projects/project3.png"
+        ]
+      }
+    ],
+    "closingCta": "Ready to build something exceptional?"
   },
   "about": {
     "introText": [
@@ -100,22 +248,6 @@
     ],
     "careersLink": "If this aligns with what you're looking to build, start a conversation with us via our contact page →"
   },
-  "pitch": {
-    "formLine1Start": "Hi, my name is",
-    "namePlaceholder": "your name",
-    "formLine1End": "and I'm exploring a potential partnership or opportunity with Gattabara Games.",
-    "formLine2Start": "Get in touch with me at",
-    "emailPlaceholder": "your e-mail",
-    "formLine2End": ".",
-    "consentText": "Hereby I authorise Gattabara Games to process the given personal information in connection with my inquiry. I am aware that submitting personal data is voluntary and that I have a right to view, edit and delete all the data concerning myself.",
-    "buttonText": "Send",
-    "companyName": "Gattabara Games LLP",
-    "email": "info@gattabaragames.com",
-    "phone": "+91 9900114038",
-    "address1": "No. 55, 1st Floor, 10th Cross, 2nd Stage, Mahalakshmipuram,",
-    "address2": "WOC Road, Bengaluru, Karnataka,",
-    "address3": "India - 560086"
-  },
   "contact": {
     "formLine1Start": "Hi, my name is",
     "namePlaceholder": "your name",
@@ -131,25 +263,5 @@
     "address1": "No. 55, 1st Floor, 10th Cross, 2nd Stage, Mahalakshmipuram,",
     "address2": "WOC Road, Bengaluru, Karnataka,",
     "address3": "India - 560086"
-  },
-  "ggProductions": {
-    "heroTagline": "Build faster. Ship smarter. Stay lean.",
-    "ctaButtonText": "Start a Conversation",
-    "introText": "Full-cycle game development, art production, and technical co-development. We extend your team’s capabilities with specialized talent and production-ready pipelines.",
-    "services": [
-      {
-        "title": "Development",
-        "description": "We help studios build games from concept to playable reality through strong game design, systems architecture, and technical execution. Our teams support gameplay mechanics, level design, prototyping, and full production across Unity, Unreal, and Roblox, building scalable foundations that support long-term growth and live operations."
-      },
-      {
-        "title": "Art",
-        "description": "We create distinctive visuals through strong art direction and production. From style exploration to full world-building, our artists deliver cohesive 2D and 3D visuals, animation, and UI that bring characters and worlds to life with a clear creative vision aligned to your gameplay and audience."
-      },
-      {
-        "title": "Strategy & Pre-Production",
-        "description": "We help studios de-risk production and validate ideas before full development. Our support spans IP creation consultancy, MVP planning for fundraising, game design documentation for investors and partners, and data-driven decision-making across entertainment, branded experiences, and applied games to align creative ambition with market and production realities."
-      }
-    ],
-    "closingCta": "Ready to build something exceptional?"
   }
 }

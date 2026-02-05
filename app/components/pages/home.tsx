@@ -31,7 +31,7 @@ const QuatrefoilGridBackground = () => {
               strokeWidth="0.5"
               opacity="0.1"
               transform="scale(1.2)"
-              transform-origin="40 30"
+              style={{ transformOrigin: '40px 30px' }}
             />
           </pattern>
         </defs>

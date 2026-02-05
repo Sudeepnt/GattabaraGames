@@ -75,7 +75,7 @@ export default function AboutPage() {
 
             <section className="w-full px-6 md:px-16 mb-24 text-center">
                 <a
-                    href="/pitch"
+                    href="/pitch-us"
                     className="inline-block w-full max-w-7xl text-2xl md:text-4xl font-bold underline hover:underline decoration-white underline-offset-8 leading-tight text-white"
                 >
                     {careersLink}

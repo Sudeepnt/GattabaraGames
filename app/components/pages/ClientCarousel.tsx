@@ -2,76 +2,82 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
-const clients = [
-    {
-        id: 1,
-        name: "Sahi Jobs",
-        color: "#d9d9d9ff",
-        logo: "Sahi Jobs", // Placeholder for logo
-        textColor: "#000000ff"
-    },
-    {
-        id: 2,
-        name: "Lokal Matrimony",
-        color: "#D32F2F",
-        logo: "Lokal",
-        textColor: "#FFFFFF"
-    },
-    {
-        id: 3,
-        name: "GyanTV",
-        color: "#4444FF",
-        logo: "GyanTV",
-        textColor: "#FFFFFF"
-    },
-    {
-        id: 3,
-        name: "GyanTV",
-        color: "#4444FF",
-        logo: "GyanTV",
-        textColor: "#FFFFFF"
-    },
-    {
-        id: 3,
-        name: "GyanTV",
-        color: "#4444FF",
-        logo: "GyanTV",
-        textColor: "#FFFFFF"
-    }
-];
+interface GameProject {
+    sub: string;
+    image?: string;
+    description?: string;
+}
 
 export default function ClientCarousel() {
     const [index, setIndex] = useState(0);
+    const [games, setGames] = useState<GameProject[]>([]);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setIndex((prev) => (prev + 1) % clients.length);
-        }, 1000); // Change every 1 second
-        return () => clearInterval(timer);
+        // Fetch game projects from content.json
+        fetch('/data/content.json')
+            .then(res => res.json())
+            .then(data => {
+                if (data?.games && Array.isArray(data.games)) {
+                    setGames(data.games);
+                }
+            })
+            .catch(error => console.error('Failed to load games:', error));
     }, []);
+
+    useEffect(() => {
+        if (games.length === 0) return;
+
+        const timer = setInterval(() => {
+            setIndex((prev) => (prev + 1) % games.length);
+        }, 2000); // Change every 2 seconds
+        return () => clearInterval(timer);
+    }, [games.length]);
+
+    if (games.length === 0) {
+        return (
+            <div className="w-full h-full relative overflow-hidden rounded-lg shadow-2xl bg-black flex items-center justify-center">
+                <p className="text-white text-sm">Loading...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="w-full h-full relative overflow-hidden rounded-lg shadow-2xl">
             <AnimatePresence mode="popLayout">
                 <motion.div
-                    key={clients[index].id}
+                    key={index}
                     initial={{ x: "100%" }}
                     animate={{ x: 0 }}
                     exit={{ x: "-100%" }}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{ backgroundColor: clients[index].color }}
+                    className="absolute inset-0 bg-black"
                 >
-                    <div className="text-center">
-                        {/* In a real app, use Image component here for logos */}
-                        <h3
-                            className="text-2xl font-bold tracking-tighter"
-                            style={{ color: clients[index].textColor }}
-                        >
-                            {clients[index].logo}
-                        </h3>
-                    </div>
+                    <Link
+                        href={`/games/${games[index].sub.toLowerCase().replace(/\s+/g, '-')}`}
+                        className="flex flex-col items-center justify-center w-full h-full relative"
+                    >
+                        {/* Game Image */}
+                        {games[index].image && (
+                            <div className="absolute inset-0">
+                                <img
+                                    src={games[index].image}
+                                    alt={games[index].sub}
+                                    className="w-full h-full object-cover opacity-80"
+                                />
+                                {/* Dark overlay for text readability */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                            </div>
+                        )}
+
+                        {/* Game Name */}
+                        <div className="relative z-10 text-center px-4">
+                            <h3 className="text-sm md:text-base font-bold tracking-wide text-white uppercase">
+                                {games[index].sub}
+                            </h3>
+                        </div>
+                    </Link>
                 </motion.div>
             </AnimatePresence>
         </div>

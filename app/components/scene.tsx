@@ -217,34 +217,47 @@ const CrodalLogo3D = ({
 export default function Scene({ activePage, logoType = 'gg' }: { activePage: string, logoType?: 'gg' | 'star' | 'star2' }) {
   // Shared ref for mouse position, updated by the HTML div, read by the 3D component
   const mouseRef = useRef({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // --- INTERACTION HANDLING ---
-  const onMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    // We ignore Y for now based on strict constraints, but calculating it doesn't hurt
-    const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-    mouseRef.current = { x, y };
-  };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Calculate normalized mouse coordinates (-1 to 1) for the entire window
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = -(e.clientY / window.innerHeight) * 2 + 1;
+      mouseRef.current = { x, y };
+    };
 
-  const onMouseLeave = () => {
-    // Reset to rest position
-    mouseRef.current = { x: 0, y: 0 };
-  };
+    const handleMouseLeave = () => {
+      // Reset to center position when mouse leaves the window
+      mouseRef.current = { x: 0, y: 0 };
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    // Fade logo to 20% opacity as user scrolls down
+    gsap.to(containerRef.current, {
+      opacity: 0.2,
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "30% top",
+        scrub: true,
+      }
+    });
+  }, { scope: containerRef });
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-[50] pointer-events-none">
-
-      {/* INTERACTION ZONE - Red Border as requested */}
-      {/* Positioned in the center where the logo is */}
-      <div
-        className="absolute top-1/2 left-1/2 md:left-[72%] md:right-auto transform -translate-x-1/2 md:-translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] z-[60] pointer-events-auto cursor-crosshair"
-        onMouseMove={onMouseMove}
-        onMouseLeave={onMouseLeave}
-      />
-
-
-
+    <div ref={containerRef} className="fixed top-0 left-0 w-full h-full z-[5] pointer-events-none transition-opacity duration-300">
       <Canvas
         className="pointer-events-none"
         camera={{ position: [0, 0, 10], fov: 32 }}

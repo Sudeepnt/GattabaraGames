@@ -9,6 +9,18 @@ interface ServiceData {
     description: string;
 }
 
+interface ProjectData {
+    sub: string;
+    image?: string;
+    description: string;
+    developedBy?: string;
+    followOn?: Array<{ label: string; url: string }>;
+    wishlistOn?: Array<{ label: string; url: string }>;
+    availableOn?: Array<{ label: string; url: string }>;
+    screenshots?: string[];
+    video?: string;
+}
+
 // Service icons based on title
 const getServiceIcon = (title: string) => {
     if (title.toLowerCase().includes("development")) {
@@ -63,7 +75,7 @@ const getServiceIcon = (title: string) => {
                 />
                 <ellipse
                     cx="32"
-                    cy="32"
+                    cy="6"
                     rx="24"
                     ry="8"
                     stroke="currentColor"
@@ -123,6 +135,8 @@ export default function GGProductions() {
     const [ctaButtonText, setCtaButtonText] = useState("Start a Conversation");
     const [introText, setIntroText] = useState("");
     const [services, setServices] = useState<ServiceData[]>([]);
+    const [projects, setProjects] = useState<ProjectData[]>([]);
+    const [clientLogos, setClientLogos] = useState<string[]>([]);
     const [closingCta, setClosingCta] = useState("Ready to build something exceptional?");
     const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -135,7 +149,9 @@ export default function GGProductions() {
                     if (data.ggProductions.ctaButtonText) setCtaButtonText(data.ggProductions.ctaButtonText);
                     if (data.ggProductions.introText) setIntroText(data.ggProductions.introText);
                     if (data.ggProductions.services) setServices(data.ggProductions.services);
+                    if (data.ggProductions.projects) setProjects(data.ggProductions.projects);
                     if (data.ggProductions.closingCta) setClosingCta(data.ggProductions.closingCta);
+                    if (data.ggProductions.clientLogos) setClientLogos(data.ggProductions.clientLogos);
                 }
             })
             .catch(error => console.error('GG Productions load error:', error));
@@ -177,9 +193,6 @@ export default function GGProductions() {
                         animation: "gradientShift 8s ease infinite"
                     }}
                 >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 border-4 border-white/20 border-t-white/80 rounded-full animate-spin" />
-                    </div>
                     {/* Subtle pattern overlay */}
                     <div
                         className="absolute inset-0 opacity-10"
@@ -226,25 +239,24 @@ export default function GGProductions() {
                     </p>
                     <Link
                         href="/pitch-us"
-                        className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-bold text-sm md:text-base uppercase tracking-wider rounded-none overflow-hidden transition-all duration-500 hover:bg-transparent hover:text-white border-2 border-white"
+                        className="tech-border-btn text-white pl-8 pr-6 py-4 font-bold text-sm md:text-base uppercase tracking-wider flex items-center gap-4 group hover:!bg-white hover:text-black transition-colors"
                         style={{ animation: "fadeInUp 1s ease-out 0.4s forwards", opacity: 0 }}
                     >
                         <span className="relative z-10">{ctaButtonText}</span>
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1"
+                            width="36"
+                            height="12"
+                            viewBox="0 0 36 12"
                             fill="none"
-                            viewBox="0 0 24 24"
                             stroke="currentColor"
-                            strokeWidth={2}
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="relative z-10"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                            />
+                            <path d="M30 1L35 6L30 11" />
+                            <path d="M0 6H35" />
                         </svg>
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#13343e] to-[#1a4a58] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                     </Link>
                 </div>
 
@@ -259,48 +271,187 @@ export default function GGProductions() {
             {/* Main Content */}
             <section className="relative w-full px-6 md:px-16 py-20 md:py-32">
                 {/* Intro Text */}
-                <div className="max-w-5xl mx-auto mb-24 md:mb-40">
+                <div className="max-w-5xl mx-auto mb-20 md:mb-32">
                     <p className="text-lg md:text-2xl lg:text-3xl font-medium leading-relaxed text-gray-200 text-center">
                         {introText}
                     </p>
                 </div>
 
+                {/* Infinite Scrolling Client Logos */}
+                <div className="w-full overflow-hidden mb-24 md:mb-40 group">
+                    {/* Masking gradients for smooth fade edges */}
+                    <div className="absolute left-0 top-0 z-10 h-full w-16 md:w-32 bg-gradient-to-r from-black via-black/80 to-transparent pointer-events-none" />
+                    <div className="absolute right-0 top-0 z-10 h-full w-16 md:w-32 bg-gradient-to-l from-black via-black/80 to-transparent pointer-events-none" />
+
+                    <div className="flex animate-scroll hover:pause-animation">
+                        {(clientLogos.length > 0 ? [...clientLogos, ...clientLogos, ...clientLogos] : [
+                            "/GGclients/Battle Bucks.png",
+                            "/GGclients/Brewed Games.png",
+                            "/GGclients/Singular Scheme .png",
+                            "/GGclients/magadha.png",
+                            "/GGclients/maplestoryworld.png",
+                            "/GGclients/oila games.png"
+                        ]).map((logo, index) => (
+                            <div key={index} className="flex-shrink-0 flex items-center justify-center px-8 md:px-12">
+                                <img
+                                    src={logo}
+                                    alt="Client Logo"
+                                    className="h-12 md:h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300 contrast-0 hover:contrast-100 brightness-150 hover:brightness-100 grayscale hover:grayscale-0"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
                 {/* Services Stack */}
-                <div className="max-w-5xl mx-auto flex flex-col gap-6">
+                <div className="max-w-5xl mx-auto flex flex-col gap-6 mb-32">
                     {services.map((service, index) => (
                         <div
                             key={service.title}
                             data-index={index}
-                            className="service-section group relative p-8 md:p-12 tech-border-btn bg-black/50 text-gray-300 transition-all duration-500 hover:bg-black/80"
+                            className="service-section relative p-8 md:p-12 tech-border-btn static-border bg-black/50 text-gray-300"
                         >
                             <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-12">
                                 {/* Header: Icon & Title - Strictly Vertical Stack for uniformity */}
                                 <div className="shrink-0 flex flex-col items-start gap-6 md:w-1/3">
-                                    <div className="text-gray-400 group-hover:text-white transition-colors duration-500">
+                                    <div className="text-gray-400">
                                         {/* Wrapper to enforce exact icon size */}
                                         <div className="w-16 h-16 flex items-center justify-center">
                                             {getServiceIcon(service.title)}
                                         </div>
                                     </div>
-                                    <h3 className="text-3xl font-bold uppercase tracking-wide text-gray-200 group-hover:text-white transition-colors duration-500">
+                                    <h3 className="text-3xl font-bold uppercase tracking-wide text-gray-200">
                                         {service.title}
                                     </h3>
                                 </div>
 
                                 {/* Description */}
                                 <div className="md:w-2/3 md:pt-2">
-                                    <p className="text-lg leading-relaxed text-gray-400 group-hover:text-gray-200 transition-colors duration-500 text-justify">
+                                    <p className="text-lg leading-relaxed text-gray-400 text-justify">
                                         {service.description}
                                     </p>
                                 </div>
                             </div>
-
-                            {/* Hover Accent Line */}
-                            <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[#13343e] to-[#2a6a7a] group-hover:w-full transition-all duration-700" />
                         </div>
                     ))}
                 </div>
+
+                {/* How We Work Section */}
+                <div className="max-w-6xl mx-auto py-10">
+                    <div className="relative min-h-[600px] md:min-h-[800px] py-10 px-4">
+                        {/* Process Steps */}
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-24 relative z-10">
+
+                            {/* Step 1: Discovery */}
+                            <div className="md:col-start-1 md:col-span-4 self-start">
+                                <div className="border border-white/30 p-6 md:p-8 text-white tech-border-btn static-border !bg-transparent hover:border-white transition-colors duration-300">
+                                    <span className="text-4xl font-black block mb-2 opacity-20 italic">01</span>
+                                    <h3 className="text-2xl font-bold uppercase mb-4 tracking-tighter">Discovery</h3>
+                                    <p className="text-sm font-medium leading-tight opacity-70">Audit of the current state of the project</p>
+                                </div>
+                            </div>
+
+                            {/* Step 2: Proposal */}
+                            <div className="md:col-start-3 md:col-span-4 md:-mt-12">
+                                <div className="border border-white/30 p-6 md:p-8 text-white tech-border-btn static-border !bg-transparent hover:border-white transition-colors duration-300 md:ml-12">
+                                    <span className="text-4xl font-black block mb-2 opacity-20 italic">02</span>
+                                    <h3 className="text-2xl font-bold uppercase mb-4 tracking-tighter text-right">Proposal</h3>
+                                    <p className="text-sm font-medium leading-tight text-right opacity-70">Bespoke proposal by headcount tailored to needs</p>
+                                </div>
+                            </div>
+
+                            {/* Step 3: Iterate */}
+                            <div className="md:col-start-5 md:col-span-6 relative">
+                                <div id="step-iterate" className="border border-white/60 p-8 md:p-12 text-white tech-border-btn static-border !bg-transparent hover:border-white hover:scale-105 transition-all duration-500 z-20">
+                                    <span className="text-5xl font-black block mb-2 opacity-20 italic">03</span>
+                                    <h3 className="text-4xl font-black uppercase mb-4 tracking-tight">Iterate</h3>
+                                    <p className="text-base font-bold uppercase opacity-80">Work on the project</p>
+                                </div>
+                            </div>
+
+                            {/* Step 4: Review */}
+                            <div className="md:col-start-8 md:col-span-4">
+                                <div id="step-review" className="border border-white/30 p-6 md:p-8 text-white tech-border-btn static-border !bg-transparent hover:border-white transition-colors duration-300">
+                                    <span className="text-4xl font-black block mb-2 opacity-20 italic">04</span>
+                                    <h3 className="text-2xl font-bold uppercase mb-4 tracking-tighter text-right">Review</h3>
+                                    <p className="text-sm font-medium leading-tight text-right opacity-70">Fortnightly reviews and iterations to improve</p>
+                                </div>
+                            </div>
+
+                            {/* Step 5: Submit */}
+                            <div className="md:col-start-10 md:col-span-3 self-end md:-mt-12">
+                                <div className="border border-white/30 p-6 text-white tech-border-btn static-border !bg-transparent hover:border-white transition-colors duration-300">
+                                    <span className="text-3xl font-black block mb-1 opacity-20 italic">05</span>
+                                    <h3 className="text-xl font-bold uppercase mb-2 tracking-tighter">Submit</h3>
+                                    <p className="text-xs font-bold opacity-70">Submit project!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Arrows Layer (Desktop) */}
+                        <div className="hidden md:block absolute inset-0 pointer-events-none z-0">
+                            <svg className="w-full h-full text-white/20" viewBox="0 0 1000 800" fill="none">
+                                {/* Connectivity Flow */}
+                                <path d="M150 150 Q 200 250 300 180" stroke="currentColor" strokeWidth="2" strokeDasharray="6 4" />
+                                <path d="M450 250 Q 550 400 650 350" stroke="currentColor" strokeWidth="2" strokeDasharray="6 4" />
+
+                                {/* Iteration Loop Arrow */}
+                                <path
+                                    d="M 680 430 C 900 480, 900 650, 650 680 C 200 750, 100 500, 380 450"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    fill="none"
+                                    markerEnd="url(#white-arrowhead)"
+                                />
+                                <defs>
+                                    <marker id="white-arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </section>
+
+            {/* Selected Projects Section */}
+            {projects && projects.length > 0 && (
+                <section className="relative w-full px-6 md:px-16 py-20 pb-32">
+
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
+                        {projects.map((project, index) => (
+                            <Link
+                                key={index}
+                                href={`/games/${project.sub.toLowerCase().replace(/\s+/g, '-')}`}
+                                className="group block"
+                            >
+                                <div
+                                    className="relative aspect-video overflow-hidden tech-border-btn bg-black/40"
+                                >
+                                    {project.image && (
+                                        <img
+                                            src={project.image}
+                                            alt={project.sub}
+                                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                                        />
+                                    )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
+
+                                    <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                        <h3 className="text-xl font-bold uppercase tracking-wider mb-2 text-white">{project.sub}</h3>
+                                        {project.description && (
+                                            <p className="text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">
+                                                {project.description}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
 
             {/* Footer */}
             <BottomBox isDark={true} />
@@ -327,6 +478,22 @@ export default function GGProductions() {
           100% {
             background-position: 0% 50%;
           }
+        }
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-33.33%); /* Move by 1/3 since we triplicated the list */
+          }
+        }
+        .animate-scroll {
+          display: flex;
+          width: max-content;
+          animation: scroll 30s linear infinite;
+        }
+        .animate-scroll:hover {
+          animation-play-state: paused;
         }
       `}</style>
         </div>

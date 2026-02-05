@@ -35,7 +35,7 @@ const SubBox = ({
   </div>
 );
 
-export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
+export default function BottomBox({ isDark = false, hideTypewriter = false }: { isDark?: boolean; hideTypewriter?: boolean }) {
   const [phrases, setPhrases] = useState(["Gattabara Games.", "crafted with conviction.", "inspired by culture."]);
   const [footerLinks, setFooterLinks] = useState<Array<{ label: string; url: string }>>([]);
 
@@ -57,6 +57,8 @@ export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
   }, []);
 
   useEffect(() => {
+    if (hideTypewriter) return; // Skip typewriter effect if hidden
+
     const handleTyping = () => {
       const i = loopNum % phrases.length;
       const fullText = phrases[i];
@@ -79,7 +81,7 @@ export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
 
     const timer = setTimeout(handleTyping, typingSpeed);
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed, phrases]);
+  }, [text, isDeleting, loopNum, typingSpeed, phrases, hideTypewriter]);
 
   const hoverClass = isDark
     ? "hover:bg-white hover:text-black"
@@ -92,11 +94,14 @@ export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
   return (
     <footer className={`w-full bg-transparent font-sans relative z-10 p-4 md:p-1 flex flex-col gap-1 ${isDark ? "text-white" : "text-black"}`}>
 
-      <div className="py-20 md:py-64 flex items-center justify-center w-full px-6 overflow-hidden min-h-[300px] md:min-h-[450px]">
-        <h2 className={`text-[11vw] md:text-[7vw] font-black tracking-tighter leading-none text-center uppercase ${isDark ? "text-white" : "text-black"}`}>
-          {text}
-        </h2>
-      </div>
+      {/* Typewriter Section - Conditionally rendered */}
+      {!hideTypewriter && (
+        <div className="py-20 md:py-64 flex items-center justify-center w-full px-6 overflow-hidden min-h-[300px] md:min-h-[450px]">
+          <h2 className={`text-[11vw] md:text-[7vw] font-black tracking-tighter leading-none text-center uppercase ${isDark ? "text-white" : "text-black"}`}>
+            {text}
+          </h2>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-1 w-full">
         <SubBox isDark={isDark} className="h-32 md:h-40 flex items-start justify-start">

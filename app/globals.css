@@ -61,7 +61,7 @@ body {
       0 calc(2 * var(--s)));
 }
 
-.tech-border-btn:hover {
+.tech-border-btn:not(.static-border):hover {
   background-color: rgba(255, 255, 255, 0.9) !important;
 }
 

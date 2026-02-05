@@ -8,37 +8,37 @@ async function cleanupOldImages(oldData: any, newData: any) {
   const oldImages = new Set<string>();
   const newImages = new Set<string>();
 
-  if (oldData?.home?.projectStack?.projects) {
-    oldData.home.projectStack.projects.forEach((p: any) => {
-      if (p.image && p.image.startsWith('/uploads/')) {
-        oldImages.add(p.image);
-      }
-    });
-  }
+  const collectImages = (data: any, images: Set<string>) => {
+    if (data?.games) {
+      data.games.forEach((p: any) => {
+        if (p.image && p.image.startsWith('/uploads/')) images.add(p.image);
+        if (p.screenshots && Array.isArray(p.screenshots)) {
+          p.screenshots.forEach((s: string) => {
+            if (s && s.startsWith('/uploads/')) images.add(s);
+          });
+        }
+      });
+    }
+    if (data?.ggProductions?.projects) {
+      data.ggProductions.projects.forEach((p: any) => {
+        if (p.image && p.image.startsWith('/uploads/')) images.add(p.image);
+      });
+    }
+    if (data?.about?.values) {
+      data.about.values.forEach((v: any) => {
+        if (v.image && v.image.startsWith('/uploads/')) images.add(v.image);
+      });
+    }
+    // Checking for old structure just in case, but primary ref calls new structure
+    if (data?.home?.projectStack?.projects) {
+      data.home.projectStack.projects.forEach((p: any) => {
+        if (p.image && p.image.startsWith('/uploads/')) images.add(p.image);
+      });
+    }
+  };
 
-  if (oldData?.about?.values) {
-    oldData.about.values.forEach((v: any) => {
-      if (v.image && v.image.startsWith('/uploads/')) {
-        oldImages.add(v.image);
-      }
-    });
-  }
-
-  if (newData?.home?.projectStack?.projects) {
-    newData.home.projectStack.projects.forEach((p: any) => {
-      if (p.image && p.image.startsWith('/uploads/')) {
-        newImages.add(p.image);
-      }
-    });
-  }
-
-  if (newData?.about?.values) {
-    newData.about.values.forEach((v: any) => {
-      if (v.image && v.image.startsWith('/uploads/')) {
-        newImages.add(v.image);
-      }
-    });
-  }
+  collectImages(oldData, oldImages);
+  collectImages(newData, newImages);
 
   const imagesToDelete = [...oldImages].filter(img => !newImages.has(img));
 
@@ -60,6 +60,7 @@ async function saveBase64Images(data: any) {
   await mkdir(uploadsDir, { recursive: true });
 
   const processImages = async (items: any[], imageKey: string) => {
+    if (!items || !Array.isArray(items)) return;
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       if (item[imageKey] && item[imageKey].startsWith('data:image')) {
@@ -68,15 +69,42 @@ async function saveBase64Images(data: any) {
         const ext = item[imageKey].split(';')[0].split('/')[1];
         const filename = `${Date.now()}-${i}.${ext}`;
         const filepath = path.join(uploadsDir, filename);
-        
+
         await writeFile(filepath, buffer);
         items[i][imageKey] = `/uploads/${filename}`;
       }
     }
   };
 
-  if (data?.home?.projectStack?.projects) {
-    await processImages(data.home.projectStack.projects, 'image');
+  const processImageArray = async (items: any[], arrayKey: string) => {
+    if (!items || !Array.isArray(items)) return;
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      if (item[arrayKey] && Array.isArray(item[arrayKey])) {
+        for (let j = 0; j < item[arrayKey].length; j++) {
+          const imgStr = item[arrayKey][j];
+          if (imgStr && imgStr.startsWith('data:image')) {
+            const base64Data = imgStr.split(',')[1];
+            const buffer = Buffer.from(base64Data, 'base64');
+            const ext = imgStr.split(';')[0].split('/')[1];
+            const filename = `${Date.now()}-${i}-${j}-sc.${ext}`;
+            const filepath = path.join(uploadsDir, filename);
+
+            await writeFile(filepath, buffer);
+            item[arrayKey][j] = `/uploads/${filename}`;
+          }
+        }
+      }
+    }
+  };
+
+  if (data?.games) {
+    await processImages(data.games, 'image');
+    await processImageArray(data.games, 'screenshots');
+  }
+
+  if (data?.ggProductions?.projects) {
+    await processImages(data.ggProductions.projects, 'image');
   }
 
   if (data?.about?.values) {
@@ -90,7 +118,7 @@ export async function saveCMSData(data: any) {
   try {
     const dataDir = path.join(process.cwd(), 'public', 'data');
     const contentPath = path.join(dataDir, 'content.json');
-    
+
     await mkdir(dataDir, { recursive: true });
 
     let oldData = null;
@@ -104,19 +132,19 @@ export async function saveCMSData(data: any) {
     if (oldData) {
       await cleanupOldImages(oldData, processedData);
     }
-    
+
     await writeFile(
       contentPath,
       JSON.stringify(processedData, null, 2),
       'utf-8'
     );
-    
+
     return { success: true };
   } catch (error) {
     console.error('Save error:', error);
-    return { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'Unknown error' 
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error'
     };
   }
 }
