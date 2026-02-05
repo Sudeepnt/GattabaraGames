@@ -296,7 +296,7 @@ export default function GGProductions() {
                                 <img
                                     src={logo}
                                     alt="Client Logo"
-                                    className="h-12 md:h-16 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300 contrast-0 hover:contrast-100 brightness-150 hover:brightness-100 grayscale hover:grayscale-0"
+                                    className="h-12 md:h-16 w-auto object-contain opacity-70 contrast-0 brightness-150 grayscale"
                                 />
                             </div>
                         ))}
@@ -442,7 +442,7 @@ export default function GGProductions() {
                                 {/* Description Below */}
                                 {project.description && (
                                     <div className="relative p-6 bg-black text-white">
-                                        <p className="text-sm leading-relaxed text-gray-300">
+                                        <p className="text-sm leading-relaxed text-gray-200 font-medium tracking-wide">
                                             {project.description}
                                         </p>
                                     </div>

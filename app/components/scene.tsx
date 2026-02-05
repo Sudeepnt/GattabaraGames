@@ -33,74 +33,46 @@ const CrodalLogo3D = ({
 
   const logoTexture = useTexture(textureUrl);
 
-  // Configure texture for pixel art look
+  // Configure texture for smoother look
   useMemo(() => {
-    logoTexture.minFilter = THREE.NearestFilter;
-    logoTexture.magFilter = THREE.NearestFilter;
-    logoTexture.generateMipmaps = false;
+    logoTexture.minFilter = THREE.LinearFilter;
+    logoTexture.magFilter = THREE.LinearFilter;
+    logoTexture.generateMipmaps = true;
   }, [logoTexture]);
-
-  /* 
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []); 
-  */
 
   // --- ALIVE MOTION ---
   useFrame((state, delta) => {
     if (!internalMotionRef.current) return;
 
+    // BASE_ROT_Y: 0.3 turns the logo face 5% to the right (approx 18 degrees).
+    const BASE_ROT_Y = 0;
+    const SENSITIVITY = 1.0;
+    const LIMIT = 0.5;
+
     let targetRotX = 0;
-    let targetRotY = 0;
+    let targetRotY = BASE_ROT_Y;
     let targetRotZ = 0;
 
-    if (activePage === "home") {
-      const scrollY = window.scrollY;
+    const scrollY = window.scrollY;
+    const scrollFactor = activePage === "home" ? Math.max(0, 1 - scrollY / 50) : 1.0;
 
-      if (scrollY > 1) {
-        mouseRef.current = { x: 0, y: 0 };
+    if (scrollFactor > 0) {
+      const { x, y } = mouseRef.current;
+      const DEAD_ZONE = 0.2;
+
+      let rotX_Val = 0;
+      if (Math.abs(y) > DEAD_ZONE) {
+        rotX_Val = -y * SENSITIVITY;
       }
+      targetRotX = THREE.MathUtils.clamp(rotX_Val, -LIMIT, LIMIT);
 
-      const scrollFactor = Math.max(0, 1 - scrollY / 50);
-
-      if (scrollFactor > 0) {
-        // STRICT User Constraint:
-        // 1. Up/Down Movement (RotX) - NOW ENABLED
-        // 2. NO Tilt (RotZ = 0).
-        // 3. Left/Right Turn (RotY).
-
-        const BASE_ROT_Y = -0.3;
-        const SENSITIVITY = 1.0;
-        const LIMIT = 0.5;
-
-        const { x, y } = mouseRef.current; // Now using both x and y
-
-        // 1. RotX Logic (Up/Down) with Dead Zone
-        const DEAD_ZONE = 0.2;
-        let rotX_Val = 0;
-        if (Math.abs(y) > DEAD_ZONE) {
-          rotX_Val = -y * SENSITIVITY;
-        }
-        targetRotX = THREE.MathUtils.clamp(rotX_Val, -LIMIT, LIMIT);
-
-        // 2. RotY Logic (Full Left/Right Turn) with Center Dead Zone
-        let rotY_Val = 0;
-        if (Math.abs(x) > DEAD_ZONE) {
-          rotY_Val = x * SENSITIVITY;
-        }
-        targetRotY = BASE_ROT_Y + THREE.MathUtils.clamp(rotY_Val, -LIMIT, LIMIT);
-
-        // 3. LOCK RotZ to 0
-        targetRotZ = 0;
+      let rotY_Val = 0;
+      if (Math.abs(x) > DEAD_ZONE) {
+        rotY_Val = x * SENSITIVITY;
       }
+      targetRotY = BASE_ROT_Y + THREE.MathUtils.clamp(rotY_Val, -LIMIT, LIMIT);
     }
 
-    // 2. SMOOTHER ANIMATION
     internalMotionRef.current.rotation.x = THREE.MathUtils.lerp(internalMotionRef.current.rotation.x, targetRotX, delta * 4.0);
     internalMotionRef.current.rotation.y = THREE.MathUtils.lerp(internalMotionRef.current.rotation.y, targetRotY, delta * 4.0);
     internalMotionRef.current.rotation.z = THREE.MathUtils.lerp(internalMotionRef.current.rotation.z, targetRotZ, delta * 4.0);
@@ -119,10 +91,8 @@ const CrodalLogo3D = ({
     const isMobile = window.innerWidth < 768;
 
     if (activePage === "home") {
-      // Increased by 40% from previous size
       let baseScale = isMobile ? 0.525 : 1;
 
-      // Reduce Star size by 20%
       if (logoType === 'star' || logoType === 'star2') {
         baseScale *= 0.8;
       }
@@ -145,7 +115,6 @@ const CrodalLogo3D = ({
         }
       });
 
-      // Scroll Animation: 1 Full Rotation
       tl.to(groupRef.current.rotation, {
         y: Math.PI * 2,
         x: 0,
@@ -172,39 +141,47 @@ const CrodalLogo3D = ({
   }, [activePage]);
 
   // --- GEOMETRY: Stacking for Thickness (Pseudo-Extrusion) ---
-  const layers = 100; // Number of slices to create thickness
-  const depth = 1.0; // Total thickness
+  const layers = 120; // Moderate layers are enough with solid-body method
+  const depth = 0.35; // Tighter depth for a "coin" or "plaque" feel
+  const step = depth / layers;
 
   return (
     <group dispose={null} ref={groupRef}>
       <group ref={internalMotionRef}>
         <Center>
           {Array.from({ length: layers }).map((_, i) => {
-            const z = (i - (layers - 1) / 2) * (depth / layers);
-
-            // Color variation for "sides" vs front/back
-            // We make the middle layers slightly darker to simulate shadow/depth on the edges
+            const z = (i - (layers - 1) / 2) * step;
             const isFace = i === 0 || i === layers - 1;
-            // Bright faces, slightly darker 'body'
-            const brightness = isFace ? 12 : 8;
+
+            // Body shading: Internal layers are slightly darker to mimic a solid material
+            const bodyBrightness = 0.85;
+            const faceBrightness = 1.0;
+            const c = isFace ? faceBrightness : bodyBrightness;
 
             return (
-              <mesh key={i} position={[0, 0, z]} frustumCulled={false}>
+              <mesh
+                key={i}
+                position={[0, 0, z]}
+                frustumCulled={false}
+                // Internal layers slightly larger to wrap and hide the slice edges
+                scale={isFace ? [1, 1, 1] : [1.015, 1.015, 1]}
+              >
                 <planeGeometry args={[3, 3]} />
                 <meshPhysicalMaterial
-                  color="#ffffff"  // Pure White
-                  map={logoTexture}
+                  color={new THREE.Color(c, c, c)}
+                  // CRITICAL: Remove texture from sides to stop "cut line" artifacts
+                  map={isFace ? logoTexture : null}
                   alphaMap={logoTexture}
-                  transparent={false}
-                  alphaTest={0.15}
+                  transparent={true}
+                  alphaTest={0.5}
                   side={THREE.DoubleSide}
-                  roughness={0.1}           // Glossy/Glassy
-                  metalness={0.1}           // Low metalness = White (Dielectric) instead of Silver
-                  clearcoat={1.0}
-                  clearcoatRoughness={0.05}
+                  roughness={isFace ? 0.2 : 0.4}
+                  metalness={0.1}
+                  // Clean highlights only on the faces
+                  clearcoat={isFace ? 1.0 : 0}
+                  clearcoatRoughness={0.1}
                   reflectivity={0.5}
                 />
-                {/* Outlines removed - using DOM Border instead */}
               </mesh>
             );
           })}

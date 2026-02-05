@@ -275,7 +275,7 @@ export default function GameDetailPage() {
 
                                     {/* Description Bottom - Padding matches items */}
                                     <div className="p-6">
-                                        <p className="text-xs text-gray-400 line-clamp-3 leading-relaxed">
+                                        <p className="text-xs text-gray-200 font-medium line-clamp-3 leading-relaxed tracking-wide">
                                             {otherGame.description}
                                         </p>
                                     </div>

@@ -98,7 +98,7 @@ export default function GamesPage() {
                                 {/* Description - Below the image */}
                                 {project.description && (
                                     <div className="relative p-6 bg-black text-white">
-                                        <p className="text-sm leading-relaxed text-gray-300">
+                                        <p className="text-sm leading-relaxed text-gray-200 font-medium tracking-wide">
                                             {project.description}
                                         </p>
                                     </div>
