@@ -40,16 +40,16 @@ export default function Header() {
     : "!text-white hover:!text-black";
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[999] p-4 md:p-1">
+    <header className="fixed top-0 left-0 w-full z-[999] p-4 md:p-1 bg-black">
       <nav className="grid grid-cols-2 md:grid-cols-5 gap-1 w-full">
         {navItems.map((item, index) => (
           <Link
             key={item.label}
             href={item.href}
             className={`
-              relative h-14 pl-[20px] pt-[5px] pr-2 pb-2
+              relative h-10 md:h-14 pl-[20px] pt-[5px] pr-2 pb-2
               flex items-start justify-start
-              bg-transparent
+              bg-black
               border-none font-bold text-sm uppercase tracking-wide
               transition-all duration-300
               tech-border-btn
