@@ -1,0 +1,155 @@
+{
+  "home": {
+    "heroText": "Gattabara Games is a video game company and creative studio headquartered in Bengaluru, India.",
+    "header": {
+      "navItems": [
+        {
+          "label": "GATTABARA GAMES"
+        },
+        {
+          "label": "Games"
+        },
+        {
+          "label": "GG PRODUCTIONS"
+        },
+        {
+          "label": "About"
+        },
+        {
+          "label": "Pitch Us"
+        }
+      ]
+    },
+    "curatedPartnerships": {
+      "description": "GG crafts games internally from the ground up and selectively backs bold creators through a co-ownership model that aligns authorship, artistry, and equity. We pair experimental design with distinctive art direction, preserving creative independence while building fun, commercially strong games that can scale globally.",
+      "linkText": "",
+      "linkUrl": ""
+    },
+    "projectStack": {
+      "projects": [
+        {
+          "sub": "Project 1",
+          "image": "/projects/project1.png",
+          "description": "An exciting new game experience that pushes the boundaries of interactive storytelling and gameplay mechanics."
+        },
+        {
+          "sub": "Project 2",
+          "image": "/projects/project2.png",
+          "description": "A bold creative venture combining experimental design with distinctive art direction for a unique gaming experience."
+        },
+        {
+          "sub": "Project 3",
+          "image": "/projects/project3.png",
+          "description": "Innovative gameplay systems met with stunning visual fidelity."
+        },
+        {
+          "sub": "Project 4",
+          "image": "/projects/project4.png",
+          "description": "Building scalable foundations for the next generation of games."
+        }
+      ]
+    },
+    "bottomBox": {
+      "phrases": [
+        "Gattabara Games.",
+        "crafted with conviction.",
+        "inspired by culture."
+      ],
+      "contactEmail": "contact@gattabaragames.com",
+      "footerLinks": [
+        {
+          "label": "Pitch",
+          "url": "/pitch-us"
+        },
+        {
+          "label": "X(Twitter)",
+          "url": "https://x.com/sudeep_n_t"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/sudeep-n-t-b3853b36a/"
+        },
+        {
+          "label": "Blogs",
+          "url": "#"
+        }
+      ]
+    }
+  },
+  "about": {
+    "introText": [
+      "Gattabara Games is an AI-powered game studio built for bold worlds and ambitious founders. We don’t just ship products — we co-create universes. Through deep collaboration with visionary teams, we share ownership, shape strategy, and build alongside you from concept to scale. We operate independently, move fast, and fuse AI with design to craft experiences that are immersive, scalable, and commercially dominant.",
+      "We’ve spent serious time defining what we stand for. Our values aren’t filler — they guide every mechanic we design, every system we architect, and every decision we make. We evolve constantly, but these principles are our core engine."
+    ],
+    "values": [
+      {
+        "title": "Curiosity, creativity and intellectual agility",
+        "description": "Original thinking and collaboration are at the core of the organization. Strong voices and unique ideas are valued in everything we do.",
+        "image": "/uploads/1770195200412-0.png"
+      },
+      {
+        "title": "Savoir Faire",
+        "description": "We celebrate people who take pride in their craft, giving them the space to improve, the resources to flourish, and opportunities to share their expertise.",
+        "image": "/About2.png"
+      },
+      {
+        "title": "Supporting and elevating each other",
+        "description": "We nurture a vibrant, inclusive community where people feel safe, respected and empowered.",
+        "image": "/About3.png"
+      }
+    ],
+    "careersLink": "If this aligns with what you're looking to build, start a conversation with us via our contact page →"
+  },
+  "pitch": {
+    "formLine1Start": "Hi, my name is",
+    "namePlaceholder": "your name",
+    "formLine1End": "and I'm exploring a potential partnership or opportunity with Gattabara Games.",
+    "formLine2Start": "Get in touch with me at",
+    "emailPlaceholder": "your e-mail",
+    "formLine2End": ".",
+    "consentText": "Hereby I authorise Gattabara Games to process the given personal information in connection with my inquiry. I am aware that submitting personal data is voluntary and that I have a right to view, edit and delete all the data concerning myself.",
+    "buttonText": "Send",
+    "companyName": "Gattabara Games LLP",
+    "email": "info@gattabaragames.com",
+    "phone": "+91 9900114038",
+    "address1": "No. 55, 1st Floor, 10th Cross, 2nd Stage, Mahalakshmipuram,",
+    "address2": "WOC Road, Bengaluru, Karnataka,",
+    "address3": "India - 560086"
+  },
+  "contact": {
+    "formLine1Start": "Hi, my name is",
+    "namePlaceholder": "your name",
+    "formLine1End": "and I'm exploring a potential partnership or opportunity with Gattabara Games.",
+    "formLine2Start": "Get in touch with me at",
+    "emailPlaceholder": "your e-mail",
+    "formLine2End": ".",
+    "consentText": "Hereby I authorise Gattabara Games to process the given personal information in connection with my inquiry. I am aware that submitting personal data is voluntary and that I have a right to view, edit and delete all the data concerning myself.",
+    "buttonText": "Send",
+    "companyName": "Gattabara Games LLP",
+    "email": "info@gattabaragames.com",
+    "phone": "+91 9900114038",
+    "address1": "No. 55, 1st Floor, 10th Cross, 2nd Stage, Mahalakshmipuram,",
+    "address2": "WOC Road, Bengaluru, Karnataka,",
+    "address3": "India - 560086"
+  },
+  "ggProductions": {
+    "heroTagline": "Build faster. Ship smarter. Stay lean.",
+    "ctaButtonText": "Start a Conversation",
+    "introText": "Full-cycle game development, art production, and technical co-development. We extend your team’s capabilities with specialized talent and production-ready pipelines.",
+    "services": [
+      {
+        "title": "Development",
+        "description": "We help studios build games from concept to playable reality through strong game design, systems architecture, and technical execution. Our teams support gameplay mechanics, level design, prototyping, and full production across Unity, Unreal, and Roblox, building scalable foundations that support long-term growth and live operations."
+      },
+      {
+        "title": "Art",
+        "description": "We create distinctive visuals through strong art direction and production. From style exploration to full world-building, our artists deliver cohesive 2D and 3D visuals, animation, and UI that bring characters and worlds to life with a clear creative vision aligned to your gameplay and audience."
+      },
+      {
+        "title": "Strategy & Pre-Production",
+        "description": "We help studios de-risk production and validate ideas before full development. Our support spans IP creation consultancy, MVP planning for fundraising, game design documentation for investors and partners, and data-driven decision-making across entertainment, branded experiences, and applied games to align creative ambition with market and production realities."
+      }
+    ],
+    "closingCta": "Ready to build something exceptional?"
+  }
+}
