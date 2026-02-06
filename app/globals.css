@@ -33,9 +33,10 @@ body {
 
   position: relative;
   background: transparent;
+  /* Default transparency */
   border: none !important;
   display: flex;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 
   /* Clip the main background to the Outer Shape so fills match the border */
   clip-path: polygon(0 calc(2 * var(--s)),
@@ -43,8 +44,18 @@ body {
       var(--s) var(--s),
       calc(2 * var(--s)) var(--s),
       calc(2 * var(--s)) 0,
-      100% 0,
+
+      /* Top-Right Corner Steps */
+      calc(100% - 2 * var(--s)) 0,
+      calc(100% - 2 * var(--s)) var(--s),
+      calc(100% - var(--s)) var(--s),
+      calc(100% - var(--s)) calc(2 * var(--s)),
+      100% calc(2 * var(--s)),
+
+      /* Right Side down to Bottom-Right steps */
       100% calc(100% - 3 * var(--s)),
+
+      /* Bottom-Right Steps */
       calc(100% - var(--s)) calc(100% - 3 * var(--s)),
       calc(100% - var(--s)) calc(100% - 2 * var(--s)),
       calc(100% - 2 * var(--s)) calc(100% - 2 * var(--s)),
@@ -63,6 +74,15 @@ body {
 
 .tech-border-btn:not(.static-border):hover {
   background-color: rgba(255, 255, 255, 0.9) !important;
+  transform: translateY(-1px);
+}
+
+.tech-border-btn:not(.static-border):active {
+  transform: translateY(0);
+}
+
+.bg-theme-blue {
+  background-color: #13343e !important;
 }
 
 .tech-border-btn::before {
@@ -89,8 +109,12 @@ body {
       calc(2 * var(--s)) var(--s),
       calc(2 * var(--s)) 0,
 
-      /* Top-Right: Straight Corner (0 steps) */
-      100% 0,
+      /* Top-Right Corner Steps */
+      calc(100% - 2 * var(--s)) 0,
+      calc(100% - 2 * var(--s)) var(--s),
+      calc(100% - var(--s)) var(--s),
+      calc(100% - var(--s)) calc(2 * var(--s)),
+      100% calc(2 * var(--s)),
 
       /* Right Side down to Bottom-Right steps */
       100% calc(100% - 3 * var(--s)),
@@ -137,11 +161,13 @@ body {
       calc(100% - var(--s) - var(--b)) calc(100% - 2 * var(--s) - var(--b)),
       calc(100% - var(--s) - var(--b)) calc(100% - 3 * var(--s) - var(--b)),
 
-      /* Top-Right Inner: Straight Corner */
+      /* Top-Right Inner Steps */
       calc(100% - var(--b)) calc(100% - 3 * var(--s) - var(--b)),
-      /* Right Edge Bottom */
-      calc(100% - var(--b)) var(--b),
-      /* Top Right Corner */
+      calc(100% - var(--b)) calc(2 * var(--s) + var(--b)),
+      calc(100% - var(--s) - var(--b)) calc(2 * var(--s) + var(--b)),
+      calc(100% - var(--s) - var(--b)) calc(var(--s) + var(--b)),
+      calc(100% - 2 * var(--s) - var(--b)) calc(var(--s) + var(--b)),
+      calc(100% - 2 * var(--s) - var(--b)) var(--b),
 
       /* Top-Left Inner Structure */
       calc(2 * var(--s) + var(--b)) var(--b),

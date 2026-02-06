@@ -21,15 +21,15 @@ const SubBox = ({
       tech-border-btn
       ${isDark ? "text-white" : "text-black"}
       ${className}
-    `}
-  >
+      group hover:!bg-white hover:!text-black transition-colors duration-300
+    `}>
     {title && (
-      <span className={`text-[10px] font-bold uppercase tracking-[0.3em] mb-4 ${isDark ? "text-white" : "text-black"}`}>
+      <span className={`text-[10px] font-bold uppercase tracking-[0.3em] mb-4 ${isDark ? "text-white" : "text-black"} group-hover:!text-black`}>
         {title}
       </span>
     )}
 
-    <div className={`text-xs font-medium uppercase tracking-tighter ${isDark ? "text-white" : "text-black"}`}>
+    <div className={`text-xs font-medium uppercase tracking-tighter ${isDark ? "text-white" : "text-black"} group-hover:!text-black`}>
       {children}
     </div>
   </div>
@@ -92,7 +92,7 @@ export default function BottomBox({ isDark = false, hideTypewriter = false }: { 
   const thirdColumn = footerLinks.slice(4);
 
   return (
-    <footer className={`w-full bg-transparent font-sans relative z-10 p-4 md:p-1 flex flex-col gap-1 ${isDark ? "text-white" : "text-black"}`}>
+    <footer className={`w-full bg-transparent font-sans relative z-10 px-2 py-4 md:p-1 flex flex-col gap-1 ${isDark ? "text-white" : "text-black"}`}>
 
       {/* Typewriter Section - Conditionally rendered */}
       {!hideTypewriter && (
@@ -105,11 +105,20 @@ export default function BottomBox({ isDark = false, hideTypewriter = false }: { 
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-1 w-full">
         <SubBox isDark={isDark} className="h-32 md:h-40 flex items-start justify-start">
-          <img
-            src="/GGlogo.png"
-            alt="Logo"
-            className={`w-12 h-12 md:w-14 md:h-14 ${isDark ? "invert" : ""}`}
-          />
+          <div className="relative w-12 h-12 md:w-14 md:h-14">
+            {/* Standard Logo - Fades out on hover */}
+            <img
+              src="/GGlogo.png"
+              alt="Logo"
+              className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0 ${isDark ? "invert" : ""}`}
+            />
+            {/* Hover Logo - Fades in on hover */}
+            <img
+              src="/gglogoblack.png"
+              alt="Logo Hover"
+              className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+            />
+          </div>
         </SubBox>
 
         <SubBox isDark={isDark}>
@@ -143,7 +152,7 @@ export default function BottomBox({ isDark = false, hideTypewriter = false }: { 
         </SubBox>
       </div>
 
-      <div className={`w-full py-6 px-8 flex items-center justify-center tech-border-btn ${isDark ? "text-white" : "text-black"}`}>
+      <div className={`w-full py-6 px-8 flex items-center justify-center tech-border-btn static-border ${isDark ? "text-white" : "text-black"}`}>
         <p className={`text-[9px] tracking-[0.5em] font-medium text-center uppercase leading-relaxed ${isDark ? "text-white" : "text-black"}`}>
           Gattabara Games and the Gattabara Games logo are all brands of Gattabara Games Limited. All rights reserved.
         </p>

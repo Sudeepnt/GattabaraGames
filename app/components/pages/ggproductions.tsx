@@ -131,7 +131,6 @@ const getServiceIcon = (title: string) => {
 export default function GGProductions() {
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
     const [activeSection, setActiveSection] = useState<number | null>(null);
-    const [heroTagline, setHeroTagline] = useState("Build faster. Ship smarter. Stay lean.");
     const [ctaButtonText, setCtaButtonText] = useState("Start a Conversation");
     const [introText, setIntroText] = useState("");
     const [services, setServices] = useState<ServiceData[]>([]);
@@ -145,7 +144,6 @@ export default function GGProductions() {
             .then(res => res.json())
             .then(data => {
                 if (data?.ggProductions) {
-                    if (data.ggProductions.heroTagline) setHeroTagline(data.ggProductions.heroTagline);
                     if (data.ggProductions.ctaButtonText) setCtaButtonText(data.ggProductions.ctaButtonText);
                     if (data.ggProductions.introText) setIntroText(data.ggProductions.introText);
                     if (data.ggProductions.services) setServices(data.ggProductions.services);
@@ -224,23 +222,29 @@ export default function GGProductions() {
                 {/* Hero Content */}
                 <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-20 px-6">
                     <h1
-                        className="text-4xl md:text-7xl font-black tracking-tighter text-center mb-4 md:mb-6"
+                        className="text-4xl md:text-7xl font-black tracking-tighter text-center"
                         style={{ animation: "fadeInUp 1s ease-out forwards" }}
                     >
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-white">
                             GG Productions
                         </span>
                     </h1>
-                    <p
-                        className="text-sm md:text-lg text-gray-300 text-center max-w-2xl mb-6 md:mb-8 opacity-90"
-                        style={{ animation: "fadeInUp 1s ease-out 0.2s forwards", opacity: 0 }}
-                    >
-                        {heroTagline}
+                </div>
+
+
+            </section>
+
+            {/* Main Content */}
+            <section className="relative w-full px-2 md:px-16 pt-10 pb-20 md:pt-16 md:pb-32">
+                {/* Intro Text & CTA */}
+                <div className="max-w-5xl mx-auto mb-20 md:mb-32 flex flex-col items-center">
+                    <p className="text-lg md:text-2xl lg:text-3xl font-medium leading-relaxed text-gray-200 text-center mb-12">
+                        {introText}
                     </p>
                     <Link
                         href="/pitch-us"
                         className="tech-border-btn text-white pl-8 pr-6 py-4 font-bold text-sm md:text-base uppercase tracking-wider flex items-center gap-4 group hover:!bg-white hover:text-black transition-colors"
-                        style={{ animation: "fadeInUp 1s ease-out 0.4s forwards", opacity: 0 }}
+                        style={{ animation: "fadeInUp 1s ease-out 0.4s forwards" }}
                     >
                         <span className="relative z-10">{ctaButtonText}</span>
                         <svg
@@ -260,25 +264,8 @@ export default function GGProductions() {
                     </Link>
                 </div>
 
-                {/* Scroll Indicator */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 animate-bounce">
-                    <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
-                        <div className="w-1 h-2 bg-white/80 rounded-full animate-pulse" />
-                    </div>
-                </div>
-            </section>
-
-            {/* Main Content */}
-            <section className="relative w-full px-6 md:px-16 py-20 md:py-32">
-                {/* Intro Text */}
-                <div className="max-w-5xl mx-auto mb-20 md:mb-32">
-                    <p className="text-lg md:text-2xl lg:text-3xl font-medium leading-relaxed text-gray-200 text-center">
-                        {introText}
-                    </p>
-                </div>
-
                 {/* Infinite Scrolling Client Logos */}
-                <div className="w-full overflow-hidden mb-24 md:mb-40 group">
+                <div className="relative w-full overflow-hidden mb-24 md:mb-40 group">
                     {/* Masking gradients for smooth fade edges */}
                     <div className="absolute left-0 top-0 z-10 h-full w-16 md:w-32 bg-gradient-to-r from-black via-black/80 to-transparent pointer-events-none" />
                     <div className="absolute right-0 top-0 z-10 h-full w-16 md:w-32 bg-gradient-to-l from-black via-black/80 to-transparent pointer-events-none" />
@@ -414,7 +401,7 @@ export default function GGProductions() {
                 </div>
             </section>
 
-            <section className="relative w-full px-4 md:px-1 py-20 pb-40 max-w-[1920px] mx-auto">
+            <section className="relative w-full px-2 md:px-1 py-20 pb-0 max-w-[1920px] mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-8">
                     {projects.map((project, index) => (
                         <Link
@@ -424,7 +411,7 @@ export default function GGProductions() {
                         >
                             <div className="relative overflow-hidden bg-black flex flex-col cursor-pointer transition-opacity group-hover:opacity-90">
                                 {/* Title Bar */}
-                                <div className="relative h-14 pl-[20px] pt-[5px] pr-2 pb-2 flex items-start justify-start bg-black text-white">
+                                <div className="relative h-14 pl-[20px] pt-[5px] pr-2 pb-1 flex items-start justify-start bg-black text-white">
                                     <h3 className="font-bold text-lg md:text-xl uppercase tracking-wide">{project.sub}</h3>
                                 </div>
 
@@ -441,7 +428,7 @@ export default function GGProductions() {
 
                                 {/* Description Below */}
                                 {project.description && (
-                                    <div className="relative p-6 bg-black text-white">
+                                    <div className="relative py-6 px-1 bg-black text-white">
                                         <p className="text-sm leading-relaxed text-gray-200 font-medium tracking-wide">
                                             {project.description}
                                         </p>

@@ -34,25 +34,24 @@ export default function Header() {
   }, []);
 
   // Determine theme based on current path
-  const isWhiteTheme = false; // Default to White Text (Dark Theme) for now, unless specified otherwise
+  const isWhiteTheme = false;
   const themeClasses = isWhiteTheme
     ? "!text-black hover:!text-white"
-    : "!text-white hover:!text-black";
+    : "!text-white hover:!text-black"; // <--- This ensures text turns black on hover
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[999] p-4 md:p-1 bg-black">
+    <header className="fixed top-0 left-0 w-full z-[999] px-2 py-4 md:px-1 md:pb-1 md:pt-6 bg-transparent">
       <nav className="grid grid-cols-2 md:grid-cols-5 gap-1 w-full">
         {navItems.map((item, index) => (
           <Link
             key={item.label}
             href={item.href}
             className={`
-              relative h-10 md:h-14 pl-[20px] pt-[5px] pr-2 pb-2
+              relative h-[34px] md:h-14 pl-[20px] pt-[5px] pr-2 pb-2
               flex items-start justify-start
-              bg-black
-              border-none font-bold text-sm uppercase tracking-wide
+              border-none font-bold text-[10px] md:text-sm uppercase tracking-wide
               transition-all duration-300
-              tech-border-btn
+              tech-border-btn !bg-black hover:!bg-white
               ${index === 0 ? "col-span-2 md:col-span-1" : "col-span-1"}
               ${themeClasses}
             `}

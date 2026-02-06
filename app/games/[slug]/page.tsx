@@ -253,11 +253,11 @@ export default function GameDetailPage() {
                                 <Link
                                     key={idx}
                                     href={`/games/${otherGame.sub.toLowerCase().replace(/\s+/g, '-')}`}
-                                    className="group flex flex-col bg-black tech-border-btn"
+                                    className="flex flex-col bg-black tech-border-btn static-border text-zinc-800"
                                 >
                                     {/* Name Top - Padding matches header pl-[20px] */}
-                                    <div className="h-14 pl-[20px] pt-[5px] pr-2 pb-2">
-                                        <h3 className="text-lg md:text-xl font-black uppercase tracking-tight group-hover:text-gray-400 transition-colors">
+                                    <div className="h-14 pl-[20px] pt-[5px] pr-2 pb-1">
+                                        <h3 className="text-lg md:text-xl font-black uppercase tracking-tight text-white">
                                             {otherGame.sub}
                                         </h3>
                                     </div>
@@ -268,13 +268,13 @@ export default function GameDetailPage() {
                                             <img
                                                 src={otherGame.image}
                                                 alt={otherGame.sub}
-                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                className="absolute inset-0 w-full h-full object-cover"
                                             />
                                         )}
                                     </div>
 
                                     {/* Description Bottom - Padding matches items */}
-                                    <div className="p-6">
+                                    <div className="py-6 px-1">
                                         <p className="text-xs text-gray-200 font-medium line-clamp-3 leading-relaxed tracking-wide">
                                             {otherGame.description}
                                         </p>

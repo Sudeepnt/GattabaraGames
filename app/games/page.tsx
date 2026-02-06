@@ -64,7 +64,7 @@ export default function GamesPage() {
                 <Header />
             </div>
 
-            <main className="pt-32 pb-40 px-4 md:px-1 max-w-[1920px] mx-auto">
+            <main className="pt-32 pb-40 px-2 md:px-1 max-w-[1920px] mx-auto">
                 {/* 2-column grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-8">
                     {projects.map((project, index) => (
@@ -80,7 +80,7 @@ export default function GamesPage() {
                                 className="group relative overflow-hidden bg-black flex flex-col cursor-pointer hover:opacity-90 transition-opacity"
                             >
                                 {/* Title Bar - Black header with game name */}
-                                <div className="relative h-14 pl-[20px] pt-[5px] pr-2 pb-2 flex items-start justify-start bg-black text-white">
+                                <div className="relative h-14 pl-[20px] pt-[5px] pr-2 pb-1 flex items-start justify-start bg-black text-white">
                                     <h3 className="font-bold text-lg md:text-xl uppercase tracking-wide">{project.sub}</h3>
                                 </div>
 
@@ -97,7 +97,7 @@ export default function GamesPage() {
 
                                 {/* Description - Below the image */}
                                 {project.description && (
-                                    <div className="relative p-6 bg-black text-white">
+                                    <div className="relative py-6 px-1 bg-black text-white">
                                         <p className="text-sm leading-relaxed text-gray-200 font-medium tracking-wide">
                                             {project.description}
                                         </p>

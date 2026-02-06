@@ -27,7 +27,7 @@ export default function CuratedPartnerships() {
   };
 
   return (
-    <section className="relative z-50 p-4 md:p-1 bg-transparent">
+    <section className="relative z-50 px-2 py-4 md:p-1 bg-transparent">
 
       <div
         className="
@@ -39,7 +39,7 @@ export default function CuratedPartnerships() {
         "
       >
 
-        <div className="relative z-10 px-6 md:px-16 py-4 w-full">
+        <div className="relative z-10 pl-[20px] pr-2 md:px-16 py-4 w-full">
           <h2 className="text-xl md:text-3xl font-bold leading-tight text-white tracking-tight">
             {description} {linkText}
           </h2>
