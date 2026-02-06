@@ -407,9 +407,9 @@ export default function GGProductions() {
                         <Link
                             key={index}
                             href={`/games/${project.sub.toLowerCase().replace(/\s+/g, '-')}`}
-                            className="group block"
+                            className="block"
                         >
-                            <div className="relative overflow-hidden bg-black flex flex-col cursor-pointer transition-opacity group-hover:opacity-90">
+                            <div className="relative overflow-hidden bg-black flex flex-col cursor-pointer">
                                 {/* Title Bar */}
                                 <div className="relative h-14 pl-[20px] pt-[5px] pr-2 pb-1 flex items-start justify-start bg-black text-white">
                                     <h3 className="font-bold text-lg md:text-xl uppercase tracking-wide">{project.sub}</h3>
@@ -421,7 +421,7 @@ export default function GGProductions() {
                                         <img
                                             src={project.image}
                                             alt={project.sub}
-                                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            className="absolute inset-0 w-full h-full object-cover"
                                         />
                                     )}
                                 </div>
