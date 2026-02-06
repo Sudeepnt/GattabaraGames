@@ -40,7 +40,7 @@ export default function Header() {
     : "!text-white hover:!text-black"; // <--- This ensures text turns black on hover
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[999] px-2 py-4 md:px-1 md:pb-1 md:pt-6 bg-transparent">
+    <header className="fixed top-0 left-0 w-full z-[999] px-2 py-4 md:px-1 md:pb-1 md:pt-[6px] bg-transparent">
       <nav className="grid grid-cols-2 md:grid-cols-5 gap-1 w-full">
         {navItems.map((item, index) => (
           <Link

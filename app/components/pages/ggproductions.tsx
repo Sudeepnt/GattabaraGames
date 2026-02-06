@@ -291,12 +291,12 @@ export default function GGProductions() {
                 </div>
 
                 {/* Services Stack */}
-                <div className="max-w-5xl mx-auto flex flex-col gap-6 mb-32">
+                <div className="w-full flex flex-col gap-6 mb-32">
                     {services.map((service, index) => (
                         <div
                             key={service.title}
                             data-index={index}
-                            className="service-section relative p-8 md:p-12 tech-border-btn static-border bg-black/50 text-gray-300"
+                            className="service-section relative py-8 pl-[20px] pr-2 md:p-12 tech-border-btn static-border bg-black/50 text-gray-300"
                         >
                             <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-12">
                                 {/* Header: Icon & Title - Strictly Vertical Stack for uniformity */}

@@ -39,16 +39,12 @@ export default function ProjectStack() {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
 
               <div className="absolute bottom-0 left-0 py-8 pl-[20px] pr-2 md:px-1 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                <h3 className="text-xl font-bold uppercase tracking-wider mb-1 text-white">{project.sub}</h3>
-                {project.description && (
-                  <p className="text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">
-                    {project.description}
-                  </p>
-                )}
+                <h3 className="text-xl font-bold uppercase tracking-wider mb-1 text-white pl-[5px]">{project.sub}</h3>
+
               </div>
 
-              {/* Hover Border Accent */}
-              <div className="absolute inset-0 border border-transparent group-hover:border-white/20 transition-colors duration-500 pointer-events-none" />
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 pointer-events-none transition-colors duration-500 group-hover:bg-white/25" />
             </div>
           </Link>
         ))}

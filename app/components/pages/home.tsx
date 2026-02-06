@@ -42,7 +42,7 @@ const QuatrefoilGridBackground = () => {
 };
 
 export default function Home() {
-  const [heroText, setHeroText] = useState("Gattabara Games is a Software design and development company headquartered in Bangalore.");
+  const [heroText, setHeroText] = useState("");
 
   useEffect(() => {
     fetch('/data/content.json')
