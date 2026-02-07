@@ -27,7 +27,7 @@ const CrodalLogo3D = ({
 
 
   // Load the texture based on type
-  let textureUrl = "/gg-logo.png";
+  let textureUrl = "/logos/gg-logo.png";
   if (logoType === 'star') textureUrl = "/star-logo.png";
   if (logoType === 'star2') textureUrl = "/star2-logo.png";
 
@@ -234,7 +234,7 @@ export default function Scene({ activePage, logoType = 'gg' }: { activePage: str
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="fixed top-0 left-0 w-full h-full z-[5] pointer-events-none transition-opacity duration-300">
+    <div ref={containerRef} className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none transition-opacity duration-300">
       <Canvas
         className="pointer-events-none"
         camera={{ position: [0, 0, 10], fov: 32 }}

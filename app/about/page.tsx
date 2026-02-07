@@ -25,7 +25,7 @@ export default function AboutPage() {
     }, []);
 
     return (
-        <div className="relative w-full bg-black text-white min-h-screen pt-24 z-40 font-sans selection:bg-white selection:text-black [&_*]:selection:bg-white [&_*]:selection:text-black">
+        <div className="relative w-full bg-black text-white min-h-screen pt-24 z-40 font-sans">
 
             <Header />
 

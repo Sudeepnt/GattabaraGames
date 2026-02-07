@@ -11,15 +11,15 @@ export default function Page() {
   const [activePage, setActivePage] = useState("home");
 
   return (
-    <div className="relative w-full min-h-screen bg-black text-white font-sans selection:bg-[#3035e6] selection:text-white overflow-x-hidden">
+    <div className="relative w-full min-h-screen bg-black text-white font-sans overflow-x-hidden">
 
       {/* 1. Header (Menu) - Z-999, Above Everything */}
       <Header />
 
-      {/* 2. Scene (Logo) - Z-50, Pointer-events-none (Interaction Zone is Z-60) */}
+      {/* 2. Scene (Logo) - Z-0, Pointer-events-none (Interaction Zone is Z-60) */}
       <Scene activePage={activePage} />
 
-      {/* 3. Main Content - Z-10, Pointer-events-auto (Clickable content, but Scene sits visually on top if transparent) */}
+      {/* 3. Main Content - Z-10, Pointer-events-auto (Content sits on top of Scene) */}
       <main className="relative z-10 w-full transition-opacity duration-500 pointer-events-auto">
         {activePage === "home" && <Home />}
         {activePage === "about" && <About />}

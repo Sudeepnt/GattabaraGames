@@ -66,13 +66,13 @@ export default function PortfolioPage() {
     };
 
     return (
-        <div className="relative w-full min-h-screen bg-black text-white font-sans pt-12 pb-32 selection:bg-white selection:text-black">
+        <div className="relative w-full min-h-screen bg-black text-white font-sans pt-12 pb-32">
 
             {/* Header section - Centered */}
             <div className={`w-full px-6 md:px-12 ${selectedCategory ? 'pb-8' : 'mb-8'} max-w-5xl mx-auto flex flex-col items-center text-center`}>
                 <Link href="/" className="inline-block mb-6">
                     <Image
-                        src="/GGlogo.png"
+                        src="/logos/GGlogo.png"
                         alt="Gattabara Games Logo"
                         width={80}
                         height={32}

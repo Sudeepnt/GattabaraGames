@@ -362,7 +362,7 @@ export default function AdminCMS() {
             <div className="mb-6 flex justify-center">
               <div className="relative">
                 <Image
-                  src="/GGlogo.png"
+                  src="/logos/GGlogo.png"
                   alt="Gattabara Games Logo"
                   width={100}
                   height={30}
@@ -419,7 +419,7 @@ export default function AdminCMS() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
             <div className="flex items-center gap-3">
               <Image
-                src="/GGlogo.png"
+                src="/logos/GGlogo.png"
                 alt="Gattabara Games Logo"
                 width={50}
                 height={15}

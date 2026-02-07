@@ -7,81 +7,54 @@ const SubBox = ({
   children,
   className = "",
   isDark = false,
+  enableHover = false,
+  onClick,
 }: {
   title?: string;
   children?: React.ReactNode;
   className?: string;
   isDark?: boolean;
+  enableHover?: boolean;
+  onClick?: () => void;
 }) => (
   <div
+    onClick={onClick}
     className={`
-      relative p-6 flex flex-col justify-start 
+      relative p-4 flex flex-col justify-start 
       bg-transparent
-      min-h-0 md:min-h-[160px] 
+      min-h-0 md:min-h-[112px] 
       tech-border-btn
+      ${!enableHover ? "static-border" : ""}
       ${isDark ? "text-white" : "text-black"}
       ${className}
-      group hover:!bg-white hover:!text-black transition-colors duration-300
+      ${enableHover ? "group hover:!bg-white hover:!text-black cursor-pointer" : ""}
+      transition-colors duration-300
     `}>
     {title && (
-      <span className={`text-[10px] font-bold uppercase tracking-[0.3em] mb-4 ${isDark ? "text-white" : "text-black"} group-hover:!text-black`}>
+      <span className={`text-[10px] font-bold uppercase tracking-[0.3em] mb-4 ${isDark ? "text-white" : "text-black"} ${enableHover ? "group-hover:!text-black" : ""}`}>
         {title}
       </span>
     )}
 
-    <div className={`text-xs font-medium uppercase tracking-tighter ${isDark ? "text-white" : "text-black"} group-hover:!text-black`}>
+    <div className={`text-xs font-medium uppercase tracking-tighter ${isDark ? "text-white" : "text-black"} ${enableHover ? "group-hover:!text-black" : ""}`}>
       {children}
     </div>
   </div>
 );
 
-export default function BottomBox({ isDark = false, hideTypewriter = false }: { isDark?: boolean; hideTypewriter?: boolean }) {
-  const [phrases, setPhrases] = useState(["Gattabara Games.", "crafted with conviction.", "inspired by culture."]);
+export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
   const [footerLinks, setFooterLinks] = useState<Array<{ label: string; url: string }>>([]);
-
-  const [text, setText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(100);
 
   useEffect(() => {
     fetch('/data/content.json')
       .then(res => res.json())
       .then(data => {
-        if (data?.home?.bottomBox) {
-          if (data.home.bottomBox.phrases) setPhrases(data.home.bottomBox.phrases);
-          if (data.home.bottomBox.footerLinks) setFooterLinks(data.home.bottomBox.footerLinks);
+        if (data?.home?.bottomBox?.footerLinks) {
+          setFooterLinks(data.home.bottomBox.footerLinks);
         }
       })
       .catch(error => console.error('BottomBox load error:', error));
   }, []);
-
-  useEffect(() => {
-    if (hideTypewriter) return; // Skip typewriter effect if hidden
-
-    const handleTyping = () => {
-      const i = loopNum % phrases.length;
-      const fullText = phrases[i];
-
-      setText(
-        isDeleting
-          ? fullText.substring(0, text.length - 1)
-          : fullText.substring(0, text.length + 1)
-      );
-
-      setTypingSpeed(isDeleting ? 40 : 80);
-
-      if (!isDeleting && text === fullText) {
-        setTimeout(() => setIsDeleting(true), 2500);
-      } else if (isDeleting && text === "") {
-        setIsDeleting(false);
-        setLoopNum(loopNum + 1);
-      }
-    };
-
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed, phrases, hideTypewriter]);
 
   const hoverClass = isDark
     ? "hover:bg-white hover:text-black"
@@ -91,37 +64,38 @@ export default function BottomBox({ isDark = false, hideTypewriter = false }: { 
   const secondColumn = footerLinks.slice(2, 4);
   const thirdColumn = footerLinks.slice(4);
 
-  return (
-    <footer className={`w-full bg-transparent font-sans relative z-10 px-2 py-4 md:p-1 flex flex-col gap-1 ${isDark ? "text-white" : "text-black"}`}>
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-      {/* Typewriter Section - Conditionally rendered */}
-      {!hideTypewriter && (
-        <div className="py-20 md:py-64 flex items-center justify-center w-full px-6 overflow-hidden min-h-[300px] md:min-h-[450px]">
-          <h2 className={`text-[11vw] md:text-[7vw] font-black tracking-tighter leading-none text-center uppercase ${isDark ? "text-white" : "text-black"}`}>
-            {text}
-          </h2>
-        </div>
-      )}
+  return (
+    <footer className={`w-full bg-transparent font-sans relative z-10 px-2 py-4 md:p-1 pt-12 md:pt-20 flex flex-col gap-1 ${isDark ? "text-white" : "text-black"}`}>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-1 w-full">
-        <SubBox isDark={isDark} className="h-32 md:h-40 flex items-start justify-start">
+        {/* First Container: Hover Enabled + Scroll to Top */}
+        <SubBox
+          isDark={isDark}
+          className="h-22 md:h-28 flex items-start justify-start"
+          enableHover={true}
+          onClick={scrollToTop}
+        >
           <div className="relative w-12 h-12 md:w-14 md:h-14">
             {/* Standard Logo - Fades out on hover */}
             <img
-              src="/GGlogo.png"
+              src="/logos/GGlogo.png"
               alt="Logo"
               className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0 ${isDark ? "invert" : ""}`}
             />
             {/* Hover Logo - Fades in on hover */}
             <img
-              src="/gglogoblack.png"
+              src="/logos/gglogoblack.png"
               alt="Logo Hover"
               className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 opacity-0 group-hover:opacity-100"
             />
           </div>
         </SubBox>
 
-        <SubBox isDark={isDark}>
+        <SubBox isDark={isDark} enableHover={false}>
           <div className="flex flex-col gap-1 italic uppercase tracking-tighter font-semibold">
             {firstColumn.map((link, index) => (
               <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className={`${hoverClass} transition-colors duration-300`}>
@@ -131,7 +105,7 @@ export default function BottomBox({ isDark = false, hideTypewriter = false }: { 
           </div>
         </SubBox>
 
-        <SubBox isDark={isDark}>
+        <SubBox isDark={isDark} enableHover={false}>
           <div className="flex flex-col gap-1 uppercase tracking-tighter font-semibold">
             {secondColumn.map((link, index) => (
               <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className={`${hoverClass} transition-colors duration-300`}>
@@ -141,7 +115,7 @@ export default function BottomBox({ isDark = false, hideTypewriter = false }: { 
           </div>
         </SubBox>
 
-        <SubBox isDark={isDark}>
+        <SubBox isDark={isDark} enableHover={false}>
           <div className="flex flex-col gap-1 uppercase tracking-tighter font-bold">
             {thirdColumn.map((link, index) => (
               <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className={`decoration-1 underline-offset-4 ${hoverClass} transition-colors duration-300`}>
@@ -152,7 +126,7 @@ export default function BottomBox({ isDark = false, hideTypewriter = false }: { 
         </SubBox>
       </div>
 
-      <div className={`w-full py-6 px-8 flex items-center justify-center tech-border-btn static-border ${isDark ? "text-white" : "text-black"}`}>
+      <div className={`w-full py-2 px-6 flex items-center justify-center tech-border-btn static-border ${isDark ? "text-white" : "text-black"}`}>
         <p className={`text-[9px] tracking-[0.5em] font-medium text-center uppercase leading-relaxed ${isDark ? "text-white" : "text-black"}`}>
           Gattabara Games and the Gattabara Games logo are all brands of Gattabara Games Limited. All rights reserved.
         </p>

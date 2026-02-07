@@ -23,7 +23,7 @@ export default function Pitch() {
     <div className="w-full h-screen bg-white text-black flex flex-col items-center justify-center p-8 overflow-hidden relative">
       <div className="absolute top-8 left-8">
         <Image
-          src="/GGlogo.png"
+          src="/logos/GGlogo.png"
           alt="Gattabara Games Logo"
           width={80}
           height={30}

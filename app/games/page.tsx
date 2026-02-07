@@ -64,7 +64,7 @@ export default function GamesPage() {
                 <Header />
             </div>
 
-            <main className="pt-32 pb-40 px-2 md:px-1 max-w-[1920px] mx-auto">
+            <main className="pt-32 pb-40 px-2 md:px-1 w-full">
                 {/* 2-column grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-8">
                     {projects.map((project, index) => (
@@ -110,7 +110,7 @@ export default function GamesPage() {
             </main>
 
             {/* Footer */}
-            <BottomBox isDark={true} hideTypewriter={true} />
+            <BottomBox isDark={true} />
         </div>
     );
 }

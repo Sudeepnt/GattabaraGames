@@ -49,7 +49,7 @@ export default function Header() {
             className={`
               relative h-[34px] md:h-14 pl-[20px] pt-[5px] pr-2 pb-2
               flex items-start justify-start
-              border-none font-bold text-[10px] md:text-sm uppercase tracking-wide
+              border-none font-bold text-[10px] md:text-xs uppercase tracking-wide
               transition-all duration-300
               tech-border-btn !bg-black hover:!bg-white
               ${index === 0 ? "col-span-2 md:col-span-1" : "col-span-1"}

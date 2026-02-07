@@ -34,6 +34,8 @@ export default function CuratedPartnerships() {
           relative w-full flex flex-col justify-center 
           tech-border-btn static-border
           text-white
+          bg-black/50
+          !bg-black/50
           overflow-hidden
           py-2 md:py-4
         "

@@ -23,12 +23,12 @@ export default function About() {
   }, []);
 
   return (
-    <div className="relative w-full bg-black text-white min-h-screen pt-24 z-40 font-sans selection:bg-white selection:text-black [&_*]:selection:bg-white [&_*]:selection:text-black">
+    <div className="relative w-full bg-black text-white min-h-screen pt-24 z-40 font-sans">
 
 
 
       <section className="w-full px-2 md:px-16 mt-32 mb-40 flex justify-end">
-        <div className="w-full md:w-1/2 flex flex-col gap-8 text-lg md:text-xl font-medium leading-relaxed text-gray-200 text-right">
+        <div className="w-full md:max-w-6xl mx-auto flex flex-col gap-8 text-lg md:text-xl font-medium leading-relaxed text-gray-200 text-center">
           {introText.map((text, index) => (
             <p key={index}>{text}</p>
           ))}
@@ -40,7 +40,7 @@ export default function About() {
           <div key={index} className="w-full flex flex-col items-center group">
             <div className="w-full px-6 md:px-16 text-center mb-10">
               <p className="text-xl md:text-3xl font-bold leading-tight text-white max-w-6xl mx-auto">
-                {index + 1}. {value.title}. {value.description}
+                {index + 1}. {value.title}{value.description ? `. ${value.description}` : ''}
               </p>
             </div>
 

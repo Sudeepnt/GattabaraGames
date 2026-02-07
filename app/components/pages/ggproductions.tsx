@@ -21,112 +21,7 @@ interface ProjectData {
     video?: string;
 }
 
-// Service icons based on title
-const getServiceIcon = (title: string) => {
-    if (title.toLowerCase().includes("development")) {
-        return (
-            <svg
-                className="w-12 h-12 md:w-16 md:h-16"
-                viewBox="0 0 64 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    d="M8 16L32 4L56 16V48L32 60L8 48V16Z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinejoin="round"
-                />
-                <path d="M32 28V60" stroke="currentColor" strokeWidth="2" />
-                <path d="M8 16L32 28L56 16" stroke="currentColor" strokeWidth="2" />
-                <circle cx="32" cy="28" r="4" fill="currentColor" />
-                <path
-                    d="M20 22L32 28L44 22"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                />
-            </svg>
-        );
-    } else if (title.toLowerCase().includes("art")) {
-        return (
-            <svg
-                className="w-12 h-12 md:w-16 md:h-16"
-                viewBox="0 0 64 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <circle
-                    cx="32"
-                    cy="32"
-                    r="24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                />
-                <path
-                    d="M32 8C32 8 20 20 20 32C20 44 32 56 32 56"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                />
-                <path
-                    d="M32 8C32 8 44 20 44 32C44 44 32 56 32 56"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                />
-                <ellipse
-                    cx="32"
-                    cy="6"
-                    rx="24"
-                    ry="8"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                />
-                <circle cx="24" cy="24" r="3" fill="currentColor" />
-                <circle cx="40" cy="40" r="3" fill="currentColor" />
-                <circle cx="38" cy="22" r="2" fill="currentColor" />
-            </svg>
-        );
-    } else {
-        return (
-            <svg
-                className="w-12 h-12 md:w-16 md:h-16"
-                viewBox="0 0 64 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <rect
-                    x="8"
-                    y="12"
-                    width="48"
-                    height="40"
-                    rx="4"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                />
-                <path d="M8 24H56" stroke="currentColor" strokeWidth="2" />
-                <path d="M24 24V52" stroke="currentColor" strokeWidth="1.5" />
-                <circle cx="16" cy="18" r="2" fill="currentColor" />
-                <circle cx="24" cy="18" r="2" fill="currentColor" />
-                <circle cx="32" cy="18" r="2" fill="currentColor" />
-                <path
-                    d="M32 36L40 32L48 38"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-                <path
-                    d="M32 44H48"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                />
-                <rect x="12" y="30" width="8" height="6" rx="1" fill="currentColor" />
-                <rect x="12" y="40" width="8" height="6" rx="1" fill="currentColor" />
-            </svg>
-        );
-    }
-};
+
 
 export default function GGProductions() {
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
@@ -271,19 +166,19 @@ export default function GGProductions() {
                     <div className="absolute right-0 top-0 z-10 h-full w-16 md:w-32 bg-gradient-to-l from-black via-black/80 to-transparent pointer-events-none" />
 
                     <div className="flex animate-scroll hover:pause-animation">
-                        {(clientLogos.length > 0 ? [...clientLogos, ...clientLogos, ...clientLogos] : [
+                        {Array(8).fill(clientLogos.length > 0 ? clientLogos : [
                             "/GGclients/Battle Bucks.png",
                             "/GGclients/Brewed Games.png",
                             "/GGclients/Singular Scheme .png",
                             "/GGclients/magadha.png",
                             "/GGclients/maplestoryworld.png",
                             "/GGclients/oila games.png"
-                        ]).map((logo, index) => (
+                        ]).flat().map((logo, index) => (
                             <div key={index} className="flex-shrink-0 flex items-center justify-center px-8 md:px-12">
                                 <img
                                     src={logo}
                                     alt="Client Logo"
-                                    className="h-12 md:h-16 w-auto object-contain opacity-70 contrast-0 brightness-150 grayscale"
+                                    className="h-[72px] md:h-24 w-auto object-contain opacity-70 contrast-0 brightness-150 grayscale"
                                 />
                             </div>
                         ))}
@@ -296,25 +191,22 @@ export default function GGProductions() {
                         <div
                             key={service.title}
                             data-index={index}
-                            className="service-section relative py-8 pl-[20px] pr-2 md:p-12 tech-border-btn static-border bg-black/50 text-gray-300"
+                            className="service-section relative py-12 px-6 md:px-12 tech-border-btn static-border bg-black/50 text-gray-300 group hover:bg-black/80 transition-all duration-300"
                         >
-                            <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-12">
-                                {/* Header: Icon & Title - Strictly Vertical Stack for uniformity */}
-                                <div className="shrink-0 flex flex-col items-start gap-6 md:w-1/3">
-                                    <div className="text-gray-400">
-                                        {/* Wrapper to enforce exact icon size */}
-                                        <div className="w-16 h-16 flex items-center justify-center">
-                                            {getServiceIcon(service.title)}
-                                        </div>
-                                    </div>
-                                    <h3 className="text-3xl font-bold uppercase tracking-wide text-gray-200">
+                            <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+                                {/* Service Number & Title */}
+                                <div className="shrink-0 flex flex-col items-start gap-2 md:w-1/3">
+                                    <span className="text-5xl md:text-6xl font-black italic text-white/10 select-none">
+                                        {(index + 1).toString().padStart(2, '0')}
+                                    </span>
+                                    <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-white group-hover:text-gray-100 transition-colors">
                                         {service.title}
                                     </h3>
                                 </div>
 
                                 {/* Description */}
-                                <div className="md:w-2/3 md:pt-2">
-                                    <p className="text-lg leading-relaxed text-gray-400 text-justify">
+                                <div className="md:w-2/3 md:pt-4 border-l-0 md:border-l border-white/10 md:pl-12">
+                                    <p className="text-lg md:text-xl leading-relaxed text-gray-400 font-medium">
                                         {service.description}
                                     </p>
                                 </div>
@@ -323,82 +215,7 @@ export default function GGProductions() {
                     ))}
                 </div>
 
-                {/* How We Work Section */}
-                <div className="max-w-6xl mx-auto py-10">
-                    <div className="relative min-h-[600px] md:min-h-[800px] py-10 px-4">
-                        {/* Process Steps */}
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-24 relative z-10">
 
-                            {/* Step 1: Discovery */}
-                            <div className="md:col-start-1 md:col-span-4 self-start">
-                                <div className="border border-white/30 p-6 md:p-8 text-white tech-border-btn static-border !bg-transparent hover:border-white transition-colors duration-300">
-                                    <span className="text-4xl font-black block mb-2 opacity-20 italic">01</span>
-                                    <h3 className="text-2xl font-bold uppercase mb-4 tracking-tighter">Discovery</h3>
-                                    <p className="text-sm font-medium leading-tight opacity-70">Audit of the current state of the project</p>
-                                </div>
-                            </div>
-
-                            {/* Step 2: Proposal */}
-                            <div className="md:col-start-3 md:col-span-4 md:-mt-12">
-                                <div className="border border-white/30 p-6 md:p-8 text-white tech-border-btn static-border !bg-transparent hover:border-white transition-colors duration-300 md:ml-12">
-                                    <span className="text-4xl font-black block mb-2 opacity-20 italic">02</span>
-                                    <h3 className="text-2xl font-bold uppercase mb-4 tracking-tighter text-right">Proposal</h3>
-                                    <p className="text-sm font-medium leading-tight text-right opacity-70">Bespoke proposal by headcount tailored to needs</p>
-                                </div>
-                            </div>
-
-                            {/* Step 3: Iterate */}
-                            <div className="md:col-start-5 md:col-span-6 relative">
-                                <div id="step-iterate" className="border border-white/60 p-8 md:p-12 text-white tech-border-btn static-border !bg-transparent hover:border-white hover:scale-105 transition-all duration-500 z-20">
-                                    <span className="text-5xl font-black block mb-2 opacity-20 italic">03</span>
-                                    <h3 className="text-4xl font-black uppercase mb-4 tracking-tight">Iterate</h3>
-                                    <p className="text-base font-bold uppercase opacity-80">Work on the project</p>
-                                </div>
-                            </div>
-
-                            {/* Step 4: Review */}
-                            <div className="md:col-start-8 md:col-span-4">
-                                <div id="step-review" className="border border-white/30 p-6 md:p-8 text-white tech-border-btn static-border !bg-transparent hover:border-white transition-colors duration-300">
-                                    <span className="text-4xl font-black block mb-2 opacity-20 italic">04</span>
-                                    <h3 className="text-2xl font-bold uppercase mb-4 tracking-tighter text-right">Review</h3>
-                                    <p className="text-sm font-medium leading-tight text-right opacity-70">Fortnightly reviews and iterations to improve</p>
-                                </div>
-                            </div>
-
-                            {/* Step 5: Submit */}
-                            <div className="md:col-start-10 md:col-span-3 self-end md:-mt-12">
-                                <div className="border border-white/30 p-6 text-white tech-border-btn static-border !bg-transparent hover:border-white transition-colors duration-300">
-                                    <span className="text-3xl font-black block mb-1 opacity-20 italic">05</span>
-                                    <h3 className="text-xl font-bold uppercase mb-2 tracking-tighter">Submit</h3>
-                                    <p className="text-xs font-bold opacity-70">Submit project!</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Arrows Layer (Desktop) */}
-                        <div className="hidden md:block absolute inset-0 pointer-events-none z-0">
-                            <svg className="w-full h-full text-white/20" viewBox="0 0 1000 800" fill="none">
-                                {/* Connectivity Flow */}
-                                <path d="M150 150 Q 200 250 300 180" stroke="currentColor" strokeWidth="2" strokeDasharray="6 4" />
-                                <path d="M450 250 Q 550 400 650 350" stroke="currentColor" strokeWidth="2" strokeDasharray="6 4" />
-
-                                {/* Iteration Loop Arrow */}
-                                <path
-                                    d="M 680 430 C 900 480, 900 650, 650 680 C 200 750, 100 500, 380 450"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    fill="none"
-                                    markerEnd="url(#white-arrowhead)"
-                                />
-                                <defs>
-                                    <marker id="white-arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                        <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
-                                    </marker>
-                                </defs>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
             </section>
 
             <section className="relative w-full px-2 md:px-1 py-20 pb-0 max-w-[1920px] mx-auto">
@@ -471,7 +288,7 @@ export default function GGProductions() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-33.33%); /* Move by 1/3 since we triplicated the list */
+            transform: translateX(-12.5%); /* Move by 1/8 since we octuplicated the list */
           }
         }
         .animate-scroll {

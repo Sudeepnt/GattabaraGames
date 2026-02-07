@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Gattabara Games",
   description: "Gattabara Games - Software Design and Development",
+
 };
 
 export default function RootLayout({

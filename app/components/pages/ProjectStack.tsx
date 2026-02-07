@@ -19,7 +19,7 @@ export default function ProjectStack() {
 
   return (
     <section className="relative w-full px-2 py-4 md:p-1">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-8">
         {projects.map((project, index) => (
           <Link
             key={index}

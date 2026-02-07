@@ -284,23 +284,22 @@
   },
   "about": {
     "introText": [
-      "Gattabara Games is an AI-powered game studio built for bold worlds and ambitious founders. We don’t just ship products — we co-create universes. Through deep collaboration with visionary teams, we share ownership, shape strategy, and build alongside you from concept to scale. We operate independently, move fast, and fuse AI with design to craft experiences that are immersive, scalable, and commercially dominant.",
-      "We’ve spent serious time defining what we stand for. Our values aren’t filler — they guide every mechanic we design, every system we architect, and every decision we make. We evolve constantly, but these principles are our core engine."
+      "At Gattabara Games, we've been driven by the pure joy of creation from day one. We obsess over craft because it's the difference between games people play and games people remember. We listen to what players feel, prototype what resonates, and refine ruthlessly until it's right—a culture built on honest feedback and relentless iteration. We don't separate the dreamers from the builders because the best games come from people who own what they create. Every decision serves the experience. Every frame earns its place. We make games that matter."
     ],
     "values": [
       {
-        "title": "Curiosity, creativity and intellectual agility",
-        "description": "Original thinking and collaboration are at the core of the organization. Strong voices and unique ideas are valued in everything we do.",
+        "title": "We build games where craft and conviction meet—experiences designed to endure, not just entertain.",
+        "description": "",
         "image": "/uploads/1770195200412-0.png"
       },
       {
-        "title": "Savoir Faire",
-        "description": "We celebrate people who take pride in their craft, giving them the space to improve, the resources to flourish, and opportunities to share their expertise.",
+        "title": "Great games come from makers who feel ownership, not oversight, which is why we've built a culture that empowers rather than constrains.",
+        "description": "",
         "image": "/About2.png"
       },
       {
-        "title": "Supporting and elevating each other",
-        "description": "We nurture a vibrant, inclusive community where people feel safe, respected and empowered.",
+        "title": "We prototype fast, refine ruthlessly, and ship only when every element serves the player's emotional journey.",
+        "description": "",
         "image": "/About3.png"
       }
     ],
