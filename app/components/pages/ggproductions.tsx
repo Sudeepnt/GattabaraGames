@@ -114,16 +114,8 @@ export default function GGProductions() {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/90" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
 
-                {/* Hero Content */}
+                {/* Hero Content - Empty for visual effect */}
                 <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-20 px-6">
-                    <h1
-                        className="text-4xl md:text-7xl font-black tracking-tighter text-center"
-                        style={{ animation: "fadeInUp 1s ease-out forwards" }}
-                    >
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-white">
-                            GG Productions
-                        </span>
-                    </h1>
                 </div>
 
 
@@ -132,31 +124,50 @@ export default function GGProductions() {
             {/* Main Content */}
             <section className="relative w-full px-2 md:px-16 pt-10 pb-20 md:pt-16 md:pb-32">
                 {/* Intro Text & CTA */}
-                <div className="max-w-5xl mx-auto mb-20 md:mb-32 flex flex-col items-center">
-                    <p className="text-lg md:text-2xl lg:text-3xl font-medium leading-relaxed text-gray-200 text-center mb-12">
-                        {introText}
-                    </p>
-                    <Link
-                        href="/pitch-us"
-                        className="tech-border-btn text-white pl-8 pr-6 py-4 font-bold text-sm md:text-base uppercase tracking-wider flex items-center gap-4 group hover:!bg-white hover:text-black transition-colors"
-                        style={{ animation: "fadeInUp 1s ease-out 0.4s forwards" }}
-                    >
-                        <span className="relative z-10">{ctaButtonText}</span>
-                        <svg
-                            width="36"
-                            height="12"
-                            viewBox="0 0 36 12"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="relative z-10"
+                <div className="w-full mb-20 md:mb-32 flex flex-col">
+                    <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12 mb-12 w-full">
+                        {/* Logo on the left */}
+                        <img
+                            src="/logos/Ggprod.png"
+                            alt="GG Productions Logo"
+                            className="h-20 md:h-32 w-auto object-contain flex-shrink-0"
+                        />
+
+                        {/* Entry text section (heading + paragraph) on the right */}
+                        <div className="flex flex-col gap-6">
+                            <h1 className="text-3xl md:text-4xl font-black tracking-tighter">
+                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-white">
+                                    GG Productions
+                                </span>
+                            </h1>
+                            <p className="text-base md:text-lg lg:text-xl font-medium leading-relaxed text-gray-200">
+                                {introText}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="w-full flex justify-center">
+                        <Link
+                            href="/pitch-us"
+                            className="tech-border-btn text-white pl-8 pr-6 py-4 font-bold text-sm md:text-base uppercase tracking-wider flex items-center gap-4 group hover:!bg-white hover:text-black transition-colors"
+                            style={{ animation: "fadeInUp 1s ease-out 0.4s forwards" }}
                         >
-                            <path d="M30 1L35 6L30 11" />
-                            <path d="M0 6H35" />
-                        </svg>
-                    </Link>
+                            <span className="relative z-10">{ctaButtonText}</span>
+                            <svg
+                                width="36"
+                                height="12"
+                                viewBox="0 0 36 12"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="relative z-10"
+                            >
+                                <path d="M30 1L35 6L30 11" />
+                                <path d="M0 6H35" />
+                            </svg>
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Infinite Scrolling Client Logos */}
@@ -168,58 +179,79 @@ export default function GGProductions() {
                     <div className="flex animate-scroll hover:pause-animation">
                         {Array(8).fill(clientLogos.length > 0 ? clientLogos : [
                             "/GGclients/Battle Bucks.png",
-                            "/GGclients/Brewed Games.png",
-                            "/GGclients/Singular Scheme .png",
+                            "/GGclients/brewed.png",
                             "/GGclients/magadha.png",
-                            "/GGclients/maplestoryworld.png",
-                            "/GGclients/oila games.png"
+                            "/GGclients/msworld.png",
+                            "/GGclients/oila.png",
+                            "/GGclients/ss.png"
                         ]).flat().map((logo, index) => (
                             <div key={index} className="flex-shrink-0 flex items-center justify-center px-8 md:px-12">
                                 <img
                                     src={logo}
                                     alt="Client Logo"
-                                    className="h-[72px] md:h-24 w-auto object-contain opacity-70 contrast-0 brightness-150 grayscale"
+                                    className="h-[86px] md:h-[115px] w-auto object-contain opacity-70"
                                 />
                             </div>
                         ))}
                     </div>
                 </div>
 
-                {/* Services Stack */}
-                <div className="w-full flex flex-col gap-6 mb-32">
-                    {services.map((service, index) => (
-                        <div
-                            key={service.title}
-                            data-index={index}
-                            className="service-section relative py-12 px-6 md:px-12 tech-border-btn static-border bg-black/50 text-gray-300 group hover:bg-black/80 transition-all duration-300"
-                        >
-                            <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
-                                {/* Service Number & Title */}
-                                <div className="shrink-0 flex flex-col items-start gap-2 md:w-1/3">
-                                    <span className="text-5xl md:text-6xl font-black italic text-white/10 select-none">
-                                        {(index + 1).toString().padStart(2, '0')}
-                                    </span>
-                                    <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-white group-hover:text-gray-100 transition-colors">
-                                        {service.title}
-                                    </h3>
-                                </div>
 
-                                {/* Description */}
-                                <div className="md:w-2/3 md:pt-4 border-l-0 md:border-l border-white/10 md:pl-12">
-                                    <p className="text-lg md:text-xl leading-relaxed text-gray-400 font-medium">
-                                        {service.description}
-                                    </p>
+                {/* Services Stack - Bold Redesign */}
+                <div className="w-full mb-2">
+                    {services.map((service, index) => {
+                        const isEven = index % 2 === 0;
+                        return (
+                            <div
+                                key={service.title}
+                                data-index={index}
+                                className="service-section relative group border-b border-white/5 last:border-b-0"
+                            >
+                                <div className={`relative overflow-hidden bg-black transition-all duration-700 hover:bg-gradient-to-r ${isEven ? 'hover:from-white/[0.03] hover:to-transparent' : 'hover:from-transparent hover:to-white/[0.03]'}`}>
+                                    {/* Diagonal accent line */}
+                                    <div className={`absolute top-0 ${isEven ? 'left-0' : 'right-0'} w-1 h-0 bg-gradient-to-b from-white/40 via-white/20 to-transparent group-hover:h-full transition-all duration-1000 ease-out`} />
+
+                                    <div className={`flex ${isEven ? 'flex-row' : 'flex-row-reverse'} items-center gap-6 md:gap-12 py-10 md:py-13 px-4 md:px-12`}>
+                                        {/* Number Section */}
+                                        <div className={`flex-shrink-0 w-32 md:w-48 ${isEven ? 'text-left' : 'text-right'}`}>
+                                            <span className={`text-8xl md:text-9xl font-black leading-none block transition-all duration-500 ${isEven
+                                                ? 'bg-clip-text text-transparent bg-gradient-to-br from-white/30 via-white/15 to-white/5 group-hover:from-white/50 group-hover:via-white/30'
+                                                : 'bg-clip-text text-transparent bg-gradient-to-bl from-white/30 via-white/15 to-white/5 group-hover:from-white/50 group-hover:via-white/30'
+                                                }`}>
+                                                {(index + 1).toString().padStart(2, '0')}
+                                            </span>
+                                        </div>
+
+                                        {/* Vertical divider */}
+                                        <div className="hidden md:block w-px h-24 bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+
+                                        {/* Content Section */}
+                                        <div className="flex-1 min-w-0">
+                                            {/* Title */}
+                                            <h3 className={`text-xl md:text-2xl font-black uppercase tracking-tighter text-white mb-4 md:mb-6 transition-all duration-300 group-hover:text-white/90 ${isEven ? 'text-left' : 'text-right md:text-left'}`}>
+                                                {service.title}
+                                            </h3>
+
+                                            {/* Description */}
+                                            <p className={`text-sm md:text-base leading-relaxed text-gray-400 transition-colors duration-300 group-hover:text-gray-300 ${isEven ? 'text-left' : 'text-right md:text-left'}`}>
+                                                {service.description}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Bottom glow effect on hover */}
+                                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/0 to-transparent group-hover:via-white/20 transition-all duration-700" />
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
 
-            </section>
+            </section >
 
-            <section className="relative w-full px-2 md:px-1 py-20 pb-0 max-w-[1920px] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-8">
+            <section className="relative w-full px-2 md:px-1 py-8 pb-0 max-w-[1920px] mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-1">
                     {projects.map((project, index) => (
                         <Link
                             key={index}
@@ -300,6 +332,6 @@ export default function GGProductions() {
           animation-play-state: paused;
         }
       `}</style>
-        </div>
+        </div >
     );
 }

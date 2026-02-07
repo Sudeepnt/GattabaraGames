@@ -12,7 +12,7 @@ export default function Pitch() {
                 <Header />
             </div>
 
-            <main className="flex-1 flex flex-col justify-center px-6 md:px-20 w-full pt-20">
+            <main className="flex-1 flex flex-col justify-center px-6 md:px-20 w-full pt-52 md:pt-32">
                 <div className="w-full max-w-5xl mx-auto flex flex-col">
                     <h1 className="text-3xl md:text-6xl font-bold mb-12 text-white text-center uppercase tracking-wider">
                         Inbound Form
@@ -36,10 +36,9 @@ export default function Pitch() {
                     <div className="mt-12 md:mt-20 w-full flex justify-center">
                         <button
                             onClick={() => router.push("/contact-us")}
-                            className="relative min-w-[200px] h-[34px] md:h-14 pl-[20px] pt-[5px] pr-2 pb-2 flex items-start justify-between tech-border-btn text-white font-bold text-[10px] md:text-xs uppercase tracking-wide hover:bg-white hover:text-black transition-colors duration-300 gap-4"
+                            className="relative min-w-[200px] h-[34px] md:h-14 flex items-center justify-center tech-border-btn text-white font-bold text-sm md:text-base tracking-wide hover:bg-white hover:text-black transition-colors duration-300 px-6"
                         >
-                            <span>Click Here to Start</span>
-                            <span className="text-lg">→</span>
+                            Click Here to Start
                         </button>
                     </div>
                 </div>
