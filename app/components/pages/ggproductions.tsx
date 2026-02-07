@@ -228,8 +228,8 @@ export default function GGProductions() {
                         >
                             <div className="relative overflow-hidden bg-black flex flex-col cursor-pointer">
                                 {/* Title Bar */}
-                                <div className="relative h-14 pl-[20px] pt-[5px] pr-2 pb-1 flex items-start justify-start bg-black text-white">
-                                    <h3 className="font-bold text-lg md:text-xl uppercase tracking-wide">{project.sub}</h3>
+                                <div className="relative h-auto pl-0 pt-[5px] pr-2 pb-3 flex items-start justify-start bg-black text-white">
+                                    <h3 className="font-bold text-xs md:text-sm uppercase tracking-wide">{project.sub}</h3>
                                 </div>
 
                                 {/* Project Image */}

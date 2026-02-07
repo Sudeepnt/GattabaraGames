@@ -64,7 +64,7 @@ export default function GamesPage() {
                 <Header />
             </div>
 
-            <main className="pt-32 pb-40 px-2 md:px-1 w-full">
+            <main className="pt-32 pb-20 px-2 md:px-1 w-full">
                 {/* 2-column grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-8">
                     {projects.map((project, index) => (
@@ -73,15 +73,12 @@ export default function GamesPage() {
                             href={`/games/${project.sub.toLowerCase().replace(/\s+/g, '-')}`}
                             className="block"
                         >
-                            <motion.div
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.2, duration: 0.8 }}
+                            <div
                                 className="relative overflow-hidden bg-black flex flex-col cursor-pointer"
                             >
                                 {/* Title Bar - Black header with game name */}
-                                <div className="relative h-14 pl-[20px] pt-[5px] pr-2 pb-1 flex items-start justify-start bg-black text-white">
-                                    <h3 className="font-bold text-lg md:text-xl uppercase tracking-wide">{project.sub}</h3>
+                                <div className="relative h-auto pl-0 pt-[5px] pr-2 pb-3 flex items-start justify-start bg-black text-white">
+                                    <h3 className="font-bold text-xs md:text-sm uppercase tracking-wide">{project.sub}</h3>
                                 </div>
 
                                 {/* Game Image */}
@@ -103,7 +100,7 @@ export default function GamesPage() {
                                         </p>
                                     </div>
                                 )}
-                            </motion.div>
+                            </div>
                         </Link>
                     ))}
                 </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Upload, Save, Loader2, Home, Info, Send, Sparkles, ArrowLeft, Gamepad2, Briefcase } from "lucide-react";
+import { Upload, Save, Loader2, Home, Info, Send, Sparkles, ArrowLeft, Gamepad2, Briefcase, Shield } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { saveCMSData } from '@/app/actions/saveCMS';
@@ -84,6 +84,17 @@ interface PitchPageData {
   address3: string;
 }
 
+interface PolicyItem {
+  title: string;
+  content: string;
+  lastUpdated: string;
+}
+
+interface PolicyPageData {
+  cookies: PolicyItem;
+  privacy: PolicyItem;
+}
+
 const initialHomeData: HomePageData = {
   heroText: "Gattabara Games is a Software design and development company headquartered in Banglore.",
   header: {
@@ -154,16 +165,30 @@ const initialPitchData: PitchPageData = {
   address3: "India...",
 };
 
+const initialPolicyData: PolicyPageData = {
+  cookies: {
+    title: "Cookies Policy",
+    content: "Content...",
+    lastUpdated: new Date().toISOString().split('T')[0]
+  },
+  privacy: {
+    title: "Privacy Policy",
+    content: "Content...",
+    lastUpdated: new Date().toISOString().split('T')[0]
+  }
+};
+
 export default function AdminCMS() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-  const [activeTab, setActiveTab] = useState<"home" | "games" | "ggproductions" | "about" | "pitch">("home");
+  const [activeTab, setActiveTab] = useState<"home" | "games" | "ggproductions" | "about" | "pitch" | "policy">("home");
 
   const [homeData, setHomeData] = useState<HomePageData>(initialHomeData);
   const [gamesData, setGamesData] = useState<GameData[]>([]);
   const [ggData, setGGData] = useState<GGProductionsData>(initialGGData);
   const [aboutData, setAboutData] = useState<AboutPageData>(initialAboutData);
   const [pitchData, setPitchData] = useState<PitchPageData>(initialPitchData);
+  const [policyData, setPolicyData] = useState<PolicyPageData>(initialPolicyData);
 
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -184,6 +209,7 @@ export default function AdminCMS() {
         }
         if (data.about) setAboutData(data.about);
         if (data.contact) setPitchData(data.contact);
+        if (data.policy) setPolicyData(data.policy);
       })
       .catch(error => console.error('Load error:', error));
   }, []);
@@ -212,6 +238,7 @@ export default function AdminCMS() {
         ggProductions: ggData,
         about: aboutData,
         contact: pitchData, // Save as 'contact' to match JSON structure
+        policy: policyData,
       });
 
       if (result.success) {
@@ -513,6 +540,17 @@ export default function AdminCMS() {
               <span className="hidden sm:inline">Pitch</span>
               <span className="sm:hidden">Pitch</span>
             </button>
+            <button
+              onClick={() => setActiveTab("policy")}
+              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg font-medium transition-all whitespace-nowrap text-sm sm:text-base ${activeTab === "policy"
+                ? "bg-black text-white shadow-md"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+            >
+              <Shield size={16} className="sm:w-[18px] sm:h-[18px]" />
+              <span className="hidden sm:inline">Policy</span>
+              <span className="sm:hidden">Policy</span>
+            </button>
           </div>
         </div>
       </div>
@@ -776,6 +814,63 @@ export default function AdminCMS() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {/* POLICY TAB */}
+        {activeTab === "policy" && (
+          <div className="space-y-4 sm:space-y-6">
+            <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow">
+              <h2 className="text-lg sm:text-xl font-bold text-black mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-gray-200">
+                Cookies Policy
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs sm:text-sm font-bold text-gray-900 mb-1">Title</label>
+                  <input
+                    type="text"
+                    value={policyData.cookies.title}
+                    onChange={(e) => setPolicyData({ ...policyData, cookies: { ...policyData.cookies, title: e.target.value } })}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs sm:text-sm font-bold text-gray-900 mb-1">Content</label>
+                  <textarea
+                    value={policyData.cookies.content}
+                    onChange={(e) => setPolicyData({ ...policyData, cookies: { ...policyData.cookies, content: e.target.value } })}
+                    rows={10}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none resize-y"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow">
+              <h2 className="text-lg sm:text-xl font-bold text-black mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-gray-200">
+                Privacy Policy
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs sm:text-sm font-bold text-gray-900 mb-1">Title</label>
+                  <input
+                    type="text"
+                    value={policyData.privacy.title}
+                    onChange={(e) => setPolicyData({ ...policyData, privacy: { ...policyData.privacy, title: e.target.value } })}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs sm:text-sm font-bold text-gray-900 mb-1">Content</label>
+                  <textarea
+                    value={policyData.privacy.content}
+                    onChange={(e) => setPolicyData({ ...policyData, privacy: { ...policyData.privacy, content: e.target.value } })}
+                    rows={10}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-black focus:border-black outline-none resize-y"
+                  />
                 </div>
               </div>
             </section>

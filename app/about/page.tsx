@@ -30,30 +30,32 @@ export default function AboutPage() {
             <Header />
 
 
-            <section className="w-full px-6 md:px-16 mt-32 mb-40 flex justify-end">
-                <div className="w-full md:w-1/2 flex flex-col gap-8 text-lg md:text-xl font-medium leading-relaxed text-gray-200 text-right">
+            <section className="w-full px-3 md:px-2 mt-0 md:mt-8 mb-24">
+                <div className="w-full flex flex-col gap-6 text-[20px] md:text-[40px] font-medium leading-tight tracking-tighter text-gray-200 text-justify">
                     {introText.map((text, index) => (
                         <p key={index}>{text}</p>
                     ))}
                 </div>
             </section>
 
-            <section className="w-full flex flex-col items-center gap-24 mb-32 py-12">
+            <section className="w-full flex flex-col items-center gap-16 mb-16 py-12">
                 {values.map((value, index) => (
-                    <div key={index} className="w-full flex flex-col items-center group">
-                        <div className="w-full px-6 md:px-16 text-center mb-10">
+                    <div key={index} className={`w-full flex flex-col items-center group ${index === 0 ? "mb-[-100px]" : ""}`}>
+                        <div className="w-full px-6 md:px-16 text-center mb-4">
                             <p className="text-xl md:text-3xl font-bold leading-tight text-white max-w-6xl mx-auto">
-                                {index + 1}. {value.title}. {value.description}
+                                {index + 1}. {value.title}{value.description ? `. ${value.description}` : ''}
                             </p>
                         </div>
 
                         {value.image && (
-                            <div className="w-[90%] md:w-[80%] h-[350px] md:h-[650px] relative rounded-3xl overflow-hidden shadow-2xl bg-black">
+                            <div className={`${index === 1 ? "w-[45%] md:w-[40%]" : "w-[90%] md:w-[80%]"} relative rounded-3xl overflow-hidden ${index === 0 ? "h-[200px] md:h-[350px]" : ""}`}>
                                 <Image
                                     src={value.image}
                                     alt={value.title}
-                                    fill
-                                    className="object-contain transition-transform duration-700 group-hover:scale-105"
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    className={`w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105 ${index === 0 ? "!h-full !object-cover" : ""}`}
                                     priority
                                 />
                             </div>

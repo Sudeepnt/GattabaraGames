@@ -52,6 +52,18 @@
       ]
     }
   },
+  "policy": {
+    "cookies": {
+      "title": "Cookies Policy",
+      "content": "This is the default cookies policy content. You can edit this in the admin panel.",
+      "lastUpdated": "2026-02-07"
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "content": "This is the default privacy policy content. You can edit this in the admin panel.",
+      "lastUpdated": "2026-02-07"
+    }
+  },
   "games": [
     {
       "sub": "Orbitals",
