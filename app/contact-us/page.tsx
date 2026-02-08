@@ -81,59 +81,73 @@ export default function Pitch() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col px-8 md:px-32 max-w-[1920px] mx-auto w-full bg-black justify-center relative font-sans text-white">
+        <div className="h-screen overflow-hidden flex flex-col px-2 md:px-32 max-w-[1920px] mx-auto w-full bg-black justify-center relative font-sans text-white">
             <div className="fixed top-0 left-0 w-full z-50">
                 <Header />
             </div>
 
-            <main className="flex-1 w-full flex flex-col justify-center items-center pt-24 md:pt-32 pb-24">
+            <main className="flex-1 w-full flex flex-col justify-start md:justify-center items-start pt-36 md:pt-0">
 
                 {/* Contact Form */}
                 <motion.form
                     onSubmit={handleSubmit}
-                    className="w-full flex flex-col items-start px-6 md:px-20 max-w-[1920px] mx-auto"
+                    className="w-full flex flex-col items-start px-0 md:px-20 max-w-[1920px] mx-auto"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.8 }}
                 >
-                    {/* Headline / Input Group 1 */}
-                    <div className="mt-6 mb-6 leading-relaxed text-white text-justify w-full" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.5rem)' }}>
+                    {/* Combined Input Group: Continuous Text Flow */}
+                    <div className="mt-8 md:mt-2 mb-4 w-full text-sm md:text-lg text-white leading-relaxed font-light tracking-wide">
                         <span className="font-light">{content.formLine1Start} </span>
-                        <input
-                            type="text"
-                            placeholder={content.namePlaceholder}
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="bg-white/10 border-0 outline-none px-4 py-1 mx-2 rounded text-white placeholder-white/30 inline-block align-baseline w-[clamp(100px,15vw,200px)] h-[clamp(1.5rem,3vw,3rem)] text-center font-normal transition-all focus:bg-white/20"
-                            disabled={status === 'loading' || status === 'success'}
-                        />
-                        <span className="font-light"> {content.formLine1End}</span>
-                    </div>
-
-                    {/* Headline / Input Group 2 */}
-                    <div className="mb-12 leading-relaxed text-white text-justify w-full" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.5rem)' }}>
+                        <span className="inline-grid items-center mx-1 md:mx-2 align-baseline relative">
+                            {/* Hidden text for auto-width */}
+                            <span className="invisible col-start-1 row-start-1 px-2 md:px-8 font-normal whitespace-pre opacity-0 pointer-events-none h-[clamp(1.5rem,3vw,3rem)] flex items-center justify-center min-w-[clamp(100px,15vw,200px)]">
+                                {formData.name || content.namePlaceholder}
+                            </span>
+                            <input
+                                type="text"
+                                placeholder={content.namePlaceholder}
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                className="col-start-1 row-start-1 w-full h-[clamp(1.5rem,3vw,3rem)] bg-white/10 border-0 outline-none px-2 md:px-8 rounded text-white placeholder-white/30 text-center font-normal transition-all focus:bg-white/20 min-w-[clamp(100px,15vw,200px)]"
+                                disabled={status === 'loading' || status === 'success'}
+                            />
+                        </span>
+                        <span className="font-light"> {content.formLine1End} </span>
+                        <br className="block md:hidden" />
                         <span className="font-light">{content.formLine2Start} </span>
-                        <input
-                            type="email"
-                            placeholder={content.emailPlaceholder}
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="bg-white/10 border-0 outline-none px-4 py-1 mx-2 rounded text-white placeholder-white/30 inline-block align-baseline w-[clamp(150px,20vw,300px)] h-[clamp(1.5rem,3vw,3rem)] text-center font-normal transition-all focus:bg-white/20"
-                            disabled={status === 'loading' || status === 'success'}
-                        />
+                        <span className="inline-grid items-center mx-1 md:mx-2 align-baseline relative">
+                            {/* Hidden text for auto-width */}
+                            <span className="invisible col-start-1 row-start-1 px-2 md:px-8 font-normal whitespace-pre opacity-0 pointer-events-none h-[clamp(1.5rem,3vw,3rem)] flex items-center justify-center min-w-[clamp(150px,20vw,300px)]">
+                                {formData.email || content.emailPlaceholder}
+                            </span>
+                            <input
+                                type="email"
+                                placeholder={content.emailPlaceholder}
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                className="col-start-1 row-start-1 w-full h-[clamp(1.5rem,3vw,3rem)] bg-white/10 border-0 outline-none px-2 md:px-8 rounded text-white placeholder-white/30 text-center font-normal transition-all focus:bg-white/20 min-w-[clamp(150px,20vw,300px)]"
+                                disabled={status === 'loading' || status === 'success'}
+                            />
+                        </span>
                         <span className="font-light">{content.formLine2End}</span>
                     </div>
 
                     {/* Consent Checkbox */}
-                    <div className="mb-10 w-full flex justify-start">
+                    <div className="mb-6 md:mb-8 w-full flex justify-start">
                         <label className={`flex items-start gap-4 cursor-pointer group ${status === 'success' ? 'opacity-50 pointer-events-none' : ''}`}>
-                            <div className="relative mt-1">
+                            <div className="relative mt-1 w-6 h-6 shrink-0">
                                 <input
                                     type="checkbox"
                                     checked={formData.consent}
                                     onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                                    className="peer appearance-none w-6 h-6 border-2 border-white/50 rounded cursor-pointer transition-colors checked:bg-white checked:border-white"
+                                    className="peer appearance-none w-6 h-6 border-2 border-white/50 rounded cursor-pointer transition-colors checked:border-white bg-transparent"
                                     disabled={status === 'loading' || status === 'success'}
+                                />
+                                <Check
+                                    size={16}
+                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity"
+                                    strokeWidth={3}
                                 />
                             </div>
                             <span className="text-[10px] md:text-xs text-gray-400 leading-relaxed pt-0.5 opacity-80 group-hover:opacity-100 transition-opacity">
@@ -177,7 +191,7 @@ export default function Pitch() {
                                     key="submit-btn"
                                     type="submit"
                                     disabled={status === 'loading'}
-                                    className="w-auto min-w-[200px] relative h-[34px] md:h-14 pl-[20px] pt-[5px] pr-2 pb-2 flex items-start justify-between tech-border-btn !bg-transparent text-white border border-white hover:!bg-white hover:!text-black transition-all duration-300 font-bold text-[10px] md:text-xs uppercase tracking-wide group disabled:opacity-70 disabled:cursor-not-allowed gap-8"
+                                    className="w-auto min-w-[150px] md:min-w-[200px] relative h-[34px] md:h-14 flex items-center justify-center gap-4 tech-border-btn !bg-transparent text-white border border-white hover:!bg-white hover:!text-black transition-all duration-300 font-bold text-sm md:text-lg tracking-wide group disabled:opacity-70 disabled:cursor-not-allowed"
                                     initial="initial"
                                     whileHover={status === 'loading' ? {} : "hover"}
                                     whileTap={status === 'loading' ? {} : "tap"}
@@ -195,27 +209,21 @@ export default function Pitch() {
                                         </>
                                     ) : (
                                         <>
-                                            {content.buttonText}
-                                            <motion.svg
-                                                width="36"
+                                            {/* Using 'capitalize' class for Pascal/Title Case feel if text is lowercase, or just rely on text. Removing uppercase class handled in className above. */}
+                                            <span className="capitalize text-lg">{content.buttonText || "Send"}</span>
+                                            <svg
+                                                width="24"
                                                 height="12"
                                                 viewBox="0 0 36 12"
                                                 fill="none"
                                                 stroke="currentColor"
-                                                strokeWidth="2"
+                                                strokeWidth="3"
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                             >
                                                 <path d="M30 1L35 6L30 11" />
-                                                <motion.path
-                                                    d="M0 6H35"
-                                                    variants={{
-                                                        initial: { scaleX: 1, originX: 1 },
-                                                        hover: { scaleX: 0.5, originX: 1 }
-                                                    }}
-                                                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                                                />
-                                            </motion.svg>
+                                                <path d="M0 6H35" />
+                                            </svg>
                                         </>
                                     )}
                                 </motion.button>
@@ -225,7 +233,7 @@ export default function Pitch() {
 
                     {/* Info Grid - Moved inside form, closer to button */}
                     {/* Info Grid - Moved inside form, closer to button */}
-                    <div className="w-full flex flex-col md:flex-row justify-between gap-6 text-gray-400 text-sm leading-relaxed mt-16 md:mt-24 border-t border-white/10 pt-8">
+                    <div className="w-full flex flex-col md:flex-row justify-between gap-2 md:gap-6 text-gray-400 text-[10px] md:text-sm leading-relaxed mt-6 md:mt-6 border-t border-white/10 pt-4 md:pt-8">
                         {/* Column 1: Company & Contact */}
                         <div className="flex flex-col items-start text-left">
                             <p className="font-bold mb-1 text-white">{content.companyName}</p>

@@ -34,13 +34,13 @@ export default function Header() {
   }, []);
 
   // Determine theme based on current path
-  const isWhiteTheme = false;
+  const isWhiteTheme = pathname === "/pitch-us" || pathname === "/gg-productions";
   const themeClasses = isWhiteTheme
     ? "!text-black hover:!text-white"
     : "!text-white hover:!text-black"; // <--- This ensures text turns black on hover
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[999] px-2 py-4 md:px-1 md:pb-1 md:pt-[6px] bg-transparent">
+    <header className="fixed top-0 left-0 w-full z-[999] px-2 py-2 md:px-1 md:pb-1 md:pt-[6px] bg-transparent">
       <nav className="grid grid-cols-2 md:grid-cols-5 gap-1 w-full">
         {navItems.map((item, index) => (
           <Link
@@ -51,9 +51,12 @@ export default function Header() {
               flex items-start justify-start
               border-none font-bold text-[10px] md:text-xs tracking-wide
               transition-all duration-300
-              tech-border-btn !bg-black hover:!bg-white
+              tech-border-btn ${isWhiteTheme
+                ? "!bg-white hover:!bg-black !text-black hover:!text-white"
+                : "!bg-black hover:!bg-white !text-white hover:!text-black"
+              }
               ${index === 0 ? "col-span-2 md:col-span-1" : "col-span-1"}
-              ${themeClasses}
+              ${index === 0 ? "col-span-2 md:col-span-1" : "col-span-1"}
             `}
           >
             {item.label}

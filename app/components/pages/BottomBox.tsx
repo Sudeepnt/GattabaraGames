@@ -130,7 +130,7 @@ export default function BottomBox({ isDark = false }: { isDark?: boolean }) {
 
       <div className={`w-full py-2 px-6 flex items-center justify-center tech-border-btn static-border ${isDark ? "text-white" : "text-black"}`}>
         <p className={`text-[9px] tracking-[0.5em] font-medium text-center leading-relaxed ${isDark ? "text-white" : "text-black"}`}>
-          Gattabara Games and the Gattabara Games logo are all brands of Gattabara Games Limited. All rights reserved.
+          “Gattabara Games”, ”GG”, “GG Productions” and the Gattabara Games logo are all brands of Gattabara Games LLP. All rights reserved.
         </p>
       </div>
 

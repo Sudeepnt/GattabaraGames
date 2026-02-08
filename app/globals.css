@@ -3,6 +3,8 @@
 :root {
   --background: #000000;
   --foreground: #171717;
+  --selection-bg: #ffffff;
+  --selection-text: #000000;
 }
 
 ::-webkit-scrollbar {
@@ -164,13 +166,11 @@ body {
 
 /* Force selection styles at the end to ensure override */
 *::selection {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  background: #ffffff !important;
+  background-color: var(--selection-bg) !important;
+  color: var(--selection-text) !important;
 }
 
 *::-moz-selection {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  background: #ffffff !important;
+  background-color: var(--selection-bg) !important;
+  color: var(--selection-text) !important;
 }

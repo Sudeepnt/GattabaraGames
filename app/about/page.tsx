@@ -30,7 +30,7 @@ export default function AboutPage() {
             <Header />
 
 
-            <section className="w-full px-3 md:px-2 mt-0 md:mt-8 mb-24">
+            <section className="w-full px-3 md:px-2 mt-24 md:mt-8 mb-24">
                 <div className="w-full flex flex-col gap-6 text-[20px] md:text-[40px] font-medium leading-tight tracking-tighter text-gray-200 text-justify">
                     {introText.map((text, index) => (
                         <p key={index}>{text}</p>

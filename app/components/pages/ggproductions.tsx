@@ -73,7 +73,10 @@ export default function GGProductions() {
     }, [services]);
 
     return (
-        <div className="relative w-full min-h-screen bg-black text-white overflow-x-hidden">
+        <div
+            className="relative w-full min-h-screen bg-white text-black overflow-x-hidden"
+            style={{ "--selection-bg": "#000000", "--selection-text": "#ffffff" } as React.CSSProperties}
+        >
             {/* Hero Video Section */}
             <section className="relative w-full h-[45vh] md:h-[65vh] overflow-hidden">
                 {/* Video Placeholder/Loading State with animated gradient */}
@@ -81,7 +84,7 @@ export default function GGProductions() {
                     className={`absolute inset-0 transition-opacity duration-1000 ${isVideoLoaded ? "opacity-0" : "opacity-100"
                         }`}
                     style={{
-                        background: "linear-gradient(135deg, #0a1a1f 0%, #13343e 50%, #0a1a1f 100%)",
+                        background: "linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%)",
                         backgroundSize: "400% 400%",
                         animation: "gradientShift 8s ease infinite"
                     }}
@@ -111,8 +114,9 @@ export default function GGProductions() {
                 </video>
 
                 {/* Video Overlay Gradients */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/90" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+                {/* Video Overlay Gradients - Inverted for White Theme (using white/opacity) */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white/90" />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-white/30" />
 
                 {/* Hero Content - Empty for visual effect */}
                 <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-20 px-6">
@@ -122,33 +126,29 @@ export default function GGProductions() {
             </section>
 
             {/* Main Content */}
-            <section className="relative w-full px-2 md:px-16 pt-10 pb-20 md:pt-16 md:pb-32">
+            <section className="relative w-full px-2 md:px-1 pt-10 pb-20 md:pt-16 md:pb-32">
                 {/* Intro Text & CTA */}
-                <div className="w-full mb-20 md:mb-32 flex flex-col">
-                    <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12 mb-12 w-full">
+                <div className="w-full mb-20 md:mb-28 flex flex-col">
+                    <div className="flex flex-col md:flex-row items-start gap-8 md:gap-8 mb-6 w-full">
                         {/* Logo on the left */}
                         <img
-                            src="/logos/Ggprod.png"
+                            src="/logos/gprod.png"
                             alt="GG Productions Logo"
-                            className="h-20 md:h-32 w-auto object-contain flex-shrink-0"
+                            className="h-40 md:h-40 w-auto object-contain flex-shrink-0"
                         />
 
                         {/* Entry text section (heading + paragraph) on the right */}
                         <div className="flex flex-col gap-6">
-                            <h1 className="text-3xl md:text-4xl font-black tracking-tighter">
-                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-white">
-                                    GG Productions
-                                </span>
-                            </h1>
-                            <p className="text-base md:text-lg lg:text-xl font-medium leading-relaxed text-gray-200">
+
+                            <p className="text-base md:text-lg lg:text-xl font-medium leading-relaxed text-black">
                                 {introText}
                             </p>
                         </div>
                     </div>
-                    <div className="w-full flex justify-center">
+                    <div className="w-full flex justify-center mt-2">
                         <Link
                             href="/pitch-us"
-                            className="tech-border-btn text-white pl-8 pr-6 py-4 font-bold text-sm md:text-base uppercase tracking-wider flex items-center gap-4 group hover:!bg-white hover:text-black transition-colors"
+                            className="tech-border-btn text-black pl-8 pr-6 py-4 font-bold text-sm md:text-base uppercase tracking-wider flex items-center gap-4 group hover:!bg-black hover:text-white transition-colors"
                             style={{ animation: "fadeInUp 1s ease-out 0.4s forwards" }}
                         >
                             <span className="relative z-10">{ctaButtonText}</span>
@@ -171,10 +171,11 @@ export default function GGProductions() {
                 </div>
 
                 {/* Infinite Scrolling Client Logos */}
-                <div className="relative w-full overflow-hidden mb-24 md:mb-40 group">
+                <div className="relative w-full overflow-hidden mb-6 md:mb-11 group">
                     {/* Masking gradients for smooth fade edges */}
-                    <div className="absolute left-0 top-0 z-10 h-full w-16 md:w-32 bg-gradient-to-r from-black via-black/80 to-transparent pointer-events-none" />
-                    <div className="absolute right-0 top-0 z-10 h-full w-16 md:w-32 bg-gradient-to-l from-black via-black/80 to-transparent pointer-events-none" />
+                    {/* Masking gradients for smooth fade edges - Inverted to White */}
+                    <div className="absolute left-0 top-0 z-10 h-full w-16 md:w-32 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none" />
+                    <div className="absolute right-0 top-0 z-10 h-full w-16 md:w-32 bg-gradient-to-l from-white via-white/80 to-transparent pointer-events-none" />
 
                     <div className="flex animate-scroll hover:pause-animation">
                         {Array(8).fill(clientLogos.length > 0 ? clientLogos : [
@@ -198,49 +199,49 @@ export default function GGProductions() {
 
 
                 {/* Services Stack - Bold Redesign */}
-                <div className="w-full mb-2">
+                <div className="w-full mb-6 md:mb-11">
                     {services.map((service, index) => {
                         const isEven = index % 2 === 0;
                         return (
                             <div
                                 key={service.title}
                                 data-index={index}
-                                className="service-section relative group border-b border-white/5 last:border-b-0"
+                                className="service-section relative group border-b border-black/5 last:border-b-0"
                             >
-                                <div className={`relative overflow-hidden bg-black transition-all duration-700 hover:bg-gradient-to-r ${isEven ? 'hover:from-white/[0.03] hover:to-transparent' : 'hover:from-transparent hover:to-white/[0.03]'}`}>
+                                <div className={`relative overflow-hidden bg-white transition-all duration-700 hover:bg-gradient-to-r ${isEven ? 'hover:from-black/[0.03] hover:to-transparent' : 'hover:from-transparent hover:to-black/[0.03]'}`}>
                                     {/* Diagonal accent line */}
-                                    <div className={`absolute top-0 ${isEven ? 'left-0' : 'right-0'} w-1 h-0 bg-gradient-to-b from-white/40 via-white/20 to-transparent group-hover:h-full transition-all duration-1000 ease-out`} />
+                                    <div className={`absolute top-0 ${isEven ? 'left-0' : 'right-0'} w-1 h-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent group-hover:h-full transition-all duration-1000 ease-out`} />
 
-                                    <div className={`flex ${isEven ? 'flex-row' : 'flex-row-reverse'} items-center gap-6 md:gap-12 py-10 md:py-13 px-4 md:px-12`}>
+                                    <div className={`flex ${isEven ? 'flex-row' : 'flex-row-reverse'} items-center gap-4 md:gap-12 py-10 md:py-13 px-4 md:px-12`}>
                                         {/* Number Section */}
-                                        <div className={`flex-shrink-0 w-32 md:w-48 ${isEven ? 'text-left' : 'text-right'}`}>
-                                            <span className={`text-8xl md:text-9xl font-black leading-none block transition-all duration-500 ${isEven
-                                                ? 'bg-clip-text text-transparent bg-gradient-to-br from-white/30 via-white/15 to-white/5 group-hover:from-white/50 group-hover:via-white/30'
-                                                : 'bg-clip-text text-transparent bg-gradient-to-bl from-white/30 via-white/15 to-white/5 group-hover:from-white/50 group-hover:via-white/30'
+                                        <div className={`flex-shrink-0 w-auto md:w-48 ${isEven ? 'text-left' : 'text-right'}`}>
+                                            <span className={`text-6xl md:text-9xl font-black leading-none block transition-all duration-500 ${isEven
+                                                ? 'bg-clip-text text-transparent bg-gradient-to-br from-black/30 via-black/15 to-black/5 group-hover:from-black/50 group-hover:via-black/30'
+                                                : 'bg-clip-text text-transparent bg-gradient-to-bl from-black/30 via-black/15 to-black/5 group-hover:from-black/50 group-hover:via-black/30'
                                                 }`}>
                                                 {(index + 1).toString().padStart(2, '0')}
                                             </span>
                                         </div>
 
                                         {/* Vertical divider */}
-                                        <div className="hidden md:block w-px h-24 bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+                                        <div className="hidden md:block w-px h-24 bg-gradient-to-b from-transparent via-black/20 to-transparent" />
 
                                         {/* Content Section */}
                                         <div className="flex-1 min-w-0">
                                             {/* Title */}
-                                            <h3 className={`text-xl md:text-2xl font-black uppercase tracking-tighter text-white mb-4 md:mb-6 transition-all duration-300 group-hover:text-white/90 ${isEven ? 'text-left' : 'text-right md:text-left'}`}>
+                                            <h3 className={`text-xl md:text-2xl font-black uppercase tracking-tighter text-black mb-4 md:mb-6 transition-all duration-300 group-hover:text-black/90 ${isEven ? 'text-left' : 'text-right md:text-left'}`}>
                                                 {service.title}
                                             </h3>
 
                                             {/* Description */}
-                                            <p className={`text-sm md:text-base leading-relaxed text-gray-400 transition-colors duration-300 group-hover:text-gray-300 ${isEven ? 'text-left' : 'text-right md:text-left'}`}>
+                                            <p className={`text-sm md:text-base leading-relaxed text-gray-600 transition-colors duration-300 group-hover:text-gray-800 ${isEven ? 'text-left' : 'text-right md:text-left'}`}>
                                                 {service.description}
                                             </p>
                                         </div>
                                     </div>
 
                                     {/* Bottom glow effect on hover */}
-                                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/0 to-transparent group-hover:via-white/20 transition-all duration-700" />
+                                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/0 to-transparent group-hover:via-black/20 transition-all duration-700" />
                                 </div>
                             </div>
                         );
@@ -250,22 +251,22 @@ export default function GGProductions() {
 
             </section >
 
-            <section className="relative w-full px-2 md:px-1 py-8 pb-0 max-w-[1920px] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-1">
+            <section className="relative w-full px-2 md:px-1 py-0 pb-0 max-w-[1920px] mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-16">
                     {projects.map((project, index) => (
                         <Link
                             key={index}
                             href={`/games/${project.sub.toLowerCase().replace(/\s+/g, '-')}`}
                             className="block"
                         >
-                            <div className="relative overflow-hidden bg-black flex flex-col cursor-pointer">
+                            <div className="relative overflow-hidden bg-white flex flex-col cursor-pointer border border-black/10">
                                 {/* Title Bar */}
-                                <div className="relative h-auto pl-0 pt-[5px] pr-2 pb-3 flex items-start justify-start bg-black text-white">
+                                <div className="relative h-auto pl-0 pt-[5px] pr-2 pb-3 flex items-start justify-start bg-white text-black">
                                     <h3 className="font-bold text-xs md:text-sm uppercase tracking-wide">{project.sub}</h3>
                                 </div>
 
                                 {/* Project Image */}
-                                <div className="relative aspect-video overflow-hidden bg-black tech-border-btn">
+                                <div className="relative aspect-video overflow-hidden bg-white tech-border-btn !border-black/10">
                                     {project.image && (
                                         <img
                                             src={project.image}
@@ -277,8 +278,8 @@ export default function GGProductions() {
 
                                 {/* Description Below */}
                                 {project.description && (
-                                    <div className="relative py-6 px-1 bg-black text-white">
-                                        <p className="text-sm leading-relaxed text-gray-200 font-medium tracking-wide">
+                                    <div className="relative py-6 px-1 bg-white text-black">
+                                        <p className="text-sm leading-relaxed text-gray-800 font-medium tracking-wide">
                                             {project.description}
                                         </p>
                                     </div>
@@ -290,7 +291,7 @@ export default function GGProductions() {
             </section>
 
             {/* Footer */}
-            <BottomBox isDark={true} />
+            <BottomBox isDark={false} />
 
             {/* Custom Styles */}
             <style jsx>{`
@@ -326,7 +327,7 @@ export default function GGProductions() {
         .animate-scroll {
           display: flex;
           width: max-content;
-          animation: scroll 30s linear infinite;
+          animation: scroll 21s linear infinite;
         }
         .animate-scroll:hover {
           animation-play-state: paused;

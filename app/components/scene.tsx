@@ -44,9 +44,12 @@ const CrodalLogo3D = ({
   useFrame((state, delta) => {
     if (!internalMotionRef.current) return;
 
-    // BASE_ROT_Y: 0.3 turns the logo face 5% to the right (approx 18 degrees).
-    const BASE_ROT_Y = 0;
-    const SENSITIVITY = 1.0;
+    // BASE_ROT_Y: Adjusted to -0.25 (User requested "5% more" rotation to the right)
+    const BASE_ROT_Y = -0.25;
+
+    // -- ROTATION CONTROL LINES --
+    // These are the lines affecting how much it turns:
+    const SENSITIVITY = 3;
     const LIMIT = 0.5;
 
     let targetRotX = 0;
@@ -56,19 +59,28 @@ const CrodalLogo3D = ({
     const scrollY = window.scrollY;
     const scrollFactor = activePage === "home" ? Math.max(0, 1 - scrollY / 50) : 1.0;
 
-    if (scrollFactor > 0) {
+    // Check for mobile: Disable mouse movement on small screens
+    const isMobile = window.innerWidth < 768;
+
+    if (scrollFactor > 0 && !isMobile) {
       const { x, y } = mouseRef.current;
-      const DEAD_ZONE = 0.2;
+      const DEAD_ZONE = 0.1; // Reduced deadzone slightly for better feel
+
+      // Calculate rotations with a smooth ease-in from the deadzone
+      // This prevents "jumping" when the cursor leaves the center area
 
       let rotX_Val = 0;
       if (Math.abs(y) > DEAD_ZONE) {
-        rotX_Val = -y * SENSITIVITY;
+        // Subtract deadzone so rotation starts from 0 at the edge of the zone
+        const sign = Math.sign(y);
+        rotX_Val = -(Math.abs(y) - DEAD_ZONE) * sign * SENSITIVITY;
       }
       targetRotX = THREE.MathUtils.clamp(rotX_Val, -LIMIT, LIMIT);
 
       let rotY_Val = 0;
       if (Math.abs(x) > DEAD_ZONE) {
-        rotY_Val = x * SENSITIVITY;
+        const sign = Math.sign(x);
+        rotY_Val = (Math.abs(x) - DEAD_ZONE) * sign * SENSITIVITY;
       }
       targetRotY = BASE_ROT_Y + THREE.MathUtils.clamp(rotY_Val, -LIMIT, LIMIT);
     }
@@ -91,7 +103,8 @@ const CrodalLogo3D = ({
     const isMobile = window.innerWidth < 768;
 
     if (activePage === "home") {
-      let baseScale = isMobile ? 0.525 : 1;
+      // increased mobile scale from 0.525 to 0.7
+      let baseScale = isMobile ? 0.7 : 1;
 
       if (logoType === 'star' || logoType === 'star2') {
         baseScale *= 0.8;
@@ -153,34 +166,37 @@ const CrodalLogo3D = ({
             const z = (i - (layers - 1) / 2) * step;
             const isFace = i === 0 || i === layers - 1;
 
-            // Body shading: Internal layers are slightly darker to mimic a solid material
-            const bodyBrightness = 0.85;
-            const faceBrightness = 1.0;
-            const c = isFace ? faceBrightness : bodyBrightness;
+            // Border configuration: Increased opacity and solidity
+            const borderColor = new THREE.Color("#151515");
+            const faceColor = new THREE.Color(1, 1, 1);
 
             return (
               <mesh
                 key={i}
                 position={[0, 0, z]}
                 frustumCulled={false}
-                // Internal layers slightly larger to wrap and hide the slice edges
-                scale={isFace ? [1, 1, 1] : [1.015, 1.015, 1]}
+                // Internal layers scaled up to create the "border" effect visible from front
+                scale={isFace ? [1, 1, 1] : [1.025, 1.025, 1]}
               >
                 <planeGeometry args={[3, 3]} />
                 <meshPhysicalMaterial
-                  color={new THREE.Color(c, c, c)}
-                  // CRITICAL: Remove texture from sides to stop "cut line" artifacts
+                  color={isFace ? faceColor : borderColor}
+                  // Internal layers share shape but are solid color
                   map={isFace ? logoTexture : null}
                   alphaMap={logoTexture}
                   transparent={true}
                   alphaTest={0.5}
                   side={THREE.DoubleSide}
-                  roughness={isFace ? 0.2 : 0.4}
-                  metalness={0.1}
-                  // Clean highlights only on the faces
-                  clearcoat={isFace ? 1.0 : 0}
+                  opacity={isFace ? 1.0 : 0.8} // Increased by 30% from 0.5 -> 0.8
+                  roughness={isFace ? 0.2 : 0.1}
+                  metalness={isFace ? 0.1 : 0.8}
+                  // Low emission for visibility
+                  emissive={isFace ? new THREE.Color(0, 0, 0) : new THREE.Color("#111111")}
+                  emissiveIntensity={isFace ? 0 : 0.2}
+                  // Clean highlights
+                  clearcoat={1.0}
                   clearcoatRoughness={0.1}
-                  reflectivity={0.5}
+                  reflectivity={1.0}
                 />
               </mesh>
             );
@@ -218,20 +234,7 @@ export default function Scene({ activePage, logoType = 'gg' }: { activePage: str
     };
   }, []);
 
-  useGSAP(() => {
-    if (!containerRef.current) return;
 
-    // Fade logo to 20% opacity as user scrolls down
-    gsap.to(containerRef.current, {
-      opacity: 0.2,
-      scrollTrigger: {
-        trigger: document.body,
-        start: "top top",
-        end: "30% top",
-        scrub: true,
-      }
-    });
-  }, { scope: containerRef });
 
   return (
     <div ref={containerRef} className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none transition-opacity duration-300">
@@ -241,10 +244,14 @@ export default function Scene({ activePage, logoType = 'gg' }: { activePage: str
         dpr={[1, 2]}
         gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
       >
-        <ambientLight intensity={2.0} color="#ffffff" />
+        <ambientLight intensity={1.5} color="#ffffff" />
 
-        {/* Subtle Fill to prevent total blackness on shadows */}
+        {/* Key light */}
         <directionalLight position={[0, 0, 5]} intensity={1.0} color="#ffffff" />
+
+        {/* Backlight (Rim Light) to manage the "lightning" and visibility */}
+        <spotLight position={[0, 5, -10]} intensity={25} angle={0.5} penumbra={1} color="#ffffff" />
+        <pointLight position={[0, -5, -5]} intensity={5} color="#444444" />
 
         <Environment preset="studio" />
 

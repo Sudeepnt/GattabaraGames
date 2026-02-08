@@ -66,7 +66,7 @@ export default function GamesPage() {
 
             <main className="pt-32 pb-20 px-2 md:px-1 w-full">
                 {/* 2-column grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-16">
                     {projects.map((project, index) => (
                         <Link
                             key={index}

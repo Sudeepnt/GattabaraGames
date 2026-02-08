@@ -26,7 +26,7 @@ export default function About() {
 
 
 
-      <section className="w-full px-2 md:px-1 mt-32 mb-40">
+      <section className="w-full px-2 md:px-1 mt-48 md:mt-32 mb-40">
         <div className="w-full flex flex-col gap-8 text-lg md:text-xl font-medium leading-relaxed text-gray-200 text-justify">
           {introText.map((text, index) => (
             <p key={index}>{text}</p>
