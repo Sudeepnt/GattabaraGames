@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import BottomBox from "./BottomBox";
+import QuatrefoilGridBackground from "../QuatrefoilGridBackground";
 
 interface ServiceData {
     title: string;
@@ -32,6 +33,7 @@ export default function GGProductions() {
     const [projects, setProjects] = useState<ProjectData[]>([]);
     const [clientLogos, setClientLogos] = useState<string[]>([]);
     const [closingCta, setClosingCta] = useState("Ready to build something exceptional?");
+    const [heroVideo, setHeroVideo] = useState("");
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
@@ -39,6 +41,7 @@ export default function GGProductions() {
             .then(res => res.json())
             .then(data => {
                 if (data?.ggProductions) {
+                    if (data.ggProductions.heroVideo) setHeroVideo(data.ggProductions.heroVideo);
                     if (data.ggProductions.ctaButtonText) setCtaButtonText(data.ggProductions.ctaButtonText);
                     if (data.ggProductions.introText) setIntroText(data.ggProductions.introText);
                     if (data.ggProductions.services) setServices(data.ggProductions.services);
@@ -77,55 +80,58 @@ export default function GGProductions() {
             className="relative w-full min-h-screen bg-white text-black overflow-x-hidden"
             style={{ "--selection-bg": "#000000", "--selection-text": "#ffffff" } as React.CSSProperties}
         >
+            <QuatrefoilGridBackground strokeColor="#000000" opacity={0.1} />
             {/* Hero Video Section */}
-            <section className="relative w-full h-[45vh] md:h-[65vh] overflow-hidden">
-                {/* Video Placeholder/Loading State with animated gradient */}
-                <div
-                    className={`absolute inset-0 transition-opacity duration-1000 ${isVideoLoaded ? "opacity-0" : "opacity-100"
-                        }`}
-                    style={{
-                        background: "linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%)",
-                        backgroundSize: "400% 400%",
-                        animation: "gradientShift 8s ease infinite"
-                    }}
-                >
-                    {/* Subtle pattern overlay */}
+            {heroVideo && (
+                <section className="relative w-full h-[45vh] md:h-[65vh] overflow-hidden">
+                    {/* Video Placeholder/Loading State with animated gradient */}
                     <div
-                        className="absolute inset-0 opacity-10"
+                        className={`absolute inset-0 transition-opacity duration-1000 ${isVideoLoaded ? "opacity-0" : "opacity-100"
+                            }`}
                         style={{
-                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                            background: "linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%)",
+                            backgroundSize: "400% 400%",
+                            animation: "gradientShift 8s ease infinite"
                         }}
-                    />
-                </div>
+                    >
+                        {/* Subtle pattern overlay */}
+                        <div
+                            className="absolute inset-0 opacity-10"
+                            style={{
+                                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                            }}
+                        />
+                    </div>
 
-                {/* Video Background */}
-                <video
-                    ref={videoRef}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    onLoadedData={() => setIsVideoLoaded(true)}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    poster="/Portfolio_Images/placeholder.jpg"
-                >
-                    {/* Add your video source here */}
-                    <source src="/videos/gg-productions-hero.mp4" type="video/mp4" />
-                </video>
+                    {/* Video Background */}
+                    <video
+                        ref={videoRef}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        onLoadedData={() => setIsVideoLoaded(true)}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        poster="/Portfolio_Images/placeholder.jpg"
+                    >
+                        {/* Add your video source here */}
+                        <source src={heroVideo} type="video/mp4" />
+                    </video>
 
-                {/* Video Overlay Gradients - Darker overlays for better contrast */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-gray-100/95" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
+                    {/* Video Overlay Gradients - Darker overlays for better contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-gray-100/95" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
 
-                {/* Hero Content - Empty for visual effect */}
-                <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-20 px-6">
-                </div>
+                    {/* Hero Content - Empty for visual effect */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-20 px-6">
+                    </div>
 
 
-            </section>
+                </section>
+            )}
 
             {/* Main Content */}
-            <section className="relative w-full px-2 md:px-1 pt-10 pb-20 md:pt-16 md:pb-32">
+            <section className={`relative w-full px-2 md:px-1 pb-20 md:pb-32 ${heroVideo ? 'pt-10 md:pt-16' : 'pt-24 md:pt-32'}`}>
                 {/* Intro Text & CTA */}
                 <div className="w-full mb-20 md:mb-28 flex flex-col">
                     <div className="flex flex-col md:flex-row items-start gap-8 md:gap-8 mb-6 w-full">
@@ -133,7 +139,7 @@ export default function GGProductions() {
                         <img
                             src="/logos/gprod.png"
                             alt="GG Productions Logo"
-                            className="h-40 md:h-40 w-auto object-contain flex-shrink-0"
+                            className="h-40 md:h-40 w-auto object-contain flex-shrink-0 mt-12 md:mt-0"
                         />
 
                         {/* Entry text section (heading + paragraph) on the right */}
@@ -189,7 +195,7 @@ export default function GGProductions() {
                                 <img
                                     src={logo}
                                     alt="Client Logo"
-                                    className="h-[86px] md:h-[115px] w-auto object-contain opacity-70"
+                                    className="h-[86px] md:h-[115px] w-auto object-contain"
                                 />
                             </div>
                         ))}
@@ -207,7 +213,7 @@ export default function GGProductions() {
                                 data-index={index}
                                 className="service-section relative group border-b border-black/5 last:border-b-0"
                             >
-                                <div className={`relative overflow-hidden bg-white transition-all duration-700 hover:bg-gradient-to-r ${isEven ? 'hover:from-black/[0.03] hover:to-transparent' : 'hover:from-transparent hover:to-black/[0.03]'}`}>
+                                <div className={`relative overflow-hidden bg-transparent transition-all duration-700 hover:bg-gradient-to-r ${isEven ? 'hover:from-black/[0.03] hover:to-transparent' : 'hover:from-transparent hover:to-black/[0.03]'}`}>
                                     {/* Diagonal accent line */}
                                     <div className={`absolute top-0 ${isEven ? 'left-0' : 'right-0'} w-1 h-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent group-hover:h-full transition-all duration-1000 ease-out`} />
 

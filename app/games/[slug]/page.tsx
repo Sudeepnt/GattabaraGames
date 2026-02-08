@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Header from "../../components/Header";
 import Link from "next/link";
+import QuatrefoilGridBackground from "../../components/QuatrefoilGridBackground";
 
 interface GameData {
     sub: string;
@@ -97,6 +98,7 @@ export default function GameDetailPage() {
             className="relative w-full min-h-screen bg-white text-black"
             style={{ "--selection-bg": "#000000", "--selection-text": "#ffffff" } as React.CSSProperties}
         >
+            <QuatrefoilGridBackground strokeColor="#000000" opacity={0.1} />
             <div className="fixed top-0 left-0 w-full z-50">
                 <Header />
             </div>

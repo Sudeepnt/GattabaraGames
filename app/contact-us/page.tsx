@@ -8,6 +8,7 @@ import { Loader2, Check, AlertCircle } from "lucide-react";
 import React from 'react';
 import Header from "../components/Header";
 import BottomBox from "../components/pages/BottomBox";
+import QuatrefoilGridBackground from "../components/QuatrefoilGridBackground";
 
 export default function Pitch() {
     const [content, setContent] = useState<any>(null);
@@ -82,6 +83,7 @@ export default function Pitch() {
 
     return (
         <div className="h-screen overflow-hidden flex flex-col px-2 md:px-32 max-w-[1920px] mx-auto w-full bg-black justify-center relative font-sans text-white">
+            <QuatrefoilGridBackground />
             <div className="fixed top-0 left-0 w-full z-50">
                 <Header />
             </div>

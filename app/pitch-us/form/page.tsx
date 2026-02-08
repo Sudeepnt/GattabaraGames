@@ -16,7 +16,7 @@ export default function GattabaraForm() {
 
     return (
         <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 font-sans text-[#333]">
-            <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden relative z-10">
 
                 {/* Header Section */}
                 <div className="p-8 pb-4">

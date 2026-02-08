@@ -3,6 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Header from "../components/Header";
+import QuatrefoilGridBackground from "../components/QuatrefoilGridBackground";
 
 export default function Pitch() {
     const router = useRouter();
@@ -11,6 +12,7 @@ export default function Pitch() {
             className="relative w-full h-screen bg-white text-black overflow-hidden flex flex-col font-sans"
             style={{ "--selection-bg": "#000000", "--selection-text": "#ffffff" } as React.CSSProperties}
         >
+            <QuatrefoilGridBackground strokeColor="#000000" opacity={0.1} />
             <div className="fixed top-0 left-0 w-full z-50">
                 <Header />
             </div>
@@ -21,7 +23,7 @@ export default function Pitch() {
                         Inbound Form
                     </h1>
 
-                    <div className="flex flex-col gap-4 md:gap-10 text-base md:text-lg text-gray-800 leading-relaxed font-normal tracking-wide w-full">
+                    <div className="flex flex-col gap-4 md:gap-10 text-base md:text-lg text-black leading-relaxed font-extrabold tracking-wide w-full">
                         <p className="md:border-l-4 md:border-black/20 md:pl-6 border-0 pl-0 text-left md:text-center w-full">
                             Pitch with clarity and conviction. We want to see what you are building, why it matters, and how you plan to ship it end to end.
                         </p>

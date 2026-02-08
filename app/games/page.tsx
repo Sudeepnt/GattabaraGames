@@ -7,6 +7,7 @@ import { getCMSData } from "../actions/cmsActions";
 import LiquidText from '../components/LiquidText';
 import BottomBox from '../components/pages/BottomBox';
 import Link from 'next/link';
+import QuatrefoilGridBackground from "../components/QuatrefoilGridBackground";
 
 interface Project {
     sub: string;
@@ -60,6 +61,7 @@ export default function GamesPage() {
 
     return (
         <div className="relative w-full min-h-screen bg-black">
+            <QuatrefoilGridBackground />
             <div className="fixed top-0 left-0 w-full z-50">
                 <Header />
             </div>

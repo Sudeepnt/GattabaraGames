@@ -195,6 +195,7 @@
     }
   ],
   "ggProductions": {
+    "heroVideo": "",
     "heroTagline": "Build faster. Ship smarter. Stay lean.",
     "ctaButtonText": "Start a Conversation",
     "introText": "At GG Productions, we know what it’s like to build games with tight budgets and big ambitions. Every decision is about momentum, what to build now, what to defer, and where the right support can help you move faster. Our outsourcing model is built to help studios stay lean while shipping at a professional standard, with clear milestones and transparent delivery. We integrate as an extension of your team, whether for full production or focused co-development, so you can move fast without losing control of your vision.",
@@ -292,12 +293,17 @@
       }
     ],
     "closingCta": "Ready to build something exceptional?",
-    "clientLogos": []
+    "clientLogos": [
+      "/GGclients/bb.png",
+      "/GGclients/brewed.png",
+      "/GGclients/magadha.png",
+      "/GGclients/msworld.png",
+      "/GGclients/oila.png",
+      "/GGclients/ss.png"
+    ]
   },
   "about": {
-    "introText": [
-      "At Gattabara Games, we've been driven by the pure joy of creation from day one. We obsess over craft because it's the difference between games people play and games people remember. We listen to what players feel, prototype what resonates, and refine ruthlessly until it's right—a culture built on honest feedback and relentless iteration. We don't separate the dreamers from the builders because the best games come from people who own what they create. Every decision serves the experience. Every frame earns its place. We make games that matter."
-    ],
+    "heroParagraph": "At Gattabara Games, we've been driven by the pure joy of creation from day one. We obsess over craft because it's the difference between games people play and games people remember. We listen to what players feel, prototype what resonates, and refine ruthlessly until it's right—a culture built on honest feedback and relentless iteration. We don't separate the dreamers from the builders because the best games come from people who own what they create. Every decision serves the experience. Every frame earns its place. We make games that matter.",
     "values": [
       {
         "title": "We build games where craft and conviction meet—experiences designed to endure, not just entertain.",
@@ -307,7 +313,7 @@
       {
         "title": "Great games come from makers who feel ownership, not oversight, which is why we've built a culture that empowers rather than constrains.",
         "description": "",
-        "image": "/About/About1.png"
+        "image": "/About/About2.png"
       },
       {
         "title": "We prototype fast, refine ruthlessly, and ship only when every element serves the player's emotional journey.",

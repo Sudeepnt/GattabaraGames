@@ -174,3 +174,37 @@ body {
   background-color: var(--selection-bg) !important;
   color: var(--selection-text) !important;
 }
+.pixelated-shape {
+  --s: 6px;
+  position: relative;
+  /* Clip the main background to the Outer Shape */
+  clip-path: polygon(
+      /* Top-Left (1 Step) */
+      0 var(--s),
+      var(--s) var(--s),
+      var(--s) 0,
+
+      /* Top-Right (0 Steps - Straight) */
+      100% 0,
+
+      /* Right Side down to Bottom-Right steps */
+      100% calc(100% - 3 * var(--s)),
+
+      /* Bottom-Right Steps (3 Steps) */
+      calc(100% - var(--s)) calc(100% - 3 * var(--s)),
+      calc(100% - var(--s)) calc(100% - 2 * var(--s)),
+      calc(100% - 2 * var(--s)) calc(100% - 2 * var(--s)),
+      calc(100% - 2 * var(--s)) calc(100% - var(--s)),
+      calc(100% - 3 * var(--s)) calc(100% - var(--s)),
+      calc(100% - 3 * var(--s)) 100%,
+
+      /* Bottom-Left Steps (3 Steps) */
+      calc(3 * var(--s)) 100%,
+      calc(3 * var(--s)) calc(100% - var(--s)),
+      calc(2 * var(--s)) calc(100% - var(--s)),
+      calc(2 * var(--s)) calc(100% - 2 * var(--s)),
+      var(--s) calc(100% - 2 * var(--s)),
+      var(--s) calc(100% - 3 * var(--s)),
+      0 calc(100% - 3 * var(--s)),
+      0 var(--s));
+}

@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import BottomBox from "./BottomBox";
+import QuatrefoilGridBackground from "../QuatrefoilGridBackground";
 
 export default function About() {
-  const [introText, setIntroText] = useState<string[]>([]);
+  const [heroParagraph, setHeroParagraph] = useState<string>("");
   const [values, setValues] = useState<Array<{ title: string; description: string; image?: string }>>([]);
 
   useEffect(() => {
@@ -14,44 +15,45 @@ export default function About() {
       .then(res => res.json())
       .then(data => {
         if (data?.about) {
-          if (data.about.introText) setIntroText(data.about.introText);
+          if (data.about.heroParagraph) setHeroParagraph(data.about.heroParagraph);
           if (data.about.values) setValues(data.about.values);
         }
       })
       .catch(error => console.error('About page load error:', error));
   }, []);
 
+  // Trigger reload for new About2.png image
   return (
     <div className="relative w-full bg-black text-white min-h-screen pt-24 z-40 font-sans">
+      <QuatrefoilGridBackground />
 
+      {/* Hero paragraph section - separate, no serial number */}
+      {heroParagraph && (
+        <section className="relative z-10 w-full flex justify-center mt-48 md:mt-32 mb-20 px-6 md:px-16">
+          <p className="max-w-5xl text-2xl md:text-4xl font-medium leading-relaxed text-gray-200 text-justify">
+            {heroParagraph}
+          </p>
+        </section>
+      )}
 
-
-      <section className="w-full px-2 md:px-1 mt-48 md:mt-32 mb-40">
-        <div className="w-full flex flex-col gap-8 text-lg md:text-xl font-medium leading-relaxed text-gray-200 text-justify">
-          {introText.map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
-        </div>
-      </section>
-
-      <section className="w-full flex flex-col items-center gap-16 mb-16 py-12">
+      <section className="relative z-10 w-full flex flex-col items-center gap-20 mb-16 py-12">
         {values.map((value, index) => (
-          <div key={index} className="w-full flex flex-col items-center group">
-            <div className="w-full px-6 md:px-16 text-center mb-4">
-              <p className="text-xl md:text-3xl font-bold leading-tight text-white max-w-6xl mx-auto">
-                {index + 1}. {value.title}{value.description ? `. ${value.description}` : ''}
+          <div key={index} className="w-full flex flex-col items-center group gap-8">
+            {/* Title with bigger font, no serial number */}
+            <div className="w-[90%] md:w-[80%] max-w-5xl">
+              <p className="text-2xl md:text-4xl font-medium leading-relaxed text-gray-200 text-justify">
+                {value.title}
               </p>
             </div>
 
             {value.image && (
-              <div className="w-[90%] md:w-[80%] relative rounded-3xl overflow-hidden shadow-2xl bg-black">
+              <div className="w-[90%] md:w-[80%] relative rounded-3xl overflow-hidden shadow-2xl bg-black aspect-video">
                 <Image
-                  src={value.image}
+                  src={`${value.image}?v=refresh`}
                   alt={value.title}
-                  width={0}
-                  height={0}
+                  fill
                   sizes="100vw"
-                  className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
+                  className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   priority
                 />
               </div>

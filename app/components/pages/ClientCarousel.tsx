@@ -44,7 +44,7 @@ export default function ClientCarousel() {
     }
 
     return (
-        <div className="w-full h-full relative overflow-hidden tech-border-btn static-border text-white">
+        <div className="w-full h-full relative overflow-hidden text-white pixelated-shape">
             <AnimatePresence mode="popLayout">
                 <motion.div
                     key={index}
@@ -54,8 +54,7 @@ export default function ClientCarousel() {
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     className="absolute inset-0 bg-black"
                 >
-                    <Link
-                        href={`/games/${games[index].sub.toLowerCase().replace(/\s+/g, '-')}`}
+                    <div
                         className="flex flex-col items-center justify-center w-full h-full relative"
                     >
                         {/* Game Image */}
@@ -77,7 +76,7 @@ export default function ClientCarousel() {
                                 {games[index].sub}
                             </h3>
                         </div>
-                    </Link>
+                    </div>
                 </motion.div>
             </AnimatePresence>
         </div>

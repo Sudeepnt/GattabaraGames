@@ -44,8 +44,11 @@ const CrodalLogo3D = ({
   useFrame((state, delta) => {
     if (!internalMotionRef.current) return;
 
-    // BASE_ROT_Y: Adjusted to -0.25 (User requested "5% more" rotation to the right)
-    const BASE_ROT_Y = -0.25;
+    // Check for mobile: Disable mouse movement on small screens
+    const isMobile = window.innerWidth < 768;
+
+
+    const BASE_ROT_Y = isMobile ? -0.0119 : -0.25;
 
     // -- ROTATION CONTROL LINES --
     // These are the lines affecting how much it turns:
@@ -58,9 +61,6 @@ const CrodalLogo3D = ({
 
     const scrollY = window.scrollY;
     const scrollFactor = activePage === "home" ? Math.max(0, 1 - scrollY / 50) : 1.0;
-
-    // Check for mobile: Disable mouse movement on small screens
-    const isMobile = window.innerWidth < 768;
 
     if (scrollFactor > 0 && !isMobile) {
       const { x, y } = mouseRef.current;
@@ -191,8 +191,8 @@ const CrodalLogo3D = ({
                   roughness={isFace ? 0.2 : 0.1}
                   metalness={isFace ? 0.1 : 0.8}
                   // Low emission for visibility
-                  emissive={isFace ? new THREE.Color(0, 0, 0) : new THREE.Color("#111111")}
-                  emissiveIntensity={isFace ? 0 : 0.2}
+                  emissive={isFace ? new THREE.Color("#ffffff") : new THREE.Color("#111111")}
+                  emissiveIntensity={isFace ? 0.3 : 0.2}
                   // Clean highlights
                   clearcoat={1.0}
                   clearcoatRoughness={0.1}
@@ -244,16 +244,16 @@ export default function Scene({ activePage, logoType = 'gg' }: { activePage: str
         dpr={[1, 2]}
         gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
       >
-        <ambientLight intensity={1.5} color="#ffffff" />
+        <ambientLight intensity={3.0} color="#ffffff" />
 
         {/* Key light */}
-        <directionalLight position={[0, 0, 5]} intensity={1.0} color="#ffffff" />
+        <directionalLight position={[0, 0, 5]} intensity={2.5} color="#ffffff" />
 
         {/* Backlight (Rim Light) to manage the "lightning" and visibility */}
         <spotLight position={[0, 5, -10]} intensity={25} angle={0.5} penumbra={1} color="#ffffff" />
         <pointLight position={[0, -5, -5]} intensity={5} color="#444444" />
 
-        <Environment preset="studio" />
+        {/* <Environment preset="studio" /> Removed to prevent HDR fetch error */}
 
         {/* Pass shared mouseRef to the 3D component */}
         <CrodalLogo3D activePage={activePage} logoType={logoType} mouseRefProp={mouseRef} />

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
 import BottomBox from "../components/pages/BottomBox";
+import QuatrefoilGridBackground from "../components/QuatrefoilGridBackground";
 
 export default function AboutPage() {
     const [introText, setIntroText] = useState<string[]>([]);
@@ -26,19 +27,16 @@ export default function AboutPage() {
 
     return (
         <div className="relative w-full bg-black text-white min-h-screen pt-24 z-40 font-sans">
-
+            <QuatrefoilGridBackground />
             <Header />
-
-
-            <section className="w-full px-3 md:px-2 mt-24 md:mt-8 mb-24">
-                <div className="w-full flex flex-col gap-6 text-[20px] md:text-[40px] font-medium leading-tight tracking-tighter text-gray-200 text-justify">
-                    {introText.map((text, index) => (
-                        <p key={index}>{text}</p>
-                    ))}
-                </div>
+            {/* Hero paragraph - hardcoded, no serial number */}
+            <section className="relative z-10 w-full px-6 md:px-16 mt-24 md:mt-8 mb-24">
+                <p className="max-w-6xl mx-auto text-2xl md:text-4xl font-medium leading-snug text-gray-200 text-justify">
+                    At Gattabara Games, we've been driven by the pure joy of creation from day one. We obsess over craft because it's the difference between games people play and games people remember. We listen to what players feel, prototype what resonates, and refine ruthlessly until it's right—a culture built on honest feedback and relentless iteration. We don't separate the dreamers from the builders because the best games come from people who own what they create. Every decision serves the experience. Every frame earns its place. We make games that matter.
+                </p>
             </section>
 
-            <section className="w-full flex flex-col items-center gap-16 mb-16 py-12">
+            <section className="relative z-10 w-full flex flex-col items-center gap-16 mb-16 py-12">
                 {values.map((value, index) => (
                     <div key={index} className={`w-full flex flex-col items-center group ${index === 0 ? "mb-[-100px]" : ""}`}>
                         <div className="w-full px-6 md:px-16 text-center mb-4">
