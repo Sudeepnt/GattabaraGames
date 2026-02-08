@@ -113,10 +113,9 @@ export default function GGProductions() {
                     <source src="/videos/gg-productions-hero.mp4" type="video/mp4" />
                 </video>
 
-                {/* Video Overlay Gradients */}
-                {/* Video Overlay Gradients - Inverted for White Theme (using white/opacity) */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-white/90" />
-                <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-white/30" />
+                {/* Video Overlay Gradients - Darker overlays for better contrast */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-gray-100/95" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
 
                 {/* Hero Content - Empty for visual effect */}
                 <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-20 px-6">
@@ -259,14 +258,14 @@ export default function GGProductions() {
                             href={`/games/${project.sub.toLowerCase().replace(/\s+/g, '-')}`}
                             className="block"
                         >
-                            <div className="relative overflow-hidden bg-white flex flex-col cursor-pointer border border-black/10">
+                            <div className="relative overflow-hidden bg-white flex flex-col cursor-pointer">
                                 {/* Title Bar */}
                                 <div className="relative h-auto pl-0 pt-[5px] pr-2 pb-3 flex items-start justify-start bg-white text-black">
                                     <h3 className="font-bold text-xs md:text-sm uppercase tracking-wide">{project.sub}</h3>
                                 </div>
 
                                 {/* Project Image */}
-                                <div className="relative aspect-video overflow-hidden bg-white tech-border-btn !border-black/10">
+                                <div className="relative aspect-video overflow-hidden bg-white tech-border-btn static-border !border-black/10">
                                     {project.image && (
                                         <img
                                             src={project.image}
@@ -278,8 +277,8 @@ export default function GGProductions() {
 
                                 {/* Description Below */}
                                 {project.description && (
-                                    <div className="relative py-6 px-1 bg-white text-black">
-                                        <p className="text-sm leading-relaxed text-gray-800 font-medium tracking-wide">
+                                    <div className="relative py-2.5 px-1 bg-white text-black">
+                                        <p className="text-sm leading-relaxed text-gray-800 font-semibold tracking-wide">
                                             {project.description}
                                         </p>
                                     </div>

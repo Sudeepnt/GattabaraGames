@@ -57,7 +57,7 @@ export default function Home() {
 
 
   return (
-    <div id="home-container" className="relative w-full min-h-screen">
+    <div id="home-container" className="relative w-full min-h-screen bg-black">
 
 
 

@@ -44,7 +44,7 @@ export default function ClientCarousel() {
     }
 
     return (
-        <div className="w-full h-full relative overflow-hidden rounded-lg shadow-2xl">
+        <div className="w-full h-full relative overflow-hidden tech-border-btn static-border text-white">
             <AnimatePresence mode="popLayout">
                 <motion.div
                     key={index}

@@ -64,12 +64,12 @@ export default function GameDetailPage() {
 
     if (loading) {
         return (
-            <div className="relative w-full min-h-screen bg-black">
+            <div className="relative w-full min-h-screen bg-white">
                 <div className="fixed top-0 left-0 w-full z-50">
                     <Header />
                 </div>
                 <div className="flex items-center justify-center min-h-screen">
-                    <p className="text-white">Loading...</p>
+                    <p className="text-black">Loading...</p>
                 </div>
             </div>
         );
@@ -77,13 +77,13 @@ export default function GameDetailPage() {
 
     if (!game) {
         return (
-            <div className="relative w-full min-h-screen bg-black">
+            <div className="relative w-full min-h-screen bg-white">
                 <div className="fixed top-0 left-0 w-full z-50">
                     <Header />
                 </div>
                 <div className="flex flex-col items-center justify-center min-h-screen gap-4">
-                    <p className="text-white text-xl">Game not found</p>
-                    <Link href="/games" className="text-white underline">Back to Games</Link>
+                    <p className="text-black text-xl">Game not found</p>
+                    <Link href="/games" className="text-black underline">Back to Games</Link>
                 </div>
             </div>
         );
@@ -93,7 +93,10 @@ export default function GameDetailPage() {
     const otherGames = allGames.filter(g => g.sub !== game.sub);
 
     return (
-        <div className="relative w-full min-h-screen bg-black text-white">
+        <div
+            className="relative w-full min-h-screen bg-white text-black"
+            style={{ "--selection-bg": "#000000", "--selection-text": "#ffffff" } as React.CSSProperties}
+        >
             <div className="fixed top-0 left-0 w-full z-50">
                 <Header />
             </div>
@@ -119,8 +122,8 @@ export default function GameDetailPage() {
                         />
                     ) : null}
 
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-black/30" />
+                    {/* Overlay - white with slight opacity to ensure text readability if needed, or transparent if preferred */}
+                    <div className="absolute inset-0 bg-white/10" />
 
                     {/* Game Title - Centered */}
                     <div className="absolute inset-0 flex items-center justify-center p-8">
@@ -135,26 +138,26 @@ export default function GameDetailPage() {
                 </section>
 
                 {/* Synopsis Section */}
-                <section className="px-6 md:px-16 py-12 max-w-7xl mx-auto">
+                <section className="px-2 md:px-1 py-12 w-full">
                     <h3 className="text-sm font-bold text-gray-500 uppercase mb-6 text-[10px] tracking-[0.2em]">Synopsis</h3>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-2xl md:text-4xl leading-tight text-gray-300"
+                        className="text-2xl md:text-4xl leading-tight text-gray-800"
                     >
                         {game.description}
                     </motion.p>
                 </section>
 
                 {/* Game Details Section - No border */}
-                <section className="px-6 md:px-16 py-12 max-w-7xl mx-auto">
+                <section className="px-2 md:px-1 py-12 w-full">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {/* Developed By */}
                         {game.developedBy && (
                             <div>
                                 <h3 className="text-sm font-bold text-gray-500 uppercase mb-3 text-[10px] tracking-[0.2em]">Developed By</h3>
-                                <p className="text-white font-bold">{game.developedBy}</p>
+                                <p className="text-black font-bold">{game.developedBy}</p>
                             </div>
                         )}
 
@@ -169,7 +172,7 @@ export default function GameDetailPage() {
                                             href={link.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-white hover:underline transition-all font-bold"
+                                            className="text-black hover:underline transition-all font-bold"
                                         >
                                             {link.label}
                                         </a>
@@ -189,7 +192,7 @@ export default function GameDetailPage() {
                                             href={link.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-white hover:underline transition-all font-bold"
+                                            className="text-black hover:underline transition-all font-bold"
                                         >
                                             {link.label}
                                         </a>
@@ -209,7 +212,7 @@ export default function GameDetailPage() {
                                             href={link.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-white hover:underline transition-all font-bold"
+                                            className="text-black hover:underline transition-all font-bold"
                                         >
                                             {link.label}
                                         </a>
@@ -223,15 +226,15 @@ export default function GameDetailPage() {
                 {/* Screenshots Section - No border */}
                 {game.screenshots && game.screenshots.length > 0 && (
                     <section className="py-12">
-                        <div className="px-6 md:px-16 max-w-7xl mx-auto mb-6">
+                        <div className="px-2 md:px-1 w-full mb-6">
                             <h2 className="text-sm font-bold text-gray-500 uppercase text-[10px] tracking-[0.2em]">Screenshots</h2>
                         </div>
                         <div className="overflow-x-auto scrollbar-hide">
-                            <div className="flex gap-4 px-6 md:px-16 pb-4">
+                            <div className="flex gap-4 px-2 md:px-1 pb-4">
                                 {game.screenshots.map((screenshot, idx) => (
                                     <div
                                         key={idx}
-                                        className="flex-shrink-0 w-[80vw] md:w-[600px] aspect-video tech-border-btn overflow-hidden"
+                                        className="flex-shrink-0 w-[80vw] md:w-[600px] aspect-video tech-border-btn overflow-hidden !border-black/10"
                                     >
                                         <img
                                             src={screenshot}
@@ -247,23 +250,23 @@ export default function GameDetailPage() {
 
                 {/* Other Games Section - No title, restructured items, matches header padding */}
                 {otherGames.length > 0 && (
-                    <section className="px-4 md:px-1 pt-36 md:pt-48 pb-20 w-full">
+                    <section className="px-2 md:px-1 pt-36 md:pt-48 pb-20 w-full">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-1 gap-y-16">
                             {otherGames.map((otherGame, idx) => (
                                 <Link
                                     key={idx}
                                     href={`/games/${otherGame.sub.toLowerCase().replace(/\s+/g, '-')}`}
-                                    className="flex flex-col bg-black tech-border-btn static-border text-zinc-800"
+                                    className="flex flex-col bg-white text-black"
                                 >
                                     {/* Name Top - Padding matches header pl-[20px] */}
                                     <div className="h-14 pl-[20px] pt-[5px] pr-2 pb-1">
-                                        <h3 className="text-lg md:text-xl font-black uppercase tracking-tight text-white">
+                                        <h3 className="text-lg md:text-xl font-black uppercase tracking-tight text-black">
                                             {otherGame.sub}
                                         </h3>
                                     </div>
 
                                     {/* Image Middle */}
-                                    <div className="relative aspect-video overflow-hidden bg-black w-full">
+                                    <div className="relative aspect-video overflow-hidden bg-white w-full tech-border-btn static-border !border-black/10">
                                         {otherGame.image && (
                                             <img
                                                 src={otherGame.image}
@@ -273,9 +276,8 @@ export default function GameDetailPage() {
                                         )}
                                     </div>
 
-                                    {/* Description Bottom - Padding matches items */}
-                                    <div className="py-6 px-1">
-                                        <p className="text-xs text-gray-200 font-medium line-clamp-3 leading-relaxed tracking-wide">
+                                    <div className="py-2.5 px-1">
+                                        <p className="text-xs text-gray-800 font-semibold line-clamp-3 leading-relaxed tracking-wide">
                                             {otherGame.description}
                                         </p>
                                     </div>

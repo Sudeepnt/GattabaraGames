@@ -34,7 +34,7 @@ export default function Header() {
   }, []);
 
   // Determine theme based on current path
-  const isWhiteTheme = pathname === "/pitch-us" || pathname === "/gg-productions";
+  const isWhiteTheme = pathname === "/pitch-us" || pathname === "/gg-productions" || (pathname.startsWith("/games/") && pathname !== "/games");
   const themeClasses = isWhiteTheme
     ? "!text-black hover:!text-white"
     : "!text-white hover:!text-black"; // <--- This ensures text turns black on hover

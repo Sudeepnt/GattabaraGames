@@ -82,7 +82,7 @@ export default function GamesPage() {
                                 </div>
 
                                 {/* Game Image */}
-                                <div className="relative aspect-video overflow-hidden bg-black tech-border-btn">
+                                <div className="relative aspect-video overflow-hidden bg-black tech-border-btn static-border text-white">
                                     {project.image && (
                                         <img
                                             src={project.image}
@@ -94,8 +94,8 @@ export default function GamesPage() {
 
                                 {/* Description - Below the image */}
                                 {project.description && (
-                                    <div className="relative py-6 px-1 bg-black text-white">
-                                        <p className="text-sm leading-relaxed text-gray-200 font-medium tracking-wide">
+                                    <div className="relative py-2.5 px-1 bg-black text-white">
+                                        <p className="text-sm leading-relaxed text-gray-200 font-semibold tracking-wide">
                                             {project.description}
                                         </p>
                                     </div>
